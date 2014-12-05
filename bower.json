@@ -1,0 +1,30 @@
+{
+  "name": "simpleoffcanvasmenu",
+  "version": "0.2.0",
+  "homepage": "https://github.com/SubZane/simpleoffcanvasmenu",
+  "authors": [
+    "Andreas Norman <an@andreasnorman.se>"
+  ],
+  "description": "Simple Off-Canvas Menu",
+  "main": "src/jquery.simpleoffcanvasmenu.js",
+  "keywords": [
+    "navigation",
+    "jquery",
+    "mobile",
+    "responsive",
+    "offcanvas"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules"
+  ],
+  "dependencies": {
+    "jquery": "2.x",
+    "kitUtils": "*",
+    "fastclick": "*"
+  },
+  "resolutions": {
+    "jquery": "2.x"
+  }
+}

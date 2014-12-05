@@ -1,0 +1,25 @@
+{
+	"name": "simpleoffcanvasmenu",
+	"title": "Simple Off Canvas Menu",
+	"description": "Off-canvas menu for modern mobile browsers",
+	"version": "0.2.0",
+	"homepage": "https://github.com/SubZane/simpleoffcanvasmenu",
+	"author": {
+		"name": "Andreas Norman",
+		"email": "an@andreasnorman.se",
+		"url": "http://www.andreasnorman.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/SubZane/simpleoffcanvasmenu.git"
+	},
+	"bugs": "https://github.com/SubZane/simpleoffcanvasmenu/issues",
+	"licenses": [{
+		"type": "MIT",
+		"url": "https://github.com/SubZane/simpleoffcanvasmenu/blob/master/LICENSE-MIT"
+	}],
+	"dependencies": {
+		"jquery": "*"
+	},
+	"keywords": []
+}
