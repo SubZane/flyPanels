@@ -2,6 +2,7 @@ html,body {
   margin: 0;
   padding: 0;
   font-family: @primary_font;
+  line-height: 140%;
 }
 
 html.socm-open, body.socm-open {
@@ -13,28 +14,32 @@ html.socm-open, body.socm-open {
 .socm-container {
   .offcanvas {
     background-color: @top_bar_bgcolor;
-    padding: 20px;
     float: left;
     transition: 0.2s all ease;
     -webkit-overflow-scrolling: touch;
     overflow-y: auto;
-    width: @panel_width;
+    width: unit(@panel_width, px);
   }
 
   .socm-right {
-    margin-right: -200%;
+    margin-right: unit(-@panel_width, px);
     display: none;
   }
   .socm-left {
-    margin-left: -100%;
+    margin-left: unit(-(@panel_width), px);
   }
 
   .socm-main {
-    transition: 0.5s all ease;
+    transition: 0.2s all ease;
     width: 100%;
     float: left;
     margin-left: 0;
     .socm-content {
+      .socm-overlay {
+        background-color: #000;
+        opacity: 0;
+        display:none;
+      }
       padding: 10px;
       padding-top: 50px;
       -webkit-overflow-scrolling: touch;
@@ -44,11 +49,17 @@ html.socm-open, body.socm-open {
   &.openleft {
     .socm-left {
       margin-left: 0;
-      width: @panel_width;
+      overflow: hidden;
+      width: unit(@panel_width, px);
+      position: relative;
+      .panelcontent {
+        position: absolute;
+      }
     }
-
     .socm-main {
+      overflow: hidden;
       margin-right: -100%;
+      opacity: 0.2;
       .socm-content {
         overflow: hidden;
       }
@@ -57,13 +68,35 @@ html.socm-open, body.socm-open {
   &.openright {
     .socm-right {
       display: block;
-      width: @panel_width;
+      overflow: hidden;
+      width: unit(@panel_width, px);
+      position: relative;
+      .panelcontent {
+        position: absolute;
+      }
     }
     .socm-main {
-      margin-left: -@panel_width;
+      overflow: hidden;
+      opacity: 0.2;
+      margin-left: unit(-(@panel_width), px);
       .socm-content {
         overflow: hidden;
       }
     }
+  }
+}
+
+body.socm-open {
+  .panelcontent {
+    padding: @top_bar_height unit(@panel_padding, px) unit(@panel_padding, px) unit(@panel_padding, px);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    z-index: 3;
+    overflow: auto;
+    opacity: 1;
   }
 }

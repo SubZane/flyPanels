@@ -20,6 +20,10 @@
 		 */
 		function init() {
 			kitUtils.init();
+			$('.socm-content').css('height', innerHeight);
+			$('.socm-left').css('height', innerHeight);
+			$('.socm-right').css('height', innerHeight);
+			$('.socm-overlay').css('height', innerHeight);
 			attachEvents();
 			hook('onInit');
 		}
@@ -27,6 +31,8 @@
 		function close() {
 			$el.removeClass('openleft');
 			$el.removeClass('openright');
+			toggleBodyHtmlClass();
+			onClose();
 		}
 
 		function closeLeft() {
@@ -39,22 +45,31 @@
 
 		function onCloseLeft() {
 			hook('onCloseLeft');
-			$('.socm-left').css('height', '');
 		}
 
 		function onCloseRight() {
 			hook('onCloseRight');
-			$('.socm-right').css('height', '');
 		}
 
 		function onOpenLeft() {
 			hook('onOpenLeft');
-			$('.socm-left').css('height', innerHeight);
 		}
 
 		function onOpenRight() {
 			hook('onOpenRight');
-			$('.socm-right').css('height', innerHeight);
+		}
+
+		function onOpen() {
+			$('.socm-content').on('click touchmove touchend touchleave touchcancel', function (e) {
+				close();
+				e.preventDefault();
+			});
+			hook('onOpen');
+		}
+
+		function onClose() {
+			$('.socm-content').off('click touchmove touchend touchleave touchcancel');
+			hook('onClose');
 		}
 
 		function toggleBodyHtmlClass() {
@@ -63,15 +78,15 @@
 		}
 
 		function attachEvents() {
-			$('.socm-content').css('height', innerHeight);
-
 			$('.socm-button-left').on('click', function() {
 				$el.toggleClass('openleft');
 				toggleBodyHtmlClass();
 				if ($(this).hasClass('openleft')) {
 					onCloseLeft();
+					onClose();
 				} else {
 					onOpenLeft();
+					onOpen();
 				}
 			});
 
@@ -80,8 +95,10 @@
 				toggleBodyHtmlClass();
 				if ($(this).hasClass('openright')) {
 					onCloseRight();
+					onClose();
 				} else {
 					onOpenRight();
+					onOpen();
 				}
 			});
 
@@ -91,7 +108,9 @@
 
 			});
 
-			$('.socm-content').on('click', function (e) {
+			/*
+
+			$('.socm-content').on('click touchmove touchend touchleave touchcancel', function (e) {
 				close();
 				e.preventDefault();
 			});
@@ -115,7 +134,7 @@
 				close();
 				e.preventDefault();
 			});
-
+*/
 			/*
 			var resizeTimer;
 			$(window).resize(function () {
