@@ -105,36 +105,12 @@
 
 			// Listen for orientation changes
 			$(window).bind('orientationchange', function (e) {
-
+				$('.socm-content').css('height', innerHeight);
+				$('.socm-left').css('height', innerHeight);
+				$('.socm-right').css('height', innerHeight);
+				$('.socm-overlay').css('height', innerHeight);
 			});
 
-			/*
-
-			$('.socm-content').on('click touchmove touchend touchleave touchcancel', function (e) {
-				close();
-				e.preventDefault();
-			});
-
-			$('.socm-content').on('touchmove', function (e) {
-				close();
-				e.preventDefault();
-			});
-
-			$('.socm-content').on('touchend', function (e) {
-				close();
-				e.preventDefault();
-			});
-
-			$('.socm-content').on('touchleave', function (e) {
-				close();
-				e.preventDefault();
-			});
-
-			$('.socm-content').on('touchcancel', function (e) {
-				close();
-				e.preventDefault();
-			});
-*/
 			/*
 			var resizeTimer;
 			$(window).resize(function () {
