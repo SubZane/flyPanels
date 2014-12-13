@@ -1,70 +1,69 @@
 html,body {
   margin: 0;
   padding: 0;
-  height: 100%;
-  width: 100%;
-  font-family: arial;
+  font-family: @primary_font;
+}
+
+html.socm-open, body.socm-open {
   overflow: hidden;
+  width: 100%
+  height: 100%;
 }
 
-.socm-container.openleft,
-.socm-container.openright {
-  overflow-x: hidden;
-}
-
-.offcanvas a {
-  color: #fff;
-  text-decoration: none;
-}
-
-.offcanvas {
-  background-color: #000;
-  padding: 20px;
-  float: left;
-  transition: .2s all ease;
-  -webkit-overflow-scrolling: touch;
-  overflow-y: auto;
-  width: 70%;
-}
-
-.socm-left {
-  margin-left: -100%;
-}
-
-.socm-container.openleft .socm-left {
-  margin-left: 0;
-  width: 70%;
-}
-
-.socm-container.openleft .socm-main {
-  margin-right: -100%;
-}
-
-.socm-right {
-  margin-right: -200%;
-  display: none;
-}
-
-.socm-container.openright .socm-right {
-  display: block;
-  width: 70%;
-}
-
-.socm-container.openright .socm-main {
-  margin-left: -80%;
-}
-
-.socm-main {
-  transition: .2s all ease;
-  width: 100%;
-  float: left;
-  margin-left: 0;
-
-  .socm-content {
-    padding: 10px;
-    padding-top: 50px;
+.socm-container {
+  .offcanvas {
+    background-color: @top_bar_bgcolor;
+    padding: 20px;
+    float: left;
+    transition: 0.2s all ease;
     -webkit-overflow-scrolling: touch;
-    overflow: auto;
+    overflow-y: auto;
+    width: @panel_width;
   }
 
+  .socm-right {
+    margin-right: -200%;
+    display: none;
+  }
+  .socm-left {
+    margin-left: -100%;
+  }
+
+  .socm-main {
+    transition: 0.5s all ease;
+    width: 100%;
+    float: left;
+    margin-left: 0;
+    .socm-content {
+      padding: 10px;
+      padding-top: 50px;
+      -webkit-overflow-scrolling: touch;
+      overflow: auto;
+    }
+  }
+  &.openleft {
+    .socm-left {
+      margin-left: 0;
+      width: @panel_width;
+    }
+
+    .socm-main {
+      margin-right: -100%;
+      .socm-content {
+        overflow: hidden;
+      }
+    }
+  }
+  &.openright {
+    .socm-right {
+      display: block;
+      width: @panel_width;
+    }
+    .socm-main {
+      margin-left: -@panel_width;
+      .socm-content {
+        overflow: hidden;
+      }
+    }
+  }
 }

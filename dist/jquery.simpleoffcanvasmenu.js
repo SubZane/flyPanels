@@ -1,4 +1,4 @@
-/*! Simple Off Canvas Menu - v0.2.0 - 2014-12-04
+/*! Simple Off Canvas Menu - v0.2.0 - 2014-12-13
 * https://github.com/SubZane/simpleoffcanvasmenu
 * Copyright (c) 2014 Andreas Norman; Licensed MIT */
 (function ($) {
@@ -23,7 +23,6 @@
 		 */
 		function init() {
 			kitUtils.init();
-			kitUtils.log('--- init simpleoffcanvasmenu ---');
 			attachEvents();
 			hook('onInit');
 		}
@@ -43,10 +42,12 @@
 
 		function onCloseLeft() {
 			hook('onCloseLeft');
+			$('.socm-left').css('height', '');
 		}
 
 		function onCloseRight() {
 			hook('onCloseRight');
+			$('.socm-right').css('height', '');
 		}
 
 		function onOpenLeft() {
@@ -59,24 +60,31 @@
 			$('.socm-right').css('height', innerHeight);
 		}
 
+		function toggleBodyHtmlClass() {
+			$('body').toggleClass('socm-open');
+			$('html').toggleClass('socm-open');
+		}
+
 		function attachEvents() {
 			$('.socm-content').css('height', innerHeight);
-			
+
 			$('.socm-button-left').on('click', function() {
 				$el.toggleClass('openleft');
+				toggleBodyHtmlClass();
 				if ($(this).hasClass('openleft')) {
-					onOpenLeft();
-				} else {
 					onCloseLeft();
+				} else {
+					onOpenLeft();
 				}
 			});
 
 			$('.socm-button-right').on('click', function() {
 				$el.toggleClass('openright');
+				toggleBodyHtmlClass();
 				if ($(this).hasClass('openright')) {
-					onOpenRight();
-				} else {
 					onCloseRight();
+				} else {
+					onOpenRight();
 				}
 			});
 
@@ -85,7 +93,7 @@
 			$(window).bind('orientationchange', function (e) {
 
 			});
-			/*
+
 			$('.socm-content').on('click', function (e) {
 				close();
 				e.preventDefault();
@@ -110,7 +118,6 @@
 				close();
 				e.preventDefault();
 			});
-			*/
 
 			/*
 			var resizeTimer;
@@ -120,6 +127,52 @@
 			});
 			*/
 			hook('onLoad');
+		}
+
+		function treeNavigation() {
+			// Toggles the plus/minus icons when opening and closing ul/li in the menu
+			$('.mobile-navigation-list li.haschildren a').click(function (e) {
+				kitUtils.log(e.target);
+				if ($(e.target).is('i')) {
+					$(this).parent().toggleClass('expanded');
+					if ($(this).parent().hasClass('expanded')) {
+						$(e.target).removeClass('fa-plus');
+						$(e.target).addClass('fa-minus');
+					} else {
+						$(e.target).addClass('fa-plus');
+						$(e.target).removeClass('fa-minus');
+					}
+					e.preventDefault();
+				}
+			});
+
+			$('.mobile-navigation-list li.haschildren a').on('touchstart', function (e) {
+				if (!$(e.target).is('i')) {
+					$(this).addClass('focus');
+				} else {
+					$(e.target).addClass('focus');
+				}
+			});
+
+			$('.mobile-navigation-list li.haschildren a').on('touchmove', function (e) {
+				$('.mobile-navigation-list a').removeClass('focus');
+				$('.mobile-navigation-list i').removeClass('focus');
+			});
+
+			$('.mobile-navigation-list li.haschildren a').on('touchend', function (e) {
+				$('.mobile-navigation-list a').removeClass('focus');
+				$('.mobile-navigation-list i').removeClass('focus');
+			});
+
+			$('.mobile-navigation-list li.haschildren a').on('touchleave', function (e) {
+				$('.mobile-navigation-list a').removeClass('focus');
+				$('.mobile-navigation-list i').removeClass('focus');
+			});
+
+			$('.mobile-navigation-list li.haschildren a').on('touchcancel', function (e) {
+				$('.mobile-navigation-list a').removeClass('focus');
+				$('.mobile-navigation-list i').removeClass('focus');
+			});
 		}
 
 		function afterWindowResize() {

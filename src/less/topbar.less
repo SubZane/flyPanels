@@ -1,26 +1,30 @@
 .socm-topbar {
   width: 100%;
-  height: 50px;
-  background-color: #000;
+  height: @top_bar_height;
+  background-color: @top_bar_bgcolor;
   position: fixed;
   z-index: 100;
-
-  .socm-button-left,
-  .socm-button-right {
-    padding: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-    text-align: center;
-    padding-top: 15px;
-    display: block;
-    float: left;
-    a {
-      color: #fff;
-      text-decoration: none;
+  a {
+    color: @text_color;
+    text-decoration: none;
+    font-size: 24px;
+    &.icon-menu:before {
+      content: "\e601";
+    }
+    &.socm-button-left,
+    &.socm-button-right {
+      padding: 10px;
+      padding-left: 20px;
+      padding-right: 20px;
+      text-align: center;
+      padding-top: 13px;
+      display: block;
+      float: left;
+    }
+    &.socm-button-right {
+      float: right;
     }
   }
-  .socm-button-right {
-    float: right;
-  }
+
 
 }

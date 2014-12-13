@@ -20,7 +20,6 @@
 		 */
 		function init() {
 			kitUtils.init();
-			kitUtils.log('--- init simpleoffcanvasmenu ---');
 			attachEvents();
 			hook('onInit');
 		}
@@ -40,10 +39,12 @@
 
 		function onCloseLeft() {
 			hook('onCloseLeft');
+			$('.socm-left').css('height', '');
 		}
 
 		function onCloseRight() {
 			hook('onCloseRight');
+			$('.socm-right').css('height', '');
 		}
 
 		function onOpenLeft() {
@@ -56,24 +57,31 @@
 			$('.socm-right').css('height', innerHeight);
 		}
 
+		function toggleBodyHtmlClass() {
+			$('body').toggleClass('socm-open');
+			$('html').toggleClass('socm-open');
+		}
+
 		function attachEvents() {
 			$('.socm-content').css('height', innerHeight);
 
 			$('.socm-button-left').on('click', function() {
 				$el.toggleClass('openleft');
+				toggleBodyHtmlClass();
 				if ($(this).hasClass('openleft')) {
-					onOpenLeft();
-				} else {
 					onCloseLeft();
+				} else {
+					onOpenLeft();
 				}
 			});
 
 			$('.socm-button-right').on('click', function() {
 				$el.toggleClass('openright');
+				toggleBodyHtmlClass();
 				if ($(this).hasClass('openright')) {
-					onOpenRight();
-				} else {
 					onCloseRight();
+				} else {
+					onOpenRight();
 				}
 			});
 
@@ -82,7 +90,7 @@
 			$(window).bind('orientationchange', function (e) {
 
 			});
-			/*
+
 			$('.socm-content').on('click', function (e) {
 				close();
 				e.preventDefault();
@@ -107,7 +115,6 @@
 				close();
 				e.preventDefault();
 			});
-			*/
 
 			/*
 			var resizeTimer;
