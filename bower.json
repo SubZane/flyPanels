@@ -22,7 +22,8 @@
   "dependencies": {
     "jquery": "2.x",
     "kitUtils": "*",
-    "fastclick": "*"
+    "fastclick": "*",
+    "jquery.transit": "*"
   },
   "resolutions": {
     "jquery": "2.x"

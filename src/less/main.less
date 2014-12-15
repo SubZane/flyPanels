@@ -3,6 +3,7 @@ html,body {
   padding: 0;
   font-family: @primary_font;
   line-height: 140%;
+  overflow-x: hidden;
 }
 
 html.socm-open, body.socm-open {
@@ -14,41 +15,46 @@ html.socm-open, body.socm-open {
 .socm-container {
   .offcanvas {
     background-color: @top_bar_bgcolor;
-    float: left;
-    transition: 0.2s all ease;
-    -webkit-overflow-scrolling: touch;
-    overflow-y: auto;
+    overflow: hidden;
     width: unit(@panel_width, px);
+    .panelcontent {
+      display:none;
+      padding: @top_bar_height unit(@panel_padding, px) unit(@panel_padding, px) unit(@panel_padding, px);
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: auto;
+      height: auto;
+      z-index: 3;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
   }
 
   .socm-right {
     margin-right: unit(-@panel_width, px);
-    display: none;
+    float: right;
   }
   .socm-left {
     margin-left: unit(-(@panel_width), px);
+    float: left;
   }
 
   .socm-main {
-    transition: 0.2s all ease;
     width: 100%;
     float: left;
-    margin-left: 0;
+    margin-left: 0px;
     .socm-content {
-      .socm-overlay {
-        background-color: #000;
-        opacity: 0;
-        display:none;
-      }
       padding: 10px;
       padding-top: 50px;
       -webkit-overflow-scrolling: touch;
-      overflow: auto;
+      overflow-y: scroll;
     }
   }
   &.openleft {
     .socm-left {
-      margin-left: 0;
+      margin-left: 0px;
       overflow: hidden;
       width: unit(@panel_width, px);
       position: relative;
@@ -59,7 +65,6 @@ html.socm-open, body.socm-open {
     .socm-main {
       overflow: hidden;
       margin-right: -100%;
-      opacity: 0.2;
       .socm-content {
         overflow: hidden;
       }
@@ -67,7 +72,7 @@ html.socm-open, body.socm-open {
   }
   &.openright {
     .socm-right {
-      display: block;
+      margin-right: 0;
       overflow: hidden;
       width: unit(@panel_width, px);
       position: relative;
@@ -77,26 +82,10 @@ html.socm-open, body.socm-open {
     }
     .socm-main {
       overflow: hidden;
-      opacity: 0.2;
       margin-left: unit(-(@panel_width), px);
       .socm-content {
         overflow: hidden;
       }
     }
-  }
-}
-
-body.socm-open {
-  .panelcontent {
-    padding: @top_bar_height unit(@panel_padding, px) unit(@panel_padding, px) unit(@panel_padding, px);
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: auto;
-    height: auto;
-    z-index: 3;
-    overflow: auto;
-    opacity: 1;
   }
 }

@@ -11,6 +11,8 @@
 		var el = element;
 		var $el = $(element);
 		var innerHeight = window.innerHeight;
+		var panelWidth;
+		var fadedOpacity = '0.2';
 
 		// Extend default options with those supplied by user.
 		options = $.extend({}, $.fn[pluginName].defaults, options);
@@ -20,27 +22,27 @@
 		 */
 		function init() {
 			kitUtils.init();
-			$('.socm-content').css('height', innerHeight);
-			$('.socm-left').css('height', innerHeight);
-			$('.socm-right').css('height', innerHeight);
-			$('.socm-overlay').css('height', innerHeight);
+			setHeight();
+			setupVariables();
 			attachEvents();
 			hook('onInit');
 		}
 
+		function setHeight() {
+			$('.socm-content').css('height', innerHeight);
+			$('.socm-left').css('height', innerHeight);
+			$('.socm-right').css('height', innerHeight);
+			$('.socm-overlay').css('height', innerHeight);
+		}
+
+		function setupVariables() {
+			panelWidth = $('.socm-left').css('width');
+		}
+
 		function close() {
-			$el.removeClass('openleft');
-			$el.removeClass('openright');
-			toggleBodyHtmlClass();
+			closeLeft();
+			closeRight();
 			onClose();
-		}
-
-		function closeLeft() {
-			$el.removeClass('openleft');
-		}
-
-		function closeRight() {
-			$el.removeClass('openright');
 		}
 
 		function onCloseLeft() {
@@ -77,100 +79,115 @@
 			$('html').toggleClass('socm-open');
 		}
 
-		function attachEvents() {
-			$('.socm-button-left').on('click', function() {
-				$el.toggleClass('openleft');
-				toggleBodyHtmlClass();
-				if ($(this).hasClass('openleft')) {
-					onCloseLeft();
-					onClose();
-				} else {
-					onOpenLeft();
-					onOpen();
-				}
-			});
-
-			$('.socm-button-right').on('click', function() {
-				$el.toggleClass('openright');
-				toggleBodyHtmlClass();
-				if ($(this).hasClass('openright')) {
-					onCloseRight();
-					onClose();
-				} else {
+		function openRight(panel) {
+			$('.socm-right').transition({
+				marginRight: '0px',
+				duration: 200,
+				easing: 'in',
+				complete: function() {
+					$el.addClass('openright');
+					toggleBodyHtmlClass();
+					$(this).find('[data-panel="' + panel +'"]').show();
 					onOpenRight();
 					onOpen();
 				}
 			});
+			$('.socm-main').transition({
+				marginLeft: '-'+panelWidth,
+				opacity: fadedOpacity,
+				duration: 200,
+				easing: 'in'
+			});
+		}
 
+		function closeRight() {
+			$('.socm-right').transition({
+				marginRight: '-'+panelWidth,
+				duration: 200,
+				easing: 'in',
+				complete: function() {
+					$el.removeClass('openright');
+					toggleBodyHtmlClass();
+					$('.offcanvas .panelcontent').hide();
+					onCloseRight();
+					onClose();
+				}
+			});
+			$('.socm-main').transition({
+				marginLeft: '0',
+				opacity: 1,
+				duration: 200,
+				easing: 'in'
+			});
+		}
+
+		function openLeft(panel) {
+			$('.socm-left').transition({
+				marginLeft: '0px',
+				duration: 200,
+				easing: 'in',
+				complete: function() {
+					$el.addClass('openleft');
+					toggleBodyHtmlClass();
+					$(this).find('[data-panel="' + panel +'"]').show();
+					onOpenLeft();
+					onOpen();
+				}
+			});
+			$('.socm-main').transition({
+				marginRight: '-100%',
+				opacity: fadedOpacity,
+				duration: 200,
+				easing: 'in'
+			});
+		}
+
+		function closeLeft() {
+			$('.socm-left').transition({
+				marginLeft: '-'+panelWidth,
+				duration: 200,
+				easing: 'in',
+				complete: function() {
+					$el.removeClass('openleft');
+					toggleBodyHtmlClass();
+					$('.offcanvas .panelcontent').hide();
+					onCloseLeft();
+					onClose();
+				}
+			});
+			$('.socm-main').transition({
+				marginLeft: '0',
+				opacity: 1,
+				duration: 200,
+				easing: 'in'
+			});
+		}
+
+		function attachEvents() {
+			$('.socm-button-left').on('click', function() {
+				var panel = $(this).data('panel');
+				if ($('.socm-container').hasClass('openleft')) {
+					closeLeft();
+				} else {
+					openLeft(panel);
+				}
+			});
+
+			$('.socm-button-right').on('click', function() {
+				var panel = $(this).data('panel');
+				if ($('.socm-container').hasClass('openright')) {
+					closeRight();
+				} else {
+					openRight(panel);
+				}
+			});
 
 			// Listen for orientation changes
 			$(window).bind('orientationchange', function (e) {
-				$('.socm-content').css('height', innerHeight);
-				$('.socm-left').css('height', innerHeight);
-				$('.socm-right').css('height', innerHeight);
-				$('.socm-overlay').css('height', innerHeight);
+				setHeight();
 			});
 
-			/*
-			var resizeTimer;
-			$(window).resize(function () {
-				clearTimeout(resizeTimer);
-				resizeTimer = setTimeout(afterWindowResize, 100);
-			});
-			*/
 			hook('onLoad');
-		}
-
-		function treeNavigation() {
-			// Toggles the plus/minus icons when opening and closing ul/li in the menu
-			$('.mobile-navigation-list li.haschildren a').click(function (e) {
-				kitUtils.log(e.target);
-				if ($(e.target).is('i')) {
-					$(this).parent().toggleClass('expanded');
-					if ($(this).parent().hasClass('expanded')) {
-						$(e.target).removeClass('fa-plus');
-						$(e.target).addClass('fa-minus');
-					} else {
-						$(e.target).addClass('fa-plus');
-						$(e.target).removeClass('fa-minus');
-					}
-					e.preventDefault();
-				}
-			});
-
-			$('.mobile-navigation-list li.haschildren a').on('touchstart', function (e) {
-				if (!$(e.target).is('i')) {
-					$(this).addClass('focus');
-				} else {
-					$(e.target).addClass('focus');
-				}
-			});
-
-			$('.mobile-navigation-list li.haschildren a').on('touchmove', function (e) {
-				$('.mobile-navigation-list a').removeClass('focus');
-				$('.mobile-navigation-list i').removeClass('focus');
-			});
-
-			$('.mobile-navigation-list li.haschildren a').on('touchend', function (e) {
-				$('.mobile-navigation-list a').removeClass('focus');
-				$('.mobile-navigation-list i').removeClass('focus');
-			});
-
-			$('.mobile-navigation-list li.haschildren a').on('touchleave', function (e) {
-				$('.mobile-navigation-list a').removeClass('focus');
-				$('.mobile-navigation-list i').removeClass('focus');
-			});
-
-			$('.mobile-navigation-list li.haschildren a').on('touchcancel', function (e) {
-				$('.mobile-navigation-list a').removeClass('focus');
-				$('.mobile-navigation-list i').removeClass('focus');
-			});
-		}
-
-		function afterWindowResize() {
-			if (kitUtils.isMobileBrowser() === true) {
-				innerHeight = window.innerHeight;
-			}
 		}
 
 		/**
@@ -276,6 +293,7 @@
 	// passing an object literal, or after initialization:
 	// $('#el').simpleoffcanvasmenu('option', 'key', value);
 	$.fn[pluginName].defaults = {
+		fadedOpacity: '0.2',
 		onInit: function () {},
 		onLoad: function () {},
 		onOpenLeft: function () {},

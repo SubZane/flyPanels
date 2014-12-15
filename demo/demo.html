@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=yes" />
 	<title>Simple Mobile Menu</title>
 	<link rel="stylesheet" href="css/styles.min.css">
 
@@ -12,15 +12,23 @@
 <body data-debug="true">
 	<div class="socm-container">
 		<div class="offcanvas socm-left">
-			<div class="panelcontent">
+			<div class="panelcontent" data-panel="text">
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+			</div>
+			<div class="panelcontent" data-panel="menu">
+				<ul>
+					<li><a href="#">menu item 1</a></li>
+					<li><a href="#">menu item 1</a></li>
+					<li><a href="#">menu item 1</a></li>
+				</ul>
 			</div>
 		</div>
 		<div class="socm-main">
 			<div class="socm-topbar">
-				<a class="socm-button-left icon-menu" href="#"></a>
-				<a class="socm-button-right icon-menu" href="#"></a>
+				<a class="socm-button-left icon-menu" data-panel="text" href="#"></a>
+				<a class="socm-button-left icon-menu" data-panel="menu" href="#"></a>
+				<a class="socm-button-right icon-menu" data-panel="text" href="#"></a>
 			</div>
 			<div class="socm-content">
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
@@ -44,7 +52,7 @@
 			</div>
 		</div>
 		<div class="offcanvas socm-right">
-			<div class="panelcontent">
+			<div class="panelcontent" data-panel="text">
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
 			</div>
@@ -52,6 +60,7 @@
 	</div>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="dependencies/kitUtils/kitUtils.js"></script>
+	<script src="dependencies/jquery.transit/jquery.transit.js"></script>
 	<script src="../dist/jquery.simpleoffcanvasmenu.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.3/fastclick.min.js"></script>
 	<script>
