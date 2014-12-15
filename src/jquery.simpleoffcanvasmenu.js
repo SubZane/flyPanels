@@ -23,7 +23,7 @@
 		function init() {
 			kitUtils.init();
 			setHeight();
-			setupVariables();
+			panelWidth = $('.socm-left').css('width');
 			attachEvents();
 			hook('onInit');
 		}
@@ -33,10 +33,6 @@
 			$('.socm-left').css('height', innerHeight);
 			$('.socm-right').css('height', innerHeight);
 			$('.socm-overlay').css('height', innerHeight);
-		}
-
-		function setupVariables() {
-			panelWidth = $('.socm-left').css('width');
 		}
 
 		function close() {
