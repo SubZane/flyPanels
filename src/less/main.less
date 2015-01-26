@@ -6,7 +6,7 @@ html,body {
   overflow-x: hidden;
 }
 
-html.socm-open, body.socm-open {
+html.flypanels-open, body.flypanels-open {
   overflow: hidden;
   width: 100%
   height: 100%;
@@ -20,7 +20,7 @@ html.socm-open, body.socm-open {
   border: 0px none;
 }
 
-.socm-container {
+.flypanels-container {
   .offcanvas {
     background-color: @top_bar_bgcolor;
     overflow: hidden;
@@ -40,20 +40,20 @@ html.socm-open, body.socm-open {
     }
   }
 
-  .socm-right {
+  .flypanels-right {
     margin-right: unit(-@panel_width, px);
     float: right;
   }
-  .socm-left {
+  .flypanels-left {
     margin-left: unit(-(@panel_width), px);
     float: left;
   }
 
-  .socm-main {
+  .flypanels-main {
     width: 100%;
     float: left;
     margin-left: 0px;
-    .socm-content {
+    .flypanels-content {
       padding: 10px;
       padding-top: 50px;
       -webkit-overflow-scrolling: touch;
@@ -61,7 +61,7 @@ html.socm-open, body.socm-open {
     }
   }
   &.openleft {
-    .socm-left {
+    .flypanels-left {
       margin-left: 0px;
       overflow: hidden;
       width: unit(@panel_width, px);
@@ -70,16 +70,16 @@ html.socm-open, body.socm-open {
         position: absolute;
       }
     }
-    .socm-main {
+    .flypanels-main {
       overflow: hidden;
       margin-right: -100%;
-      .socm-content {
+      .flypanels-content {
         overflow: hidden;
       }
     }
   }
   &.openright {
-    .socm-right {
+    .flypanels-right {
       margin-right: 0;
       overflow: hidden;
       width: unit(@panel_width, px);
@@ -88,10 +88,10 @@ html.socm-open, body.socm-open {
         position: absolute;
       }
     }
-    .socm-main {
+    .flypanels-main {
       overflow: hidden;
       margin-left: unit(-(@panel_width), px);
-      .socm-content {
+      .flypanels-content {
         overflow: hidden;
       }
     }

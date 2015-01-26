@@ -1,12 +1,12 @@
 {
-  "name": "simpleoffcanvasmenu",
+  "name": "flyPanels",
   "version": "0.2.0",
-  "homepage": "https://github.com/SubZane/simpleoffcanvasmenu",
+  "homepage": "https://github.com/SubZane/flyPanels",
   "authors": [
     "Andreas Norman <an@andreasnorman.se>"
   ],
-  "description": "Simple Off-Canvas Menu",
-  "main": "src/jquery.simpleoffcanvasmenu.js",
+  "description": "flyPanels",
+  "main": "src/jquery.flyPanels.js",
   "keywords": [
     "navigation",
     "jquery",
@@ -21,9 +21,8 @@
   ],
   "dependencies": {
     "jquery": "2.x",
-    "kitUtils": "*",
-    "fastclick": "*",
-    "jquery.transit": "*"
+    "fastclick": "1.x",
+    "jquery.transit": "0.9.x"
   },
   "resolutions": {
     "jquery": "2.x"

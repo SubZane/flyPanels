@@ -1,2 +1,2 @@
-SimpleOffCanvasMenu
+flyPanels
 ==================

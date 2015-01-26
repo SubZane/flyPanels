@@ -1,9 +1,9 @@
-/*! Simple Off Canvas Menu - v0.2.0 - 2015-01-26
-* https://github.com/SubZane/simpleoffcanvasmenu
+/*! flyPanels - v0.2.0 - 2015-01-26
+* https://github.com/SubZane/flyPanels
 * Copyright (c) 2015 Andreas Norman; Licensed MIT */
 (function ($) {
 	// Change this to your plugin name.
-	var pluginName = 'simpleoffcanvasmenu';
+	var pluginName = 'flyPanels';
 
 	/**
 	 * Plugin object constructor.
@@ -16,8 +16,8 @@
 		var innerHeight = window.innerHeight;
 		var panelWidth;
 		var redrawOnResize = true;
-		// Need to get the topbar height in order to later set the correct height of .socm-content
-		var topBarHeight = parseInt($('.socm-topbar').css('height'), 10);
+		// Need to get the topbar height in order to later set the correct height of .flypanels-content
+		var topBarHeight = parseInt($('.flypanels-topbar').css('height'), 10);
 		var fadedOpacity = '0.2';
 
 		// Extend default options with those supplied by user.
@@ -29,16 +29,16 @@
 		function init() {
 			kitUtils.init();
 			setHeight();
-			panelWidth = $('.socm-left').css('width');
+			panelWidth = $('.flypanels-left').css('width');
 			attachEvents();
 			hook('onInit');
 		}
 
 		function setHeight() {
-			$('.socm-content').css('height', (parseInt(innerHeight, 10) - topBarHeight) + 'px');
-			$('.socm-left').css('height', innerHeight);
-			$('.socm-right').css('height', innerHeight);
-			$('.socm-overlay').css('height', innerHeight);
+			$('.flypanels-content').css('height', (parseInt(innerHeight, 10) - topBarHeight) + 'px');
+			$('.flypanels-left').css('height', innerHeight);
+			$('.flypanels-right').css('height', innerHeight);
+			$('.flypanels-overlay').css('height', innerHeight);
 		}
 
 		function close() {
@@ -64,7 +64,7 @@
 		}
 
 		function onOpen() {
-			$('.socm-content').on('click touchmove touchend touchleave touchcancel', function (e) {
+			$('.flypanels-content').on('click touchmove touchend touchleave touchcancel', function (e) {
 				close();
 				e.preventDefault();
 			});
@@ -72,17 +72,17 @@
 		}
 
 		function onClose() {
-			$('.socm-content').off('click touchmove touchend touchleave touchcancel');
+			$('.flypanels-content').off('click touchmove touchend touchleave touchcancel');
 			hook('onClose');
 		}
 
 		function toggleBodyHtmlClass() {
-			$('body').toggleClass('socm-open');
-			$('html').toggleClass('socm-open');
+			$('body').toggleClass('flypanels-open');
+			$('html').toggleClass('flypanels-open');
 		}
 
 		function openRight(panel) {
-			$('.socm-right').transition({
+			$('.flypanels-right').transition({
 				marginRight: '0px',
 				duration: 200,
 				easing: 'in',
@@ -94,7 +94,7 @@
 					onOpen();
 				}
 			});
-			$('.socm-main').transition({
+			$('.flypanels-main').transition({
 				marginLeft: '-'+panelWidth,
 				opacity: fadedOpacity,
 				duration: 200,
@@ -103,7 +103,7 @@
 		}
 
 		function closeRight() {
-			$('.socm-right').transition({
+			$('.flypanels-right').transition({
 				marginRight: '-'+panelWidth,
 				duration: 200,
 				easing: 'in',
@@ -115,7 +115,7 @@
 					onClose();
 				}
 			});
-			$('.socm-main').transition({
+			$('.flypanels-main').transition({
 				marginLeft: '0',
 				opacity: 1,
 				duration: 200,
@@ -124,7 +124,7 @@
 		}
 
 		function openLeft(panel) {
-			$('.socm-left').transition({
+			$('.flypanels-left').transition({
 				marginLeft: '0px',
 				duration: 200,
 				easing: 'in',
@@ -136,7 +136,7 @@
 					onOpen();
 				}
 			});
-			$('.socm-main').transition({
+			$('.flypanels-main').transition({
 				marginRight: '-100%',
 				opacity: fadedOpacity,
 				duration: 200,
@@ -145,7 +145,7 @@
 		}
 
 		function closeLeft() {
-			$('.socm-left').transition({
+			$('.flypanels-left').transition({
 				marginLeft: '-'+panelWidth,
 				duration: 200,
 				easing: 'in',
@@ -157,7 +157,7 @@
 					onClose();
 				}
 			});
-			$('.socm-main').transition({
+			$('.flypanels-main').transition({
 				marginLeft: '0',
 				opacity: 1,
 				duration: 200,
@@ -183,18 +183,18 @@
 				}
 			});
 
-			$('.socm-button-left').on('click', function() {
+			$('.flypanels-button-left').on('click', function() {
 				var panel = $(this).data('panel');
-				if ($('.socm-container').hasClass('openleft')) {
+				if ($('.flypanels-container').hasClass('openleft')) {
 					closeLeft();
 				} else {
 					openLeft(panel);
 				}
 			});
 
-			$('.socm-button-right').on('click', function() {
+			$('.flypanels-button-right').on('click', function() {
 				var panel = $(this).data('panel');
-				if ($('.socm-container').hasClass('openright')) {
+				if ($('.flypanels-container').hasClass('openright')) {
 					closeRight();
 				} else {
 					openRight(panel);
@@ -219,8 +219,8 @@
 
 		/**
 		 * Get/set a plugin option.
-		 * Get usage: $('#el').simpleoffcanvasmenu('option', 'key');
-		 * Set usage: $('#el').simpleoffcanvasmenu('option', 'key', value);
+		 * Get usage: $('#el').flyPanels('option', 'key');
+		 * Set usage: $('#el').flyPanels('option', 'key', value);
 		 */
 		function option(key, val) {
 			if (val) {
@@ -232,7 +232,7 @@
 
 		/**
 		 * Destroy plugin.
-		 * Usage: $('#el').simpleoffcanvasmenu('destroy');
+		 * Usage: $('#el').flyPanels('destroy');
 		 */
 		function destroy() {
 			// Iterate over each matching element.
@@ -318,7 +318,7 @@
 	// Default plugin options.
 	// Options can be overwritten when initializing plugin, by
 	// passing an object literal, or after initialization:
-	// $('#el').simpleoffcanvasmenu('option', 'key', value);
+	// $('#el').flyPanels('option', 'key', value);
 	$.fn[pluginName].defaults = {
 		fadedOpacity: '0.2',
 		onInit: function () {},
