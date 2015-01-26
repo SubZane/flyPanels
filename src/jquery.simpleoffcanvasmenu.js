@@ -12,6 +12,9 @@
 		var $el = $(element);
 		var innerHeight = window.innerHeight;
 		var panelWidth;
+		var redrawOnResize = true;
+		// Need to get the topbar height in order to later set the correct height of .socm-content
+		var topBarHeight = parseInt($('.socm-topbar').css('height'), 10);
 		var fadedOpacity = '0.2';
 
 		// Extend default options with those supplied by user.
@@ -29,7 +32,7 @@
 		}
 
 		function setHeight() {
-			$('.socm-content').css('height', innerHeight);
+			$('.socm-content').css('height', (parseInt(innerHeight, 10) - topBarHeight) + 'px');
 			$('.socm-left').css('height', innerHeight);
 			$('.socm-right').css('height', innerHeight);
 			$('.socm-overlay').css('height', innerHeight);
@@ -159,7 +162,24 @@
 			});
 		}
 
+		function afterWindowResize() {
+			console.log('afterWindowResize');
+			innerHeight = window.innerHeight;
+			setHeight();
+		}
+
+
 		function attachEvents() {
+
+			// Prevent scroll if content doesn't need scroll.
+			$('.panelcontent').on('touchmove',function(e) {
+				kitUtils.log('this: ' + $(this).prop('scrollHeight'));
+				kitUtils.log('inner: ' + parseInt(innerHeight, 10));
+				if ($(this).prop('scrollHeight') <= parseInt(innerHeight, 10)) {
+					e.preventDefault();
+				}
+			});
+
 			$('.socm-button-left').on('click', function() {
 				var panel = $(this).data('panel');
 				if ($('.socm-container').hasClass('openleft')) {
@@ -177,6 +197,14 @@
 					openRight(panel);
 				}
 			});
+
+			if (redrawOnResize === true) {
+				var resizeTimer;
+				$(window).resize(function () {
+					clearTimeout(resizeTimer);
+					resizeTimer = setTimeout(afterWindowResize, 100);
+				});
+			}
 
 			// Listen for orientation changes
 			$(window).bind('orientationchange', function (e) {
