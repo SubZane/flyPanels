@@ -1,5 +1,5 @@
 {
-	"name": "flyPanels",
+	"name": "flypanels",
 	"version": "0.7.0",
 	"engines": {
 		"node": ">= 0.8.0"
