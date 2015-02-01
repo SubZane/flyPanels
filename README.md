@@ -4,7 +4,11 @@ flyPanels v0.7.0
 flyPanels - responsive off canvas menu panels
 
 ##Features
-flyPanels is a responsive off canvas menu plugin for websites or web apps. It supports all modern browsers and even some of the old ones like IE9. It can be used for menus, contact forms or anything you like really. Compared to many other off canvas menu plugins out there this one behaves more like a native solution. For example, the content will not scroll when a panel is open and its content scrolled. Any touch movement, swiping outside an open panel will close the panel. It's very solid.
+FlyPanels is a responsive off canvas menu plugin for websites or web apps. It supports all modern browsers and even some of the old ones like IE9. It can be used for menus, contact forms or anything you like really.
+
+Compared to many other off canvas menu plugins out there this one is more solid and behaves more like a native solution. Try it!
+
+###[View demo](http://www.andreasnorman.com/flypanels)
 
 ##Browser Support
 * Google Chrome (Windows, OSX, iOS and Android 4.x)
@@ -20,15 +24,12 @@ bower install flyPanels --save
 
 ##Dependencies
 * jQuery Transit
-* fastclick (not required but recommended to get that quicker native feeling when touching the panel buttons)
 
 ###Setup
 ```html
 <!-- You'll need jquery and jquery transit-->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.min.js"></script>
-<!-- I also recommend fastclick -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.3/fastclick.min.js"></script>
 <!-- and you'll need to include flyPanels of course! -->
 <script src="jquery.flyPanels.js"></script>
 
@@ -71,7 +72,6 @@ This could be your typical script setup.
 jQuery(document).ready(function($) {
   $(document).ready(function(){
     $('.flypanels-container').flyPanels();
-    FastClick.attach(document.body); // if you want. Totally up to you. I won't judge you.
   });
 });
 ```

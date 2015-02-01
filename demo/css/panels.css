@@ -34,3 +34,8 @@
   font-size: 12px;
   margin-right: 7px;
 }
+
+
+.panelcontent[data-panel="mail"] {
+  color: #fff;
+}

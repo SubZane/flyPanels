@@ -46,6 +46,7 @@ p {
 .codepanel {
   background-color: #efefef;
   padding: 20px;
+  line-height: 30px;
 }
 
 .bower {
