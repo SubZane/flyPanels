@@ -37,11 +37,11 @@ module.exports = function (grunt) {
 		less: {
 			production: {
 				options: {
-					compress: true,
-					cleancss: true
+					compress: false,
+					cleancss: false
 				},
 				files: {
-					'demo/css/styles.min.css': 'src/less/_application.less'
+					'demo/css/flyPanels.css': 'src/less/_application.less'
 				}
 			}
 		},

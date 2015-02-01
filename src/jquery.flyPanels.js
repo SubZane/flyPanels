@@ -24,7 +24,6 @@
 		 * Initialize plugin.
 		 */
 		function init() {
-			kitUtils.init();
 			setHeight();
 			panelWidth = $('.flypanels-left').css('width');
 			attachEvents();
@@ -32,7 +31,7 @@
 		}
 
 		function setHeight() {
-			$('.flypanels-content').css('height', (parseInt(innerHeight, 10) - topBarHeight) + 'px');
+			//$('.flypanels-content').css('height', (parseInt(innerHeight, 10) - topBarHeight) + 'px');
 			$('.flypanels-left').css('height', innerHeight);
 			$('.flypanels-right').css('height', innerHeight);
 			$('.flypanels-overlay').css('height', innerHeight);
@@ -173,11 +172,16 @@
 
 			// Prevent scroll if content doesn't need scroll.
 			$('.panelcontent').on('touchmove',function(e) {
-				kitUtils.log('this: ' + $(this).prop('scrollHeight'));
-				kitUtils.log('inner: ' + parseInt(innerHeight, 10));
 				if ($(this).prop('scrollHeight') <= parseInt(innerHeight, 10)) {
 					e.preventDefault();
 				}
+			});
+
+			// Prevent scrolling of the panel itself. Only the content panel should be allowed to scroll
+			$('.offcanvas').on('touchmove',function(e) {
+				e.preventDefault();
+			}).on('touchmove', '.panelcontent', function(e) {
+				e.stopPropagation();
 			});
 
 			$('.flypanels-button-left').on('click', function() {
