@@ -1,27 +1,30 @@
 {
   "name": "flyPanels",
   "version": "0.7.0",
-  "homepage": "https://github.com/SubZane/flyPanels",
+  "homepage": "http://www.andreasnorman.com/flypanels/",
   "authors": [
     "Andreas Norman <an@andreasnorman.se>"
   ],
-  "description": "flyPanels",
-  "main": "src/jquery.flyPanels.js",
+  "description": "Responsive off canvas menu panels",
+  "main": "dist/jquery.flyPanels.min.js",
   "keywords": [
     "navigation",
     "jquery",
     "mobile",
     "responsive",
-    "offcanvas"
+    "off canvas"
   ],
   "license": "MIT",
   "ignore": [
     "**/.*",
-    "node_modules"
+    "node_modules",
+    "bower_components",
+    "demo/dependencies",
+    "test",
+    "tests"
   ],
   "dependencies": {
     "jquery": "2.x",
-    "fastclick": "1.x",
     "jquery.transit": "0.9.x"
   },
   "resolutions": {
