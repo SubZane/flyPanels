@@ -1,4 +1,4 @@
-/*! flypanels - v0.7.0 - 2015-02-02
+/*! flypanels - v0.7.0 - 2015-02-17
 * https://github.com/SubZane/flyPanels
 * Copyright (c) 2015 Andreas Norman; Licensed MIT */
 (function ($) {
@@ -18,7 +18,14 @@
 		var redrawOnResize = true;
 		// Need to get the topbar height in order to later set the correct height of .flypanels-content
 		var topBarHeight = parseInt($('.flypanels-topbar').css('height'), 10);
-		var fadedOpacity = '0.2';
+
+		// Default options for the tree menu component
+		var treeMenu = {
+			init: false,
+			expandHandler: 'span.expand'
+		};
+		// Extend default treemenu options with those supplied by user.
+		options.treeMenu = $.extend({}, treeMenu, options.treeMenu);
 
 		// Extend default options with those supplied by user.
 		options = $.extend({}, $.fn[pluginName].defaults, options);
@@ -30,6 +37,9 @@
 			setHeight();
 			panelWidth = $('.flypanels-left').css('width');
 			attachEvents();
+			if (options.treeMenu.init) {
+				initTreeMenu();
+			}
 			hook('onInit');
 		}
 
@@ -38,6 +48,16 @@
 			$('.flypanels-left').css('height', innerHeight);
 			$('.flypanels-right').css('height', innerHeight);
 			$('.flypanels-overlay').css('height', innerHeight);
+		}
+
+		function initTreeMenu() {
+			if (kitUtils.isAndroid() || kitUtils.isIOS()) {
+				$('.flypanels-treemenu').addClass('touch');
+			}
+			$('.flypanels-treemenu li.haschildren ' + options.treeMenu.expandHandler).click(function (e) {
+				$(this).parent().parent().toggleClass('expanded');
+				e.preventDefault();
+			});
 		}
 
 		function close() {
@@ -95,7 +115,7 @@
 			});
 			$('.flypanels-main').transition({
 				marginLeft: '-'+panelWidth,
-				opacity: fadedOpacity,
+				opacity: options.fadedOpacity,
 				duration: 200,
 				easing: 'in'
 			});
@@ -137,7 +157,7 @@
 			});
 			$('.flypanels-main').transition({
 				marginRight: '-100%',
-				opacity: fadedOpacity,
+				opacity: options.fadedOpacity,
 				duration: 200,
 				easing: 'in'
 			});

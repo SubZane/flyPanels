@@ -113,3 +113,231 @@ body.flypanels-open {
 .flypanels-topbar a.flypanels-button-right {
   float: right;
 }
+.panelcontent nav.flypanels-treemenu {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  /* Tree Menu Level 2-6 */
+}
+.panelcontent nav.flypanels-treemenu ul,
+.panelcontent nav.flypanels-treemenu ul li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.panelcontent nav.flypanels-treemenu ul li a {
+  color: #fff;
+  display: block;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  font-weight: 400;
+  font-size: 12px;
+  display: inline-block;
+  width: 260px;
+  position: relative;
+}
+.panelcontent nav.flypanels-treemenu ul li a span.link {
+  padding-top: 11px;
+  padding-bottom: 13px;
+  display: inline-block;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 260px;
+}
+.panelcontent nav.flypanels-treemenu ul li.haschildren span.link {
+  width: 200px;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+.panelcontent nav.flypanels-treemenu ul li.haschildren span.expand {
+  width: 60px;
+  font-size: 11px;
+  float: right;
+  display: inline-block;
+  height: 100%;
+  padding-left: 15px;
+  padding-top: 11px;
+  padding-bottom: 13px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+.panelcontent nav.flypanels-treemenu ul li.haschildren > a > span.expand > i.fa.icon:before {
+  content: "\f105";
+}
+.panelcontent nav.flypanels-treemenu ul li.expanded > a > span.expand > i.fa.icon:before {
+  content: "\f107";
+}
+.panelcontent nav.flypanels-treemenu ul li.haschildren li a {
+  border-bottom-color: #b8564c;
+}
+.panelcontent nav.flypanels-treemenu ul li.haschildren li a span {
+  background-color: #ab3326;
+}
+.panelcontent nav.flypanels-treemenu ul li.haschildren li a span.link {
+  border-right: none;
+  width: 260px;
+  padding-left: 25px;
+}
+.panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren span.link {
+  border-right: 1px solid #b8564c;
+  width: 200px;
+}
+.panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li a {
+  border-bottom-color: #a84c43;
+}
+.panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li a span {
+  background-color: #962d22;
+}
+.panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li a span.link {
+  border-right: none;
+  width: 260px;
+  padding-left: 40px;
+}
+.panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren span.link {
+  border-right: 1px solid #a84c43;
+  width: 200px;
+}
+.panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren li a {
+  border-bottom-color: #96443b;
+}
+.panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren li a span {
+  background-color: #81261d;
+}
+.panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren li a span.link {
+  border-right: none;
+  width: 260px;
+  padding-left: 55px;
+}
+.panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren li.haschildren span.link {
+  border-right: 1px solid #96443b;
+  width: 200px;
+}
+.panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren li.haschildren li a {
+  border-bottom-color: #843c34;
+}
+.panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren li.haschildren li a span {
+  background-color: #6d2018;
+}
+.panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren li.haschildren li a span.link {
+  border-right: none;
+  width: 260px;
+  padding-left: 70px;
+}
+.panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren li.haschildren li.haschildren span.link {
+  border-right: 1px solid #843c34;
+  width: 200px;
+}
+.panelcontent nav.flypanels-treemenu li a span.link:hover {
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  color: #c0392b;
+}
+.panelcontent nav.flypanels-treemenu li a span.expand:hover {
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  color: #c0392b;
+}
+.panelcontent nav.flypanels-treemenu ul li a:focus,
+.panelcontent nav.flypanels-treemenu .panelcontent nav ul li a:visited,
+.panelcontent nav.flypanels-treemenu .panelcontent nav ul li a:link {
+  text-decoration: none;
+}
+/* Touch devices :hover fix */
+.panelcontent nav.flypanels-treemenu.touch li a span:hover {
+  background-color: inherit !important;
+  color: #fff;
+}
+.panelcontent nav.flypanels-treemenu.touch li li a span:hover {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  color: #fff;
+}
+.panelcontent nav.flypanels-treemenu.touch li li li a span:hover {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  color: #fff;
+}
+.panelcontent nav.flypanels-treemenu.touch li li li li a span:hover {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  color: #fff;
+}
+.panelcontent nav.flypanels-treemenu.touch li li li li li a span:hover {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  color: #fff;
+}
+.panelcontent nav.flypanels-treemenu.touch li li li li li li a span:hover {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  color: #fff;
+}
+.panelcontent nav.flypanels-treemenu.touch li a span:active,
+.panelcontent nav.flypanels-treemenu.touch li li a span:active,
+.panelcontent nav.flypanels-treemenu.touch li li li a span:active,
+.panelcontent nav.flypanels-treemenu.touch li li li li a span:active,
+.panelcontent nav.flypanels-treemenu.touch li li li li li a span:active {
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  color: #c0392b;
+}
+.panelcontent nav.flypanels-treemenu li.haschildren > ul {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  -moz-transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -moz-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  -webkit-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  -o-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  overflow: hidden;
+}
+.panelcontent nav.flypanels-treemenu li.haschildren.expanded > ul {
+  -moz-transition-duration: 0.75s;
+  -webkit-transition-duration: 0.75s;
+  -o-transition-duration: 0.75s;
+  transition-duration: 0.75s;
+  -moz-transition-timing-function: ease-in;
+  -webkit-transition-timing-function: ease-in;
+  -o-transition-timing-function: ease-in;
+  transition-timing-function: ease-in;
+  max-height: 3000px;
+  overflow: hidden;
+}
+.panelcontent nav.flypanels-treemenu ul li span i {
+  font-size: 12px;
+  margin-left: 10px;
+}
+.flypanels-container .offcanvas .panelcontent[data-panel="treemenu"] {
+  padding-left: 0;
+  padding-right: 0;
+}
+nav.flypanels-iconmenu ul,
+nav.flypanels-iconmenu li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav.flypanels-iconmenu li a {
+  color: #fff;
+  display: block;
+  font-weight: 400;
+  font-size: 14px;
+  display: inline-block;
+  width: 260px;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 15px;
+}
+nav.flypanels-iconmenu li a:hover {
+  text-decoration: none;
+  background-color: #db695d;
+}
+nav.flypanels-iconmenu li a:before {
+  color: #fff;
+  font-size: 25px;
+  margin-right: 20px;
+  position: relative;
+  top: 4px;
+}
+.flypanels-container .offcanvas .panelcontent[data-panel="iconmenu"] {
+  padding-left: 0;
+  padding-right: 0;
+}

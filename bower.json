@@ -1,6 +1,6 @@
 {
   "name": "flyPanels",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "homepage": "http://www.andreasnorman.com/flypanels/",
   "authors": [
     "Andreas Norman <an@andreasnorman.se>"
@@ -25,7 +25,8 @@
   ],
   "dependencies": {
     "jquery": "2.x",
-    "jquery.transit": "0.9.x"
+    "jquery.transit": "0.9.x",
+    "kitUtils": "1.x"
   },
   "resolutions": {
     "jquery": "2.x"
