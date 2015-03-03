@@ -1,4 +1,4 @@
-/*! flypanels - v0.7.0 - 2015-02-17
+/*! flypanels - v0.9.0 - 2015-03-03
 * https://github.com/SubZane/flyPanels
 * Copyright (c) 2015 Andreas Norman; Licensed MIT */
 (function ($) {
@@ -101,91 +101,46 @@
 		}
 
 		function openRight(panel) {
-			$('.flypanels-right').transition({
-				marginRight: '0px',
-				duration: 200,
-				easing: 'in',
-				complete: function() {
-					$el.addClass('openright');
-					toggleBodyHtmlClass();
-					$(this).find('[data-panel="' + panel +'"]').show();
-					onOpenRight();
-					onOpen();
-				}
-			});
-			$('.flypanels-main').transition({
-				marginLeft: '-'+panelWidth,
-				opacity: options.fadedOpacity,
-				duration: 200,
-				easing: 'in'
-			});
+			$el.addClass('openright');
+			setTimeout(function () {
+				toggleBodyHtmlClass();
+				$('.flypanels-right').find('[data-panel="' + panel +'"]').show();
+				onOpenRight();
+				onOpen();
+			}, 200);
 		}
 
 		function closeRight() {
-			$('.flypanels-right').transition({
-				marginRight: '-'+panelWidth,
-				duration: 200,
-				easing: 'in',
-				complete: function() {
-					$el.removeClass('openright');
-					toggleBodyHtmlClass();
-					$('.offcanvas .panelcontent').hide();
-					onCloseRight();
-					onClose();
-				}
-			});
-			$('.flypanels-main').transition({
-				marginLeft: '0',
-				opacity: 1,
-				duration: 200,
-				easing: 'in'
-			});
+			$el.removeClass('openright');
+			setTimeout(function () {
+				toggleBodyHtmlClass();
+				$('.offcanvas .panelcontent').hide();
+				onCloseRight();
+				onClose();
+			}, 200);
 		}
 
 		function openLeft(panel) {
-			$('.flypanels-left').transition({
-				marginLeft: '0px',
-				duration: 200,
-				easing: 'in',
-				complete: function() {
-					$el.addClass('openleft');
-					toggleBodyHtmlClass();
-					$(this).find('[data-panel="' + panel +'"]').show();
-					onOpenLeft();
-					onOpen();
-				}
-			});
-			$('.flypanels-main').transition({
-				marginRight: '-100%',
-				opacity: options.fadedOpacity,
-				duration: 200,
-				easing: 'in'
-			});
+			$el.addClass('openleft');
+			setTimeout(function () {
+				toggleBodyHtmlClass();
+				$('.flypanels-left').find('[data-panel="' + panel +'"]').show();
+				onOpenLeft();
+				onOpen();
+			}, 200);
 		}
 
 		function closeLeft() {
-			$('.flypanels-left').transition({
-				marginLeft: '-'+panelWidth,
-				duration: 200,
-				easing: 'in',
-				complete: function() {
-					$el.removeClass('openleft');
-					toggleBodyHtmlClass();
-					$('.offcanvas .panelcontent').hide();
-					onCloseLeft();
-					onClose();
-				}
-			});
-			$('.flypanels-main').transition({
-				marginLeft: '0',
-				opacity: 1,
-				duration: 200,
-				easing: 'in'
-			});
+			$el.removeClass('openleft');
+			setTimeout(function () {
+				toggleBodyHtmlClass();
+				$('.offcanvas .panelcontent').hide();
+				onCloseLeft();
+				onClose();
+			}, 200);
 		}
 
 		function afterWindowResize() {
-			console.log('afterWindowResize');
 			innerHeight = window.innerHeight;
 			setHeight();
 		}
@@ -344,7 +299,6 @@
 	// passing an object literal, or after initialization:
 	// $('#el').flyPanels('option', 'key', value);
 	$.fn[pluginName].defaults = {
-		fadedOpacity: '0.2',
 		onInit: function () {},
 		onLoad: function () {},
 		onOpenLeft: function () {},

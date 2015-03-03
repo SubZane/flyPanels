@@ -1,11 +1,30 @@
 @primary_color: #c0392b;
 
+@main_background_fade_opacity: 0.2;
 @loader_size: 120px;
 @top_bar_height: 50px;
 @panel_width: 260;
 @panel_padding: 20;
 @top_bar_bgcolor: @primary_color;
 
+
 @text_color: #fff;
 
 @primary_font: Helvetica, sans-serif, arial;
+
+
+// transition
+.transition(@transition) when not (isstring(@transition)) {
+  -webkit-transition: @transition;
+     -moz-transition: @transition;
+       -o-transition: @transition;
+          transition: @transition;
+}
+
+// transition (string)
+.transition(@transition) when (isstring(@transition)) {
+  -webkit-transition: e(@transition);
+     -moz-transition: e(@transition);
+       -o-transition: e(@transition);
+          transition: e(@transition);
+}

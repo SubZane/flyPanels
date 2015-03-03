@@ -22,6 +22,8 @@ html.flypanels-open, body.flypanels-open {
 
 .flypanels-container {
   .offcanvas {
+    .transition(all 0.2s cubic-bezier(.53,.54,.54,.54));
+    -webkit-transform: translate3d(0, 0, 0);
     background-color: @top_bar_bgcolor;
     overflow: hidden;
     width: unit(@panel_width, px);
@@ -50,6 +52,8 @@ html.flypanels-open, body.flypanels-open {
   }
 
   .flypanels-main {
+    .transition(all 0.2s cubic-bezier(.53,.54,.54,.54));
+    -webkit-transform: translate3d(0, 0, 0);
     width: 100%;
     float: left;
     margin-left: 0px;
@@ -62,7 +66,10 @@ html.flypanels-open, body.flypanels-open {
   }
   &.openleft {
     .flypanels-left {
+      /*
       margin-left: 0px;
+      */
+      -webkit-transform: translate3d(unit(@panel_width, px), 0, 0);
       overflow: hidden;
       width: unit(@panel_width, px);
       position: relative;
@@ -71,8 +78,13 @@ html.flypanels-open, body.flypanels-open {
       }
     }
     .flypanels-main {
+      .transition(all 0.2s cubic-bezier(.53,.54,.54,.54));
+      opacity: @main_background_fade_opacity;
       overflow: hidden;
+      /*
       margin-right: -100%;
+      */
+      -webkit-transform: translate3d(unit(@panel_width, px), 0, 0);
       .flypanels-content {
         overflow: hidden;
       }
@@ -80,7 +92,10 @@ html.flypanels-open, body.flypanels-open {
   }
   &.openright {
     .flypanels-right {
+      /*
       margin-right: 0;
+      */
+      -webkit-transform: translate3d(unit(-(@panel_width), px), 0, 0);
       overflow: hidden;
       width: unit(@panel_width, px);
       position: relative;
@@ -89,8 +104,13 @@ html.flypanels-open, body.flypanels-open {
       }
     }
     .flypanels-main {
+      .transition(all 0.2s cubic-bezier(.53,.54,.54,.54));
+      -webkit-transform: translate3d(unit(-(@panel_width), px), 0, 0);
+      opacity: @main_background_fade_opacity;
       overflow: hidden;
+      /*
       margin-left: unit(-(@panel_width), px);
+      */
       .flypanels-content {
         overflow: hidden;
       }

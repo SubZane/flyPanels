@@ -1,4 +1,4 @@
-flyPanels v0.8.0
+flyPanels v0.9.0
 ===========
 
 flyPanels - responsive off canvas menu panels
@@ -12,7 +12,7 @@ Compared to many other off canvas menu plugins out there this one is more solid 
 
 ##Browser Support
 * Google Chrome (Windows, OSX, iOS and Android 4.x)
-* Internet Explorer 9+
+* Internet Explorer 10+
 * Firefox
 * Safari 7+
 * Mobile Safari iOS 7+
@@ -27,9 +27,8 @@ bower install flyPanels --save
 
 ###Setup
 ```html
-<!-- You'll need jquery and jquery transit-->
+<!-- You'll need jquery -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.min.js"></script>
 <!-- and you'll need to include flyPanels of course! -->
 <script src="jquery.flyPanels.js"></script>
 
@@ -46,7 +45,6 @@ $(document).ready(function(){
 ###Settings and Defaults
 ```javascript
 options: {
-  fadedOpacity: '0.2',
   treeMenu: {
     init: false,
     expandHandler: 'span.expand'
@@ -60,7 +58,6 @@ options: {
   onDestroy: function () {}
 };
 ```
-* `fadedOpacity`: The opacity value of the content when a panel is open.
 * `treeMenu`:
   * `init`: Boolean - If it should look for and init the expanding treemenu.
   * `expandHandler`: String - The element that should have the click event to open/close submenu (expand/contract)
@@ -203,6 +200,13 @@ jQuery(document).ready(function($) {
 
 
 ##changelog
+####0.9.0
+* Removed support for IE9
+* Removed the need for jquery.transit. Making the whole script as such smaller.
+* Added CSS3 translate3d animations for better and smoother animations.
+* Removed the `fadedOpacity` option (The opacity value of the content when a panel is open). This is now a LESS variable you can change in the LESS file
+* Please refer to the LESS files for all visual customizations you need.
+
 ####0.8.0
 * Added a very nice and expanding treemenu component supporting up to 6 levels of depth.
 

@@ -25,7 +25,6 @@
   ],
   "dependencies": {
     "jquery": "2.x",
-    "jquery.transit": "0.9.x",
     "kitUtils": "1.x"
   },
   "resolutions": {

@@ -20,6 +20,11 @@ body.flypanels-open {
   border: 0px none;
 }
 .flypanels-container .offcanvas {
+  -webkit-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  -moz-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  -o-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  -webkit-transform: translate3d(0, 0, 0);
   background-color: #c0392b;
   overflow: hidden;
   width: 260px;
@@ -46,6 +51,11 @@ body.flypanels-open {
   float: left;
 }
 .flypanels-container .flypanels-main {
+  -webkit-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  -moz-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  -o-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  -webkit-transform: translate3d(0, 0, 0);
   width: 100%;
   float: left;
   margin-left: 0px;
@@ -57,7 +67,10 @@ body.flypanels-open {
   overflow-y: scroll;
 }
 .flypanels-container.openleft .flypanels-left {
-  margin-left: 0px;
+  /*
+      margin-left: 0px;
+      */
+  -webkit-transform: translate3d(260px, 0, 0);
   overflow: hidden;
   width: 260px;
   position: relative;
@@ -66,14 +79,25 @@ body.flypanels-open {
   position: absolute;
 }
 .flypanels-container.openleft .flypanels-main {
+  -webkit-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  -moz-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  -o-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  opacity: 0.2;
   overflow: hidden;
-  margin-right: -100%;
+  /*
+      margin-right: -100%;
+      */
+  -webkit-transform: translate3d(260px, 0, 0);
 }
 .flypanels-container.openleft .flypanels-main .flypanels-content {
   overflow: hidden;
 }
 .flypanels-container.openright .flypanels-right {
-  margin-right: 0;
+  /*
+      margin-right: 0;
+      */
+  -webkit-transform: translate3d(-260px, 0, 0);
   overflow: hidden;
   width: 260px;
   position: relative;
@@ -82,8 +106,16 @@ body.flypanels-open {
   position: absolute;
 }
 .flypanels-container.openright .flypanels-main {
+  -webkit-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  -moz-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  -o-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  -webkit-transform: translate3d(-260px, 0, 0);
+  opacity: 0.2;
   overflow: hidden;
-  margin-left: -260px;
+  /*
+      margin-left: unit(-(@panel_width), px);
+      */
 }
 .flypanels-container.openright .flypanels-main .flypanels-content {
   overflow: hidden;
