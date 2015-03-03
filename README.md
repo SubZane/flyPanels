@@ -22,9 +22,6 @@ Compared to many other off canvas menu plugins out there this one is more solid 
 bower install flyPanels --save
 ```
 
-##Dependencies
-* jQuery Transit
-
 ###Setup
 ```html
 <!-- You'll need jquery -->
