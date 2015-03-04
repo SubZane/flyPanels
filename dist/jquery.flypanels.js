@@ -1,4 +1,4 @@
-/*! flypanels - v0.9.0 - 2015-03-03
+/*! flypanels - v0.9.0 - 2015-03-04
 * https://github.com/SubZane/flyPanels
 * Copyright (c) 2015 Andreas Norman; Licensed MIT */
 (function ($) {
@@ -40,6 +40,10 @@
 			if (options.treeMenu.init) {
 				initTreeMenu();
 			}
+			$( document ).ready(function() {
+				console.log('hejsan load');
+				$el.removeClass('preload');
+			});
 			hook('onInit');
 		}
 

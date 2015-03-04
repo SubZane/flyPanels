@@ -12,6 +12,13 @@ html.flypanels-open, body.flypanels-open {
   height: 100%;
 }
 
+.preload * {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+}
+
 .img-responsive {
   display: block;
   max-width: 100%;
@@ -23,7 +30,6 @@ html.flypanels-open, body.flypanels-open {
 .flypanels-container {
   .offcanvas {
     .transition(all 0.2s cubic-bezier(.53,.54,.54,.54));
-    -webkit-transform: translate3d(0, 0, 0);
     background-color: @top_bar_bgcolor;
     overflow: hidden;
     width: unit(@panel_width, px);

@@ -37,6 +37,11 @@
 			if (options.treeMenu.init) {
 				initTreeMenu();
 			}
+
+			// Remove preload class when page has loaded to allow transitions/animations
+			$( document ).ready(function() {
+				$el.removeClass('preload');
+			});
 			hook('onInit');
 		}
 

@@ -1,4 +1,4 @@
-flyPanels v0.9.0
+flyPanels v0.9.1
 ===========
 
 flyPanels - responsive off canvas menu panels
@@ -79,7 +79,7 @@ jQuery(document).ready(function($) {
 
 ###Html needed for a basic setup
 ```html
-<div class="flypanels-container">
+<div class="flypanels-container preload">
   <div class="offcanvas flypanels-left">
     <div class="panelcontent" data-panel="default">
       <p>panel content goes here</p>
@@ -105,7 +105,7 @@ jQuery(document).ready(function($) {
 ###Multiple content panels
 It is possible to have multiple content panels in one panel and activate a different content panel depending on what button you press. You use the `data-panel` attribute to target a specific content panel
 ```html
-<div class="flypanels-container">
+<div class="flypanels-container preload">
   <div class="offcanvas flypanels-left">
     <div class="panelcontent" data-panel="default">
       <p>panel content goes here</p>
@@ -149,7 +149,7 @@ jQuery(document).ready(function($) {
 ```
 
 ```html
-<div class="flypanels-container">
+<div class="flypanels-container preload">
   <div class="offcanvas flypanels-left">
   <div class="panelcontent" data-panel="treemenu">
     <nav class="flypanels-treemenu">
@@ -197,6 +197,9 @@ jQuery(document).ready(function($) {
 
 
 ##changelog
+####0.9.1
+* Added a `preload` class to the container wich is removed at page load, to prevent objects from animating to their starting positions.
+
 ####0.9.0
 * Removed support for IE9
 * Removed the need for jquery.transit. Making the whole script as such smaller.
