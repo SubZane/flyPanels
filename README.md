@@ -1,5 +1,6 @@
-flyPanels v0.9.1
+flyPanels - responsive off canvas panel jquery plugin
 ===========
+v0.9.1
 
 flyPanels - responsive off canvas menu panels
 
