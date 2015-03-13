@@ -1,4 +1,4 @@
-flyPanels v0.9.1
+flyPanels v0.10.0
 ===========
 
 flyPanels - responsive off canvas menu panels
@@ -45,7 +45,11 @@ options: {
   treeMenu: {
     init: false,
     expandHandler: 'span.expand'
-  }
+  },
+  search = {
+    init: false,
+    saveQueryCookie: false
+  },
   onInit: function () {},
   onLoad: function () {},
   onOpenLeft: function () {},
@@ -58,6 +62,9 @@ options: {
 * `treeMenu`:
   * `init`: Boolean - If it should look for and init the expanding treemenu.
   * `expandHandler`: String - The element that should have the click event to open/close submenu (expand/contract)
+* `search`:
+  * `init`: Boolean - If it should look for and init the search component.
+  * `saveQueryCookie`: Boolean - If the search query should be stored in a session cookie to remember the last search.
 * `onInit`: What to do after the plugin is initialized.
 * `onLoad`: What to do after the plugin has loaded.
 * `onOpenLeft`: What to do after the left panel has opened.
@@ -116,9 +123,9 @@ It is possible to have multiple content panels in one panel and activate a diffe
   </div>
   <div class="flypanels-main">
     <div class="flypanels-topbar">
-      <a class="flypanels-button-left icon-menu" data-panel="default" href="#"></a>
-      <a class="flypanels-button-left icon-menu" data-panel="more" href="#"></a>
-      <a class="flypanels-button-right icon-menu" data-panel="default" href="#"></a>
+      <a class="flypanels-button-left icon-menu" data-panel="default" href="#"><i class="fa fa-bars"></i></a>
+      <a class="flypanels-button-left icon-menu" data-panel="more" href="#"><i class="fa fa-gears"></i></a>
+      <a class="flypanels-button-right icon-menu" data-panel="default" href="#"><i class="fa fa-bars"></i></a>
     </div>
     <div class="flypanels-content">
       Your page content goes here...
@@ -151,37 +158,38 @@ jQuery(document).ready(function($) {
 ```html
 <div class="flypanels-container preload">
   <div class="offcanvas flypanels-left">
-  <div class="panelcontent" data-panel="treemenu">
-    <nav class="flypanels-treemenu">
-      <ul>
-        <li class="haschildren"><a href="#"><span class="link">Example menu item</span> <span class="expand">2<i class="fa icon"></i></span></a>
-          <ul>
-            <li class="haschildren"><a href="#"><span class="link">Example menu item</span> <span class="expand">2<i class="fa icon"></i></span></a>
-              <ul>
-                <li class="haschildren"><a href="#"><span class="link">Example menu item</span> <span class="expand">2<i class="fa icon"></i></span></a>
-                  <ul>
-                    <li class="haschildren"><a href="#"><span class="link">Example menu item</span> <span class="expand">2<i class="fa icon"></i></span></a>
-                      <ul>
-                        <li><a href="#"><span class="link">Example menu item</span></a></li>
-                        <li><a href="#"><span class="link">Example menu item</span></a></li>
-                      </ul>
-                    </li>
-                    <li><a href="#"><span class="link">Example menu item</span></a></li>
-                  </ul>
-                </li>
-                <li><a href="#"><span class="link">Example menu item</span></a></li>
-              </ul>
-            </li>
-            <li><a href="#"><span class="link">Example menu item</span></a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-  </div>  </div>
+    <div class="panelcontent" data-panel="treemenu">
+      <nav class="flypanels-treemenu">
+        <ul>
+          <li class="haschildren"><a href="#"><span class="link">Example menu item</span> <span class="expand">2<i class="fa icon"></i></span></a>
+            <ul>
+              <li class="haschildren"><a href="#"><span class="link">Example menu item</span> <span class="expand">2<i class="fa icon"></i></span></a>
+                <ul>
+                  <li class="haschildren"><a href="#"><span class="link">Example menu item</span> <span class="expand">2<i class="fa icon"></i></span></a>
+                    <ul>
+                      <li class="haschildren"><a href="#"><span class="link">Example menu item</span> <span class="expand">2<i class="fa icon"></i></span></a>
+                        <ul>
+                          <li><a href="#"><span class="link">Example menu item</span></a></li>
+                          <li><a href="#"><span class="link">Example menu item</span></a></li>
+                        </ul>
+                      </li>
+                      <li><a href="#"><span class="link">Example menu item</span></a></li>
+                    </ul>
+                  </li>
+                  <li><a href="#"><span class="link">Example menu item</span></a></li>
+                </ul>
+              </li>
+              <li><a href="#"><span class="link">Example menu item</span></a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
   <div class="flypanels-main">
     <div class="flypanels-topbar">
-      <a class="flypanels-button-left icon-menu" data-panel="treemenu" href="#"></a>
-      <a class="flypanels-button-right icon-menu" data-panel="default" href="#"></a>
+      <a class="flypanels-button-left icon-menu" data-panel="treemenu" href="#"><i class="fa fa-bars"></i></a>
+      <a class="flypanels-button-right icon-menu" data-panel="default" href="#"><i class="fa fa-gears"></i></a>
     </div>
     <div class="flypanels-content">
       Your page content goes here...
@@ -195,8 +203,64 @@ jQuery(document).ready(function($) {
 </div>
 ```
 
+###Using the search component
+If you want to use the search component you'll need to set it to true in the options and you'll need to add the necessary HTML markup.
+
+To customize the appearance of the search panel and its result you can either modify the LESS files and rebuild or just simply override the default styles.
+```javascript
+jQuery(document).ready(function($) {
+  $(document).ready(function(){
+    $('.flypanels-container').flyPanels({
+      search: {
+        init: true,
+        saveQueryCookie: true
+      }
+    });
+  });
+});
+```
+
+```html
+<div class="flypanels-container preload">
+  <div class="offcanvas flypanels-left">
+    <div class="panelcontent" data-panel="default">
+      <p>panel content goes here</p>
+    </div>  
+  </div>
+  <div class="flypanels-main">
+    <div class="flypanels-topbar">
+      <a class="flypanels-button-left icon-menu" data-panel="default" href="#"><i class="fa fa-bars"></i></a>
+      <a class="flypanels-button-right icon-menu" data-panel="search" href="#"><i class="fa fa-search"></i></a>
+    </div>
+    <div class="flypanels-content">
+      Your page content goes here...
+    </div>
+  </div>
+  <div class="offcanvas flypanels-right">
+    <div class="panelcontent" data-panel="search">
+      <div class="searchbox" data-searchurl="json/searchresult.json?search=true">
+        <input type="text" />
+        <a href="#" class="searchbutton"></a>
+      </div>
+      <div class="resultinfo" style="display:none">
+        You search for "<span class="query">lorem ipsum</span>" resulted in <span class="num">5</span> hits.
+      </div>
+      <div class="errormsg" style="display:none">
+        Something went wrong, please refresh the page and try again.
+      </div>
+
+      <div class="loading" style="display:none"><div class="loader"></div><span>Searching...</span></div>
+      <nav class="flypanels-searchresult" style="display:none"></nav>
+    </div>
+  </div>
+</div>
+```
 
 ##changelog
+####0.10.0
+* Added search panel. This is a panel with an search form that calls a URL with a querystring passing along a keyword expecting a JSON response. Use this to produce a search result in the panel. Look at the dummy JSON file to understand on how the JSON format should be.
+* Added search settings. Default the search features will not init, just like the tree menu component it must be set to true to init.
+
 ####0.9.1
 * Added a `preload` class to the container wich is removed at page load, to prevent objects from animating to their starting positions.
 

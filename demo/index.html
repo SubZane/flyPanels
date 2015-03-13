@@ -116,7 +116,7 @@
 		<div class="flypanels-main">
 			<div class="flypanels-topbar">
 				<a class="flypanels-button-left icon-menu" data-panel="treemenu" href="#"><i class="fa fa-bars"></i></a>
-				<a class="flypanels-button-right icon-menu" data-panel="iconmenu" href="#"><i class="fa fa-github-square"></i></a>
+				<a class="flypanels-button-right icon-menu" data-panel="search" href="#"><i class="fa fa-search"></i></a>
 			</div>
 			<div class="flypanels-content">
 				<div class="container">
@@ -127,7 +127,7 @@
 					</div>
 					<div class="row">
 						<div class="col-xs-12 col-md-8 col-md-offset-2">
-							<div class="version">v 0.9.0</div>
+							<div class="version">v 0.10.0</div>
 							<div class="github">
 								<a class="github-button" href="https://github.com/SubZane/flyPanels" data-style="mega" data-count-href="/SubZane/flyPanels/stargazers" data-count-api="/repos/SubZane/flyPanels#stargazers_count">Star</a>
 								<a class="github-button" href="https://github.com/SubZane/flyPanels" data-style="mega" data-count-href="/SubZane/flyPanels/network" data-count-api="/repos/SubZane/flyPanels#forks_count">Fork</a>
@@ -153,6 +153,23 @@
 			</div>
 		</div>
 		<div class="offcanvas flypanels-right">
+			<div class="panelcontent" data-panel="search">
+				<div class="searchbox" data-searchurl="json/searchresult.json?search=true">
+					<input type="text" />
+					<a href="#" class="searchbutton"></a>
+				</div>
+				<div class="resultinfo" style="display:none">
+					You search for "<span class="query">lorem ipsum</span>" resulted in <span class="num">5</span> hits.
+				</div>
+				<div class="errormsg" style="display:none">
+					Something went wrong, please refresh the page and try again.
+				</div>
+
+				<div class="loading" style="display:none"><div class="loader"></div><span>Searching...</span></div>
+				<nav class="flypanels-searchresult" style="display:none"></nav>
+			</div>
+
+
 			<div class="panelcontent" data-panel="iconmenu">
 				<nav class="flypanels-iconmenu">
 					<ul>
@@ -173,6 +190,10 @@
 			$('.flypanels-container').flyPanels({
 				treeMenu: {
 					init: true
+				},
+				search: {
+					init: true,
+					saveQueryCookie: true
 				}
 			});
 			FastClick.attach(document.body);

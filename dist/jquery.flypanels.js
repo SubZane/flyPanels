@@ -1,4 +1,4 @@
-/*! flypanels - v0.9.0 - 2015-03-04
+/*! flypanels - v0.10.0 - 2015-03-13
 * https://github.com/SubZane/flyPanels
 * Copyright (c) 2015 Andreas Norman; Licensed MIT */
 (function ($) {
@@ -27,6 +27,16 @@
 		// Extend default treemenu options with those supplied by user.
 		options.treeMenu = $.extend({}, treeMenu, options.treeMenu);
 
+		// Default options for the search component
+		var search = {
+			init: false,
+			saveQueryCookie: false,
+			searchPanel: $('.offcanvas').find('[data-panel="search"]')
+		};
+		// Extend default search options with those supplied by user.
+		options.search = $.extend({}, search, options.search);
+
+
 		// Extend default options with those supplied by user.
 		options = $.extend({}, $.fn[pluginName].defaults, options);
 
@@ -37,11 +47,15 @@
 			setHeight();
 			panelWidth = $('.flypanels-left').css('width');
 			attachEvents();
+			if (options.search.init) {
+				initSearch();
+			}
 			if (options.treeMenu.init) {
 				initTreeMenu();
 			}
-			$( document ).ready(function() {
-				console.log('hejsan load');
+
+			// Remove preload class when page has loaded to allow transitions/animations
+			$(document).ready(function () {
 				$el.removeClass('preload');
 			});
 			hook('onInit');
@@ -108,7 +122,7 @@
 			$el.addClass('openright');
 			setTimeout(function () {
 				toggleBodyHtmlClass();
-				$('.flypanels-right').find('[data-panel="' + panel +'"]').show();
+				$('.flypanels-right').find('[data-panel="' + panel + '"]').show();
 				onOpenRight();
 				onOpen();
 			}, 200);
@@ -128,7 +142,7 @@
 			$el.addClass('openleft');
 			setTimeout(function () {
 				toggleBodyHtmlClass();
-				$('.flypanels-left').find('[data-panel="' + panel +'"]').show();
+				$('.flypanels-left').find('[data-panel="' + panel + '"]').show();
 				onOpenLeft();
 				onOpen();
 			}, 200);
@@ -149,24 +163,168 @@
 			setHeight();
 		}
 
+		function initSearch() {
+			options.search.searchPanel.find('.searchbutton').on('click', function (event) {
+				event.preventDefault();
+				searchProgress('show');
+				doSearch(options.search.searchPanel.find('.searchbox input').val());
+			});
+
+			options.search.searchPanel.find('.searchbox input').keydown(function (event) {
+				if (event.which === 13) {
+					searchProgress('show');
+					doSearch($(this).val());
+					$(this).blur();
+				}
+			});
+
+			if (cookies.has('searchQuery') === true && options.search.saveQueryCookie ===  true) {
+				doSearch(cookies.get('searchQuery'));
+			}
+		}
+
+		function searchError(state) {
+			if (state === 'hide') {
+				options.search.searchPanel.find('.errormsg').hide();
+			} else {
+				options.search.searchPanel.find('.errormsg').show();
+			}
+		}
+
+		function searchProgress(state) {
+			if (state === 'hide') {
+				options.search.searchPanel.find('.loading').hide();
+			} else {
+				options.search.searchPanel.find('.loading').show();
+			}
+		}
+
+		var cookies = {
+			get: function (sKey) {
+				if (!sKey) {
+					return null;
+				}
+				return decodeURIComponent(document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
+			},
+			set: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+				if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) {
+					return false;
+				}
+				var sExpires = '';
+				if (vEnd) {
+					switch (vEnd.constructor) {
+					case Number:
+						sExpires = vEnd === Infinity ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT' : '; max-age=' + vEnd;
+						break;
+					case String:
+						sExpires = '; expires=' + vEnd;
+						break;
+					case Date:
+						sExpires = '; expires=' + vEnd.toUTCString();
+						break;
+					}
+				}
+				document.cookie = encodeURIComponent(sKey) + '=' + encodeURIComponent(sValue) + sExpires + (sDomain ? '; domain=' + sDomain : '') + (sPath ? '; path=' + sPath : '') + (bSecure ? '; secure' : '');
+				return true;
+			},
+			remove: function (sKey, sPath, sDomain) {
+				if (!this.hasItem(sKey)) {
+					return false;
+				}
+				document.cookie = encodeURIComponent(sKey) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT' + (sDomain ? '; domain=' + sDomain : '') + (sPath ? '; path=' + sPath : '');
+				return true;
+			},
+			has: function (sKey) {
+				if (!sKey) {
+					return false;
+				}
+				return (new RegExp('(?:^|;\\s*)' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=')).test(document.cookie);
+			},
+			keys: function () {
+				var aKeys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, '').split(/\s*(?:\=[^;]*)?;\s*/);
+				for (var nLen = aKeys.length, nIdx = 0; nIdx < nLen; nIdx++) {
+					aKeys[nIdx] = decodeURIComponent(aKeys[nIdx]);
+				}
+				return aKeys;
+			}
+		};
+
+		function doSearch(query) {
+			searchError('hide');
+
+			$jsonurl = options.search.searchPanel.find('.searchbox').data('searchurl');
+			$ajaxCall = $.ajax({
+				url: $jsonurl + '&q=' + query,
+				dataType: 'json'
+			});
+
+			// Ajax success
+			$ajaxCall.done(function (response) {
+				var output;
+				$foundResults = response.Items.length;
+
+				// Check if any products found
+				if ($foundResults > 0) {
+					if (options.search.saveQueryCookie ===  true) {
+						cookies.set('searchQuery', query, null, '/');
+					}
+					output = buildResultsList(response.Items);
+				} else {
+					//$.removeCookie('searchQuery');
+					if (options.search.saveQueryCookie ===  true) {
+						cookies.remove('searchQuery', '/');
+					}
+					searchError('show');
+				}
+
+				// Render html
+				options.search.searchPanel.find('.resultinfo .query').html(query);
+				options.search.searchPanel.find('.resultinfo .num').html($foundResults);
+				options.search.searchPanel.find('.flypanels-searchresult').html(output);
+				searchProgress('hide');
+				options.search.searchPanel.find('.resultinfo').show();
+				options.search.searchPanel.find('.flypanels-searchresult').show();
+			});
+
+			// Ajax error
+			$ajaxCall.fail(function () {
+				// Render error message ***** Should we get the error message from response.error? *****
+				// If so, include jqXHR and response in the fail function
+				searchError('show');
+			});
+		}
+
+		function buildResultsList(results) {
+			output = '<ul>';
+			for (var i in results) {
+				if (results[i].Type === 'Page') {
+					output += '<li><a href="' + results[i].LinkUrl + '"><span class="link">' + results[i].Header + '</span>  <span class="type"><i class="fa page"></i></span></a>';
+				} else {
+					output += '<li><a href="' + results[i].LinkUrl + '"><span class="link">' + results[i].Header + '</span>  <span class="type"><i class="fa doc"></i></span></a>';
+				}
+			}
+			output += '</ul>';
+			return output;
+		}
+
 
 		function attachEvents() {
 
 			// Prevent scroll if content doesn't need scroll.
-			$('.panelcontent').on('touchmove',function(e) {
+			$('.panelcontent').on('touchmove', function (e) {
 				if ($(this).prop('scrollHeight') <= parseInt(innerHeight, 10)) {
 					e.preventDefault();
 				}
 			});
 
 			// Prevent scrolling of the panel itself. Only the content panel should be allowed to scroll
-			$('.offcanvas').on('touchmove',function(e) {
+			$('.offcanvas').on('touchmove', function (e) {
 				e.preventDefault();
-			}).on('touchmove', '.panelcontent', function(e) {
+			}).on('touchmove', '.panelcontent', function (e) {
 				e.stopPropagation();
 			});
 
-			$('.flypanels-button-left').on('click', function() {
+			$('.flypanels-button-left').on('click', function () {
 				var panel = $(this).data('panel');
 				if ($('.flypanels-container').hasClass('openleft')) {
 					closeLeft();
@@ -175,7 +333,7 @@
 				}
 			});
 
-			$('.flypanels-button-right').on('click', function() {
+			$('.flypanels-button-right').on('click', function () {
 				var panel = $(this).data('panel');
 				if ($('.flypanels-container').hasClass('openright')) {
 					closeRight();

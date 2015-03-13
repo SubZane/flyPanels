@@ -150,6 +150,11 @@ body.flypanels-open {
 .flypanels-topbar a.flypanels-button-right {
   float: right;
 }
+.flypanels-topbar a i.fa-search:before {
+  font-size: 20px;
+  position: relative;
+  top: -3px;
+}
 .panelcontent nav.flypanels-treemenu {
   border-top: 1px solid rgba(255, 255, 255, 0.15);
   /* Tree Menu Level 2-6 */
@@ -161,7 +166,7 @@ body.flypanels-open {
   list-style: none;
 }
 .panelcontent nav.flypanels-treemenu ul li a {
-  color: #fff;
+  color: #ffffff;
   display: block;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   font-weight: 400;
@@ -279,27 +284,27 @@ body.flypanels-open {
 /* Touch devices :hover fix */
 .panelcontent nav.flypanels-treemenu.touch li a span:hover {
   background-color: inherit !important;
-  color: #fff;
+  color: #ffffff;
 }
 .panelcontent nav.flypanels-treemenu.touch li li a span:hover {
   background-color: rgba(0, 0, 0, 0.1) !important;
-  color: #fff;
+  color: #ffffff;
 }
 .panelcontent nav.flypanels-treemenu.touch li li li a span:hover {
   background-color: rgba(0, 0, 0, 0.2) !important;
-  color: #fff;
+  color: #ffffff;
 }
 .panelcontent nav.flypanels-treemenu.touch li li li li a span:hover {
   background-color: rgba(0, 0, 0, 0.3) !important;
-  color: #fff;
+  color: #ffffff;
 }
 .panelcontent nav.flypanels-treemenu.touch li li li li li a span:hover {
   background-color: rgba(0, 0, 0, 0.4) !important;
-  color: #fff;
+  color: #ffffff;
 }
 .panelcontent nav.flypanels-treemenu.touch li li li li li li a span:hover {
   background-color: rgba(0, 0, 0, 0.5) !important;
-  color: #fff;
+  color: #ffffff;
 }
 .panelcontent nav.flypanels-treemenu.touch li a span:active,
 .panelcontent nav.flypanels-treemenu.touch li li a span:active,
@@ -377,4 +382,175 @@ nav.flypanels-iconmenu li a:before {
 .flypanels-container .offcanvas .panelcontent[data-panel="iconmenu"] {
   padding-left: 0;
   padding-right: 0;
+}
+.panelcontent nav.flypanels-searchresult {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+.panelcontent nav.flypanels-searchresult ul,
+.panelcontent nav.flypanels-searchresult ul li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.panelcontent nav.flypanels-searchresult ul li a {
+  color: #ffffff;
+  display: block;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  font-weight: 400;
+  font-size: 13px;
+  display: inline-block;
+  width: 260px;
+  position: relative;
+}
+.panelcontent nav.flypanels-searchresult ul li a span.link {
+  padding-top: 11px;
+  padding-bottom: 13px;
+  display: inline-block;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 210px;
+}
+.panelcontent nav.flypanels-searchresult ul li a span.type {
+  width: 50px;
+  float: right;
+  display: inline-block;
+  height: 100%;
+  padding-left: 15px;
+  padding-top: 11px;
+  padding-bottom: 13px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+.panelcontent nav.flypanels-searchresult ul li a span.type i.page {
+  font-size: 14px;
+  margin-left: 10px;
+}
+.panelcontent nav.flypanels-searchresult ul li a span.type i.page::before {
+  content: "\f105";
+}
+.panelcontent nav.flypanels-searchresult ul li a span.type i.doc {
+  font-size: 12px;
+  margin-left: 10px;
+}
+.panelcontent nav.flypanels-searchresult ul li a span.type i.doc::before {
+  content: "\f016";
+}
+.panelcontent nav.flypanels-searchresult li a:hover {
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  color: #c0392b;
+}
+.panelcontent nav.flypanels-searchresult ul li a:focus,
+.panelcontent nav.flypanels-searchresult .panelcontent nav ul li a:visited,
+.panelcontent nav.flypanels-searchresult .panelcontent nav ul li a:link {
+  text-decoration: none;
+}
+/* Touch devices :hover fix */
+.panelcontent nav.flypanels-searchresult.touch li a:hover {
+  background-color: inherit !important;
+  color: #ffffff;
+}
+.panelcontent nav.flypanels-searchresult.touch li a span:active {
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  color: #c0392b;
+}
+.flypanels-container .offcanvas .panelcontent[data-panel="search"] {
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
+}
+.flypanels-container .offcanvas .panelcontent[data-panel="search"] .loading {
+  margin-top: 50px;
+}
+.flypanels-container .offcanvas .panelcontent[data-panel="search"] .loading span {
+  text-align: center;
+  color: #fff;
+  display: block;
+  margin-top: 15px;
+}
+.flypanels-container .offcanvas .panelcontent[data-panel="search"] .loading .loader {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-left: 70px;
+}
+.flypanels-container .offcanvas .panelcontent[data-panel="search"] .loading .loader,
+.flypanels-container .offcanvas .panelcontent[data-panel="search"] .loading .loader:before,
+.flypanels-container .offcanvas .panelcontent[data-panel="search"] .loading .loader:after {
+  border-radius: 50%;
+  border: 10px solid rgba(0, 61, 88, 0);
+  border-top-color: #ffffff;
+  -webkit-animation: spin 4s infinite;
+}
+.flypanels-container .offcanvas .panelcontent[data-panel="search"] .loading .loader:before,
+.flypanels-container .offcanvas .panelcontent[data-panel="search"] .loading .loader:after {
+  position: absolute;
+  content: '';
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  top: 10px;
+}
+.flypanels-container .offcanvas .panelcontent[data-panel="search"] .loading .loader:after {
+  left: 30px;
+  right: 30px;
+  bottom: 30px;
+  top: 30px;
+  -webkit-animation: spin2 4s infinite;
+}
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin2 {
+  100% {
+    -webkit-transform: rotate(720deg);
+  }
+}
+.flypanels-container .offcanvas .panelcontent[data-panel="search"] .resultinfo {
+  color: #ffffff;
+  font-size: 13px;
+  padding: 20px 15px;
+}
+.flypanels-container .offcanvas .panelcontent[data-panel="search"] .searchbox {
+  background-color: #fff;
+  height: 40px;
+  margin-left: 10px;
+  margin-top: 10px;
+  width: 240px;
+}
+.flypanels-container .offcanvas .panelcontent[data-panel="search"] .searchbox input {
+  height: 100%;
+  width: 210px;
+  border: none;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.flypanels-container .offcanvas .panelcontent[data-panel="search"] .searchbox input:focus {
+  outline: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.flypanels-container .offcanvas .panelcontent[data-panel="search"] .searchbox .searchbutton {
+  width: 30px;
+  float: right;
+  color: #c0392b;
+}
+.flypanels-container .offcanvas .panelcontent[data-panel="search"] .searchbox .searchbutton::before {
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  -webkit-font-smoothing: antialiased;
+  content: "\f002";
+  font-size: 16px;
+  position: relative;
+  top: 9px;
+}
+.flypanels-container .offcanvas .panelcontent[data-panel="search"] .searchbox .searchbutton:hover {
+  text-decoration: none;
 }

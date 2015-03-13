@@ -1,6 +1,6 @@
 {
 	"name": "flypanels",
-	"version": "0.9.1",
+	"version": "0.10.0",
 	"engines": {
 		"node": ">= 0.8.0"
 	},

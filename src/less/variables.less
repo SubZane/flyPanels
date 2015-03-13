@@ -7,11 +7,14 @@
 @panel_padding: 20;
 @top_bar_bgcolor: @primary_color;
 
-
+@panel_bg: @primary_color;
 @text_color: #fff;
+@link_color: @text_color;
 
 @primary_font: Helvetica, sans-serif, arial;
 
+@loader_size: 120px;
+@loader_color: #fff;
 
 // transition
 .transition(@transition) when not (isstring(@transition)) {
@@ -27,4 +30,18 @@
      -moz-transition: e(@transition);
        -o-transition: e(@transition);
           transition: e(@transition);
+}
+
+// box-shadow
+.box-shadow(@shadow) when not (isstring(@shadow)) {
+  -webkit-box-shadow: @shadow;
+     -moz-box-shadow: @shadow;
+          box-shadow: @shadow;
+}
+
+// box-shadow (string)
+.box-shadow(@shadow) when (isstring(@shadow)) {
+  -webkit-box-shadow: e(@shadow);
+     -moz-box-shadow: e(@shadow);
+          box-shadow: e(@shadow);
 }
