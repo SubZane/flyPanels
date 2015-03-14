@@ -161,6 +161,9 @@
 		}
 
 		function initSearch() {
+			if (kitUtils.isAndroid() || kitUtils.isIOS()) {
+				$('.flypanels-searchresult').addClass('touch');
+			}
 			options.search.searchPanel.find('.searchbutton').on('click', function (event) {
 				event.preventDefault();
 				searchProgress('show');

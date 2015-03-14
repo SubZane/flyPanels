@@ -451,7 +451,7 @@ nav.flypanels-iconmenu li a:before {
   background-color: inherit !important;
   color: #ffffff;
 }
-.panelcontent nav.flypanels-searchresult.touch li a span:active {
+.panelcontent nav.flypanels-searchresult.touch li a:active {
   text-decoration: none;
   background-color: rgba(255, 255, 255, 0.8) !important;
   color: #c0392b;
