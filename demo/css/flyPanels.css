@@ -528,9 +528,11 @@ nav.flypanels-iconmenu li a:before {
   border: none;
   padding-left: 10px;
   padding-right: 10px;
+  font-size: 16px;
 }
 .flypanels-container .offcanvas .panelcontent[data-panel="search"] .searchbox input:focus {
   outline: none;
+  font-size: 16px;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
