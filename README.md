@@ -257,6 +257,8 @@ jQuery(document).ready(function($) {
 ```
 
 ##changelog
+####0.10.2
+* Small fix: Removing and adding classes when opening and closing panels wasn't working properly resulting in unwanted scroll. 
 ####0.10.0
 * Added search panel. This is a panel with an search form that calls a URL with a querystring passing along a keyword expecting a JSON response. Use this to produce a search result in the panel. Look at the dummy JSON file to understand on how the JSON format should be.
 * Added search settings. Default the search features will not init, just like the tree menu component it must be set to true to init.

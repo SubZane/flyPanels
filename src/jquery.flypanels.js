@@ -82,18 +82,26 @@
 		}
 
 		function onCloseLeft() {
+			$('body').removeClass('flypanels-open');
+			$('html').removeClass('flypanels-open');
 			hook('onCloseLeft');
 		}
 
 		function onCloseRight() {
+			$('body').removeClass('flypanels-open');
+			$('html').removeClass('flypanels-open');
 			hook('onCloseRight');
 		}
 
 		function onOpenLeft() {
+			$('body').addClass('flypanels-open');
+			$('html').addClass('flypanels-open');
 			hook('onOpenLeft');
 		}
 
 		function onOpenRight() {
+			$('body').addClass('flypanels-open');
+			$('html').addClass('flypanels-open');
 			hook('onOpenRight');
 		}
 
@@ -110,15 +118,10 @@
 			hook('onClose');
 		}
 
-		function toggleBodyHtmlClass() {
-			$('body').toggleClass('flypanels-open');
-			$('html').toggleClass('flypanels-open');
-		}
-
 		function openRight(panel) {
 			$el.addClass('openright');
+			console.log('open');
 			setTimeout(function () {
-				toggleBodyHtmlClass();
 				$('.flypanels-right').find('[data-panel="' + panel + '"]').show();
 				onOpenRight();
 				onOpen();
@@ -127,8 +130,8 @@
 
 		function closeRight() {
 			$el.removeClass('openright');
+			console.log('close');
 			setTimeout(function () {
-				toggleBodyHtmlClass();
 				$('.offcanvas .panelcontent').hide();
 				onCloseRight();
 				onClose();
@@ -138,7 +141,6 @@
 		function openLeft(panel) {
 			$el.addClass('openleft');
 			setTimeout(function () {
-				toggleBodyHtmlClass();
 				$('.flypanels-left').find('[data-panel="' + panel + '"]').show();
 				onOpenLeft();
 				onOpen();
@@ -148,7 +150,6 @@
 		function closeLeft() {
 			$el.removeClass('openleft');
 			setTimeout(function () {
-				toggleBodyHtmlClass();
 				$('.offcanvas .panelcontent').hide();
 				onCloseLeft();
 				onClose();
