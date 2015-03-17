@@ -120,7 +120,6 @@
 
 		function openRight(panel) {
 			$el.addClass('openright');
-			console.log('open');
 			setTimeout(function () {
 				$('.flypanels-right').find('[data-panel="' + panel + '"]').show();
 				onOpenRight();
@@ -130,7 +129,6 @@
 
 		function closeRight() {
 			$el.removeClass('openright');
-			console.log('close');
 			setTimeout(function () {
 				$('.offcanvas .panelcontent').hide();
 				onCloseRight();

@@ -1,4 +1,4 @@
-/*! flypanels - v0.10.1 - 2015-03-17
+/*! flypanels - v0.10.2 - 2015-03-17
 * https://github.com/SubZane/flyPanels
 * Copyright (c) 2015 Andreas Norman; Licensed MIT */
 (function ($) {
@@ -123,7 +123,6 @@
 
 		function openRight(panel) {
 			$el.addClass('openright');
-			console.log('open');
 			setTimeout(function () {
 				$('.flypanels-right').find('[data-panel="' + panel + '"]').show();
 				onOpenRight();
@@ -133,7 +132,6 @@
 
 		function closeRight() {
 			$el.removeClass('openright');
-			console.log('close');
 			setTimeout(function () {
 				$('.offcanvas .panelcontent').hide();
 				onCloseRight();
