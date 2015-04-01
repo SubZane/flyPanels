@@ -1,4 +1,4 @@
-/*! flypanels - v0.10.3 - 2015-03-30
+/*! flypanels - v0.10.4 - 2015-04-01
 * https://github.com/SubZane/flyPanels
 * Copyright (c) 2015 Andreas Norman; Licensed MIT */
 (function ($) {
@@ -109,6 +109,7 @@
 		}
 
 		function onOpen() {
+			$('.flypanels-content').append('<div id="flypanels-overlay" class="overlay"></div>');
 			$('.flypanels-content').on('click touchmove touchend touchleave touchcancel', function (e) {
 				close();
 				e.preventDefault();
@@ -117,6 +118,7 @@
 		}
 
 		function onClose() {
+			$('.flypanels-content #flypanels-overlay').remove();
 			$('.flypanels-content').off('click touchmove touchend touchleave touchcancel');
 			hook('onClose');
 		}

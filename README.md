@@ -257,6 +257,9 @@ jQuery(document).ready(function($) {
 ```
 
 ##changelog
+####0.10.4
+* Fixed bug with topbar not being fixed because of `translate3d`.
+
 ####0.10.3
 * Bug fix: Errors in the CSS preventing the panels to work in Firefox.
 

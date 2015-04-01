@@ -56,14 +56,8 @@ body.flypanels-open {
   float: left;
 }
 .flypanels-container .flypanels-main {
-  -webkit-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
-  -moz-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
-  -o-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
-  transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  -ms-transform: translate3d(0, 0, 0);
-  -o-transform: translate3d(0, 0, 0);
+  /*.transition(all 0.2s cubic-bezier(.53,.54,.54,.54));
+    .translate3d(0, 0, 0);*/
   width: 100%;
   float: left;
   margin-left: 0px;
@@ -73,11 +67,16 @@ body.flypanels-open {
   padding-top: 50px;
   -webkit-overflow-scrolling: touch;
   overflow-y: scroll;
+  -webkit-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  -moz-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  -o-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
 }
 .flypanels-container.openleft .flypanels-left {
-  /*
-      margin-left: 0px;
-      */
   -webkit-transform: translate3d(260px, 0, 0);
   -moz-transform: translate3d(260px, 0, 0);
   -ms-transform: translate3d(260px, 0, 0);
@@ -90,27 +89,40 @@ body.flypanels-open {
   position: absolute;
 }
 .flypanels-container.openleft .flypanels-main {
+  overflow: hidden;
+}
+.flypanels-container.openleft .flypanels-main .flypanels-topbar {
   -webkit-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
   -moz-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
   -o-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
   transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
-  opacity: 0.2;
-  overflow: hidden;
-  /*
-      margin-right: -100%;
-      */
   -webkit-transform: translate3d(260px, 0, 0);
   -moz-transform: translate3d(260px, 0, 0);
   -ms-transform: translate3d(260px, 0, 0);
   -o-transform: translate3d(260px, 0, 0);
 }
 .flypanels-container.openleft .flypanels-main .flypanels-content {
+  -webkit-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  -moz-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  -o-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  -webkit-transform: translate3d(260px, 0, 0);
+  -moz-transform: translate3d(260px, 0, 0);
+  -ms-transform: translate3d(260px, 0, 0);
+  -o-transform: translate3d(260px, 0, 0);
   overflow: hidden;
 }
+.flypanels-container.openleft .flypanels-main .flypanels-content .overlay {
+  background-color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.8;
+  z-index: 100;
+}
 .flypanels-container.openright .flypanels-right {
-  /*
-      margin-right: 0;
-      */
   -webkit-transform: translate3d(-260px, 0, 0);
   -moz-transform: translate3d(-260px, 0, 0);
   -ms-transform: translate3d(-260px, 0, 0);
@@ -123,6 +135,9 @@ body.flypanels-open {
   position: absolute;
 }
 .flypanels-container.openright .flypanels-main {
+  overflow: hidden;
+}
+.flypanels-container.openright .flypanels-main .flypanels-topbar {
   -webkit-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
   -moz-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
   -o-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
@@ -131,21 +146,44 @@ body.flypanels-open {
   -moz-transform: translate3d(-260px, 0, 0);
   -ms-transform: translate3d(-260px, 0, 0);
   -o-transform: translate3d(-260px, 0, 0);
-  opacity: 0.2;
-  overflow: hidden;
-  /*
-      margin-left: unit(-(@panel_width), px);
-      */
 }
 .flypanels-container.openright .flypanels-main .flypanels-content {
+  -webkit-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  -moz-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  -o-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  -webkit-transform: translate3d(-260px, 0, 0);
+  -moz-transform: translate3d(-260px, 0, 0);
+  -ms-transform: translate3d(-260px, 0, 0);
+  -o-transform: translate3d(-260px, 0, 0);
   overflow: hidden;
 }
+.flypanels-container.openright .flypanels-main .flypanels-content .overlay {
+  background-color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.8;
+  z-index: 100;
+}
 .flypanels-topbar {
+  -webkit-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  -moz-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  -o-transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  transition: all 0.2s cubic-bezier(0.53, 0.54, 0.54, 0.54);
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
   width: 100%;
   height: 50px;
   background-color: #c0392b;
   position: fixed;
-  z-index: 100;
+  z-index: 1;
+  top: 0;
+  left: 0;
 }
 .flypanels-topbar a {
   color: #ffffff;

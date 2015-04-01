@@ -106,6 +106,7 @@
 		}
 
 		function onOpen() {
+			$('.flypanels-content').append('<div id="flypanels-overlay" class="overlay"></div>');
 			$('.flypanels-content').on('click touchmove touchend touchleave touchcancel', function (e) {
 				close();
 				e.preventDefault();
@@ -114,6 +115,7 @@
 		}
 
 		function onClose() {
+			$('.flypanels-content #flypanels-overlay').remove();
 			$('.flypanels-content').off('click touchmove touchend touchleave touchcancel');
 			hook('onClose');
 		}
