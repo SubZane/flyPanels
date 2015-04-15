@@ -1,4 +1,4 @@
-flyPanels v0.10.3
+flyPanels v0.11.0
 =======
 
 flyPanels - responsive off canvas menu panels
@@ -257,6 +257,10 @@ jQuery(document).ready(function($) {
 ```
 
 ##changelog
+####0.11.0
+* Updated the HTML markup for the treemenu component for a more accessible menu. Switched out `span` elements for `a` link elements
+* Addressed some issues with horizontal scrollbars caused by scrollbars on units with visible scrollbars. Horizontal overflow in the panels is now set to `overflow-x:hidden` and vertical scroll is now set to auto `overflow-y:auto`. This is maybe not the best solution to address scrollbar width.
+
 ####0.10.4
 * Fixed bug with topbar not being fixed because of `translate3d`.
 

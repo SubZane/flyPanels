@@ -19,7 +19,7 @@
 		// Default options for the tree menu component
 		var treeMenu = {
 			init: false,
-			expandHandler: 'span.expand'
+			expandHandler: 'a.expand'
 		};
 		// Extend default treemenu options with those supplied by user.
 		options.treeMenu = $.extend({}, treeMenu, options.treeMenu);

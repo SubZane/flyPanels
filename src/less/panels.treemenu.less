@@ -8,8 +8,7 @@
   }
   ul {
     li {
-      a {
-        color: @link_color;
+      div {
         display: block;
         border-bottom: 1px solid rgba(255, 255, 255, 0.15);
         font-weight: 400;
@@ -18,7 +17,8 @@
         width: unit(@panel_width, px);
         position: relative;
 
-        span.link {
+        a.link {
+          color: @link_color;
           padding-top: 11px;
           padding-bottom: 13px;
           display: inline-block;
@@ -28,11 +28,12 @@
         }
       }
       &.haschildren {
-        span.link {
+        a.link {
           width: unit((@panel_width - 60), px);
           border-right: 1px solid rgba(255, 255, 255, 0.15);
         }
-        span.expand {
+        a.expand {
+          color: @link_color;
           width: unit((@panel_width - 200), px);
           font-size: 11px;
           float: right;
@@ -46,10 +47,10 @@
           bottom: 0;
         }
       }
-      &.haschildren > a > span.expand > i.fa.icon:before {
+      &.haschildren > div > a.expand > i.fa.icon:before {
         content: "\f105";
       }
-      &.expanded > a > span.expand > i.fa.icon:before {
+      &.expanded > div > a.expand > i.fa.icon:before {
         content: "\f107";
       }
     }
@@ -58,9 +59,9 @@
   /* Tree Menu Level 2-6 */
   ul li.haschildren {
     li {
-      a {
+      div {
         border-bottom-color: desaturate(lighten(darken(@primary_color, 5%), 10%), 20%);
-        span {
+        a {
           background-color: darken(@primary_color, 5%);
           &.link {
             border-right: none;
@@ -70,14 +71,14 @@
         }
       }
       &.haschildren {
-        span.link {
+        a.link {
           border-right: 1px solid desaturate(lighten(darken(@primary_color, 5%), 10%), 20%);
           width: unit((@panel_width - 60), px);
         }
         li {
-          a {
+          div {
             border-bottom-color: desaturate(lighten(darken(@primary_color, 10%), 10%), 20%);
-            span {
+            a {
               background-color: darken(@primary_color, 10%);
               &.link {
                 border-right: none;
@@ -87,14 +88,14 @@
             }
           }
           &.haschildren {
-            span.link {
+            a.link {
               border-right: 1px solid desaturate(lighten(darken(@primary_color, 10%), 10%), 20%);
               width: unit((@panel_width - 60), px);
             }
             li {
-              a {
+              div {
                 border-bottom-color: desaturate(lighten(darken(@primary_color, 15%), 10%), 20%);
-                span {
+                a {
                   background-color: darken(@primary_color, 15%);
                   &.link {
                     border-right: none;
@@ -104,14 +105,14 @@
                 }
               }
               &.haschildren {
-                span.link {
+                a.link {
                   border-right: 1px solid desaturate(lighten(darken(@primary_color, 15%), 10%), 20%);
                   width: unit((@panel_width - 60), px);
                 }
                 li {
-                  a {
+                  div {
                     border-bottom-color: desaturate(lighten(darken(@primary_color, 20%), 10%), 20%);
-                    span {
+                    a {
                       background-color: darken(@primary_color, 20%);
                       &.link {
                         border-right: none;
@@ -121,7 +122,7 @@
                     }
                   }
                   &.haschildren {
-                    span.link {
+                    a.link {
                       border-right: 1px solid desaturate(lighten(darken(@primary_color, 20%), 10%), 20%);
                       width: unit((@panel_width - 60), px);
                     }
@@ -137,13 +138,13 @@
 
   }
 
-  li a span.link:hover {
+  li div a.link:hover {
     text-decoration: none;
     background-color:rgba(255, 255, 255, 0.8) !important;
     color: @primary_color;
   }
 
-  li a span.expand:hover {
+  li div  a.expand:hover {
     text-decoration: none;
     background-color:rgba(255, 255, 255, 0.8) !important;
     color: @primary_color;
@@ -155,36 +156,36 @@
 }
 
 /* Touch devices :hover fix */
-.panelcontent nav.flypanels-treemenu.touch li a span:hover {
+.panelcontent nav.flypanels-treemenu.touch li a:hover {
   background-color:inherit !important;
   color: @link_color;
 }
-.panelcontent nav.flypanels-treemenu.touch li li a span:hover {
+.panelcontent nav.flypanels-treemenu.touch li li a:hover {
   background-color:rgba(0, 0, 0, 0.1) !important;
   color: @link_color;
 }
-.panelcontent nav.flypanels-treemenu.touch li li li a span:hover {
+.panelcontent nav.flypanels-treemenu.touch li li li a:hover {
   background-color:rgba(0, 0, 0, 0.2) !important;
   color: @link_color;
 }
-.panelcontent nav.flypanels-treemenu.touch li li li li a span:hover {
+.panelcontent nav.flypanels-treemenu.touch li li li li a:hover {
   background-color:rgba(0, 0, 0, 0.3) !important;
   color: @link_color;
 }
-.panelcontent nav.flypanels-treemenu.touch li li li li li a span:hover {
+.panelcontent nav.flypanels-treemenu.touch li li li li li a:hover {
   background-color:rgba(0, 0, 0, 0.4) !important;
   color: @link_color;
 }
-.panelcontent nav.flypanels-treemenu.touch li li li li li li a span:hover {
+.panelcontent nav.flypanels-treemenu.touch li li li li li li a:hover {
   background-color:rgba(0, 0, 0, 0.5) !important;
   color: @link_color;
 }
 
-.panelcontent nav.flypanels-treemenu.touch li a span:active,
-.panelcontent nav.flypanels-treemenu.touch li li a span:active,
-.panelcontent nav.flypanels-treemenu.touch li li li a span:active,
-.panelcontent nav.flypanels-treemenu.touch li li li li a span:active,
-.panelcontent nav.flypanels-treemenu.touch li li li li li a span:active {
+.panelcontent nav.flypanels-treemenu.touch li a:active,
+.panelcontent nav.flypanels-treemenu.touch li li a:active,
+.panelcontent nav.flypanels-treemenu.touch li li li a:active,
+.panelcontent nav.flypanels-treemenu.touch li li li li a:active,
+.panelcontent nav.flypanels-treemenu.touch li li li li li a:active {
   text-decoration: none;
   background-color:rgba(255, 255, 255, 0.8) !important;
   color: @primary_color;
@@ -219,7 +220,7 @@
       max-height: 3000px;
       overflow:hidden;
   }
-  ul li span i {
+  ul li a i {
     font-size: 12px;
     margin-left: 10px;
   }

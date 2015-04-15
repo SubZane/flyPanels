@@ -1,4 +1,4 @@
-/*! flypanels - v0.10.4 - 2015-04-01
+/*! flypanels - v0.11.0 - 2015-04-15
 * https://github.com/SubZane/flyPanels
 * Copyright (c) 2015 Andreas Norman; Licensed MIT */
 (function ($) {
@@ -22,7 +22,7 @@
 		// Default options for the tree menu component
 		var treeMenu = {
 			init: false,
-			expandHandler: 'span.expand'
+			expandHandler: 'a.expand'
 		};
 		// Extend default treemenu options with those supplied by user.
 		options.treeMenu = $.extend({}, treeMenu, options.treeMenu);

@@ -43,7 +43,8 @@ html.flypanels-open, body.flypanels-open {
       width: auto;
       height: auto;
       z-index: 3;
-      overflow-y: scroll;
+      overflow-y: auto;
+      overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
     }
   }
@@ -67,7 +68,7 @@ html.flypanels-open, body.flypanels-open {
       padding: 10px;
       padding-top: 50px;
       -webkit-overflow-scrolling: touch;
-      overflow-y: scroll;
+      overflow-y: auto;
       .transition(all 0.2s cubic-bezier(.53,.54,.54,.54));
       .translate3d(0, 0, 0);
     }
