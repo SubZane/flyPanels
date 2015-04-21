@@ -438,16 +438,16 @@ nav.flypanels-iconmenu li a:before {
   padding-left: 0;
   padding-right: 0;
 }
-.panelcontent nav.flypanels-searchresult {
+.panelcontent .flypanels-searchresult {
   border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
-.panelcontent nav.flypanels-searchresult ul,
-.panelcontent nav.flypanels-searchresult ul li {
+.panelcontent .flypanels-searchresult ul,
+.panelcontent .flypanels-searchresult ul li {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-.panelcontent nav.flypanels-searchresult ul li a {
+.panelcontent .flypanels-searchresult ul li a {
   color: #ffffff;
   display: block;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
@@ -457,7 +457,7 @@ nav.flypanels-iconmenu li a:before {
   width: 260px;
   position: relative;
 }
-.panelcontent nav.flypanels-searchresult ul li a span.link {
+.panelcontent .flypanels-searchresult ul li a span.link {
   padding-top: 11px;
   padding-bottom: 13px;
   display: inline-block;
@@ -465,7 +465,7 @@ nav.flypanels-iconmenu li a:before {
   padding-right: 15px;
   width: 210px;
 }
-.panelcontent nav.flypanels-searchresult ul li a span.type {
+.panelcontent .flypanels-searchresult ul li a span.type {
   width: 50px;
   float: right;
   display: inline-block;
@@ -477,36 +477,36 @@ nav.flypanels-iconmenu li a:before {
   top: 0;
   bottom: 0;
 }
-.panelcontent nav.flypanels-searchresult ul li a span.type i.page {
+.panelcontent .flypanels-searchresult ul li a span.type i.page {
   font-size: 14px;
   margin-left: 10px;
 }
-.panelcontent nav.flypanels-searchresult ul li a span.type i.page::before {
+.panelcontent .flypanels-searchresult ul li a span.type i.page::before {
   content: "\f105";
 }
-.panelcontent nav.flypanels-searchresult ul li a span.type i.doc {
+.panelcontent .flypanels-searchresult ul li a span.type i.doc {
   font-size: 12px;
   margin-left: 10px;
 }
-.panelcontent nav.flypanels-searchresult ul li a span.type i.doc::before {
+.panelcontent .flypanels-searchresult ul li a span.type i.doc::before {
   content: "\f016";
 }
-.panelcontent nav.flypanels-searchresult li a:hover {
+.panelcontent .flypanels-searchresult li a:hover {
   text-decoration: none;
   background-color: rgba(255, 255, 255, 0.8) !important;
   color: #c0392b;
 }
-.panelcontent nav.flypanels-searchresult ul li a:focus,
-.panelcontent nav.flypanels-searchresult .panelcontent nav ul li a:visited,
-.panelcontent nav.flypanels-searchresult .panelcontent nav ul li a:link {
+.panelcontent .flypanels-searchresult ul li a:focus,
+.panelcontent .flypanels-searchresult .panelcontent nav ul li a:visited,
+.panelcontent .flypanels-searchresult .panelcontent nav ul li a:link {
   text-decoration: none;
 }
 /* Touch devices :hover fix */
-.panelcontent nav.flypanels-searchresult.touch li a:hover {
+.panelcontent .flypanels-searchresult.touch li a:hover {
   background-color: inherit !important;
   color: #ffffff;
 }
-.panelcontent nav.flypanels-searchresult.touch li a:active {
+.panelcontent .flypanels-searchresult.touch li a:active {
   text-decoration: none;
   background-color: rgba(255, 255, 255, 0.8) !important;
   color: #c0392b;

@@ -1,4 +1,4 @@
-/*! flypanels - v0.11.0 - 2015-04-15
+/*! flypanels - v0.11.1 - 2015-04-21
 * https://github.com/SubZane/flyPanels
 * Copyright (c) 2015 Andreas Norman; Licensed MIT */
 (function ($) {
