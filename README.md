@@ -257,6 +257,9 @@ jQuery(document).ready(function($) {
 ```
 
 ##changelog
+####0.11.2
+* Renamed all LESS variables. Added prefix `flypanels_` to all.
+
 ####0.11.1
 * The search result shouldn't be a `nav` element. Changed to a `div`. LESS file updated as well.
 

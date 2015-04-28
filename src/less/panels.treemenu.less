@@ -14,27 +14,27 @@
         font-weight: 400;
         font-size: 12px;
         display: inline-block;
-        width: unit(@panel_width, px);
+        width: unit(@flypanels_panel_width, px);
         position: relative;
 
         a.link {
-          color: @link_color;
+          color: @flypanels_link_color;
           padding-top: 11px;
           padding-bottom: 13px;
           display: inline-block;
           padding-left: 15px;
           padding-right: 15px;
-          width: unit(@panel_width, px);
+          width: unit(@flypanels_panel_width, px);
         }
       }
       &.haschildren {
         a.link {
-          width: unit((@panel_width - 60), px);
+          width: unit((@flypanels_panel_width - 60), px);
           border-right: 1px solid rgba(255, 255, 255, 0.15);
         }
         a.expand {
-          color: @link_color;
-          width: unit((@panel_width - 200), px);
+          color: @flypanels_link_color;
+          width: unit((@flypanels_panel_width - 200), px);
           font-size: 11px;
           float: right;
           display: inline-block;
@@ -60,71 +60,71 @@
   ul li.haschildren {
     li {
       div {
-        border-bottom-color: desaturate(lighten(darken(@primary_color, 5%), 10%), 20%);
+        border-bottom-color: desaturate(lighten(darken(@flypanels_primary_color, 5%), 10%), 20%);
         a {
-          background-color: darken(@primary_color, 5%);
+          background-color: darken(@flypanels_primary_color, 5%);
           &.link {
             border-right: none;
-            width: unit(@panel_width, px);
+            width: unit(@flypanels_panel_width, px);
             padding-left: 25px;
           }
         }
       }
       &.haschildren {
         a.link {
-          border-right: 1px solid desaturate(lighten(darken(@primary_color, 5%), 10%), 20%);
-          width: unit((@panel_width - 60), px);
+          border-right: 1px solid desaturate(lighten(darken(@flypanels_primary_color, 5%), 10%), 20%);
+          width: unit((@flypanels_panel_width - 60), px);
         }
         li {
           div {
-            border-bottom-color: desaturate(lighten(darken(@primary_color, 10%), 10%), 20%);
+            border-bottom-color: desaturate(lighten(darken(@flypanels_primary_color, 10%), 10%), 20%);
             a {
-              background-color: darken(@primary_color, 10%);
+              background-color: darken(@flypanels_primary_color, 10%);
               &.link {
                 border-right: none;
-                width: unit(@panel_width, px);
+                width: unit(@flypanels_panel_width, px);
                 padding-left: 40px;
               }
             }
           }
           &.haschildren {
             a.link {
-              border-right: 1px solid desaturate(lighten(darken(@primary_color, 10%), 10%), 20%);
-              width: unit((@panel_width - 60), px);
+              border-right: 1px solid desaturate(lighten(darken(@flypanels_primary_color, 10%), 10%), 20%);
+              width: unit((@flypanels_panel_width - 60), px);
             }
             li {
               div {
-                border-bottom-color: desaturate(lighten(darken(@primary_color, 15%), 10%), 20%);
+                border-bottom-color: desaturate(lighten(darken(@flypanels_primary_color, 15%), 10%), 20%);
                 a {
-                  background-color: darken(@primary_color, 15%);
+                  background-color: darken(@flypanels_primary_color, 15%);
                   &.link {
                     border-right: none;
-                    width: unit(@panel_width, px);
+                    width: unit(@flypanels_panel_width, px);
                     padding-left: 55px;
                   }
                 }
               }
               &.haschildren {
                 a.link {
-                  border-right: 1px solid desaturate(lighten(darken(@primary_color, 15%), 10%), 20%);
-                  width: unit((@panel_width - 60), px);
+                  border-right: 1px solid desaturate(lighten(darken(@flypanels_primary_color, 15%), 10%), 20%);
+                  width: unit((@flypanels_panel_width - 60), px);
                 }
                 li {
                   div {
-                    border-bottom-color: desaturate(lighten(darken(@primary_color, 20%), 10%), 20%);
+                    border-bottom-color: desaturate(lighten(darken(@flypanels_primary_color, 20%), 10%), 20%);
                     a {
-                      background-color: darken(@primary_color, 20%);
+                      background-color: darken(@flypanels_primary_color, 20%);
                       &.link {
                         border-right: none;
-                        width: unit(@panel_width, px);
+                        width: unit(@flypanels_panel_width, px);
                         padding-left: 70px;
                       }
                     }
                   }
                   &.haschildren {
                     a.link {
-                      border-right: 1px solid desaturate(lighten(darken(@primary_color, 20%), 10%), 20%);
-                      width: unit((@panel_width - 60), px);
+                      border-right: 1px solid desaturate(lighten(darken(@flypanels_primary_color, 20%), 10%), 20%);
+                      width: unit((@flypanels_panel_width - 60), px);
                     }
                   }
                 }
@@ -141,13 +141,13 @@
   li div a.link:hover {
     text-decoration: none;
     background-color:rgba(255, 255, 255, 0.8) !important;
-    color: @primary_color;
+    color: @flypanels_primary_color;
   }
 
   li div  a.expand:hover {
     text-decoration: none;
     background-color:rgba(255, 255, 255, 0.8) !important;
-    color: @primary_color;
+    color: @flypanels_primary_color;
   }
 
   ul li a:focus, .panelcontent nav ul li a:visited, .panelcontent nav ul li a:link {
@@ -158,27 +158,27 @@
 /* Touch devices :hover fix */
 .panelcontent nav.flypanels-treemenu.touch li a:hover {
   background-color:inherit !important;
-  color: @link_color;
+  color: @flypanels_link_color;
 }
 .panelcontent nav.flypanels-treemenu.touch li li a:hover {
   background-color:rgba(0, 0, 0, 0.1) !important;
-  color: @link_color;
+  color: @flypanels_link_color;
 }
 .panelcontent nav.flypanels-treemenu.touch li li li a:hover {
   background-color:rgba(0, 0, 0, 0.2) !important;
-  color: @link_color;
+  color: @flypanels_link_color;
 }
 .panelcontent nav.flypanels-treemenu.touch li li li li a:hover {
   background-color:rgba(0, 0, 0, 0.3) !important;
-  color: @link_color;
+  color: @flypanels_link_color;
 }
 .panelcontent nav.flypanels-treemenu.touch li li li li li a:hover {
   background-color:rgba(0, 0, 0, 0.4) !important;
-  color: @link_color;
+  color: @flypanels_link_color;
 }
 .panelcontent nav.flypanels-treemenu.touch li li li li li li a:hover {
   background-color:rgba(0, 0, 0, 0.5) !important;
-  color: @link_color;
+  color: @flypanels_link_color;
 }
 
 .panelcontent nav.flypanels-treemenu.touch li a:active,
@@ -188,7 +188,7 @@
 .panelcontent nav.flypanels-treemenu.touch li li li li li a:active {
   text-decoration: none;
   background-color:rgba(255, 255, 255, 0.8) !important;
-  color: @primary_color;
+  color: @flypanels_primary_color;
 }
 
 .panelcontent nav.flypanels-treemenu {
