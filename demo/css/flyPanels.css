@@ -321,7 +321,8 @@ body.flypanels-open {
   border-right: 1px solid #843c34;
   width: 200px;
 }
-.panelcontent nav.flypanels-treemenu li div a.link:hover {
+.panelcontent nav.flypanels-treemenu li div a.link:hover,
+.panelcontent nav.flypanels-treemenu li.active div a.link {
   text-decoration: none;
   background-color: rgba(255, 255, 255, 0.8) !important;
   color: #c0392b;

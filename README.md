@@ -1,4 +1,4 @@
-flyPanels v0.11.1
+flyPanels v0.12.0
 =======
 
 flyPanels - responsive off canvas menu panels
@@ -257,6 +257,9 @@ jQuery(document).ready(function($) {
 ```
 
 ##changelog
+####0.12.0
+* Added CSS class for active menu item.
+
 ####0.11.2
 * Renamed all LESS variables. Added prefix `flypanels_` to all.
 
