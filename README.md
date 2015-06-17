@@ -1,4 +1,4 @@
-flyPanels v0.12.0
+flyPanels v0.12.1
 =======
 
 flyPanels - responsive off canvas menu panels
@@ -257,6 +257,9 @@ jQuery(document).ready(function($) {
 ```
 
 ##changelog
+####0.12.1
+* Fixed CSS issue with the tree menu. #3
+
 ####0.12.0
 * Added CSS class for active menu item.
 
