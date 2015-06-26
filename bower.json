@@ -1,33 +1,34 @@
 {
-  "name": "flyPanels",
-  "version": "0.12.1",
-  "homepage": "http://www.andreasnorman.com/flypanels/",
-  "authors": [
-    "Andreas Norman <an@andreasnorman.se>"
-  ],
-  "description": "Responsive off canvas menu panels",
-  "main": "dist/jquery.flyPanels.min.js",
-  "keywords": [
-    "navigation",
-    "jquery",
-    "mobile",
-    "responsive",
-    "off canvas"
-  ],
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "demo/dependencies",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "jquery": "2.x",
-    "kitUtils": "1.x"
-  },
-  "resolutions": {
-    "jquery": "2.x"
-  }
+	"name": "flypanels",
+	"version": "0.12.1",
+	"homepage": "http://www.andreasnorman.com/flypanels/",
+	"authors": [
+		"Andreas Norman <an@andreasnorman.se>"
+	],
+	"description": "Responsive off canvas menu panels",
+	"main": "dist/jquery.flyPanels.min.js",
+	"keywords": [
+		"navigation",
+		"jquery",
+		"mobile",
+		"responsive",
+		"off canvas"
+	],
+	"license": "MIT",
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"demo/dependencies",
+		"test",
+		"tests"
+	],
+	"dependencies": {
+		"jquery": "2.x",
+		"kitUtils": "1.x"
+	},
+	"resolutions": {
+		"jquery": "2.x"
+	},
+	"title": "flypanels"
 }

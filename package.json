@@ -1,16 +1,19 @@
 {
-	"name": "flypanels",
-	"version": "0.12.1",
-	"engines": {
-		"node": ">= 0.8.0"
-	},
-	"devDependencies": {
-		"grunt-contrib-jshint": "~0.6.0",
-		"grunt-contrib-concat": "~0.3.0",
-		"grunt-contrib-uglify": "~0.2.0",
-		"grunt-contrib-watch": "~0.4.0",
-		"grunt-contrib-clean": "~0.4.0",
-		"grunt-contrib-less": "~0.11.0",
-		"grunt": "~0.4.4"
-	}
+  "name": "flypanels",
+  "title": "flypanels",
+  "description": "Responsive off canvas menu panels",
+  "version": "0.12.1",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-less": "~0.11.0",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-watch": "~0.4.0",
+    "grunt-update-json": "^0.2.1"
+  }
 }

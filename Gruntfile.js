@@ -68,6 +68,37 @@ module.exports = function (grunt) {
 				files: '<%= jshint.src.src %>',
 				tasks: ['jshint:src', 'qunit']
 			},
+		},
+		update_json: {
+			// set some task-level options
+			options: {
+				src: 'package.json',
+				indent: '\t'
+			},
+			// update bower.json with data from package.json
+			bower: {
+				src: 'package.json', // where to read from
+				dest: 'bower.json', // where to write to
+				// the fields to update, as a String Grouping
+				fields: {
+					'name': 'name',
+					'title': 'title',
+					'version': 'version',
+					'description': 'description',
+				}
+			},
+			flypanels: {
+				src: 'package.json', // where to read from
+				dest: 'flypanels.json', // where to write to
+				// the fields to update, as a String Grouping
+				fields: {
+					'name': 'name',
+					'title': 'title',
+					'version': 'version',
+					'description': 'description',
+				}
+			},
+
 		}
 	});
 
@@ -78,8 +109,10 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-update-json');
 
 	// Default task.
-	grunt.registerTask('default', ['jshint', 'clean', 'less', 'concat', 'uglify']);
+	grunt.registerTask('default', ['jshint', 'clean', 'less', 'concat', 'uglify', 'version']);
+	grunt.registerTask('version', ['update_json:bower', 'update_json:flypanels']);
 
 };
