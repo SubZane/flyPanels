@@ -34,6 +34,7 @@ module.exports = function (grunt) {
 				dest: 'dist/jquery.<%= pkg.name %>.min.js'
 			},
 		},
+
 		less: {
 			production: {
 				options: {
@@ -41,10 +42,22 @@ module.exports = function (grunt) {
 					cleancss: false
 				},
 				files: {
-					'demo/css/flyPanels.css': 'src/less/_application.less'
+					'demo/css/flyPanels_less.css': 'src/less/_application.less'
 				}
 			}
 		},
+
+		sass: {
+			options: {
+				sourceMap: false
+			},
+			dist: {
+				files: {
+					'demo/css/flyPanels.css': 'src/sass/flyPanels.scss'
+				}
+			}
+		},
+
 		jshint: {
 			gruntfile: {
 				options: {
@@ -105,6 +118,7 @@ module.exports = function (grunt) {
 	// These plugins provide necessary tasks.
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-less');
+	grunt.loadNpmTasks('grunt-sass');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -112,7 +126,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-update-json');
 
 	// Default task.
-	grunt.registerTask('default', ['jshint', 'clean', 'less', 'concat', 'uglify', 'version']);
+	grunt.registerTask('default', ['jshint', 'clean', 'sass', 'concat', 'uglify', 'version']);
 	grunt.registerTask('version', ['update_json:bower', 'update_json:flypanels']);
 
 };

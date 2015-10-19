@@ -1,7 +1,7 @@
 html,body {
   margin: 0;
   padding: 0;
-  font-family: @flypanels_primary_font;
+  font-family: $flypanels_primary_font;
   line-height: 140%;
   overflow-x: hidden;
 }
@@ -29,13 +29,13 @@ html.flypanels-open, body.flypanels-open {
 
 .flypanels-container {
   .offcanvas {
-    .transition(all 0.2s cubic-bezier(.53,.54,.54,.54));
-    background-color: @flypanels_top_bar_bgcolor;
+    @include transition(all 0.2s cubic-bezier(.53,.54,.54,.54));
+    background-color: $flypanels_top_bar_bgcolor;
     overflow: hidden;
-    width: unit(@flypanels_panel_width, px);
+    width: #{$flypanels_panel_width}px;
     .panelcontent {
       display:none;
-      padding: @flypanels_top_bar_height unit(@flypanels_panel_padding, px) unit(@flypanels_panel_padding, px) unit(@flypanels_panel_padding, px);
+      padding: $flypanels_top_bar_height #{$flypanels_panel_padding}px #{$flypanels_panel_padding}px #{$flypanels_panel_padding}px;
       top: 0;
       right: 0;
       bottom: 0;
@@ -50,17 +50,17 @@ html.flypanels-open, body.flypanels-open {
   }
 
   .flypanels-right {
-    margin-right: unit(-@flypanels_panel_width, px);
+    margin-right: #{0 - $flypanels_panel_width}px;
     float: right;
   }
   .flypanels-left {
-    margin-left: unit(-(@flypanels_panel_width), px);
+    margin-left: #{0 - $flypanels_panel_width}px;
     float: left;
   }
 
   .flypanels-main {
-    /*.transition(all 0.2s cubic-bezier(.53,.54,.54,.54));
-    .translate3d(0, 0, 0);*/
+    /*@include transition(all 0.2s cubic-bezier(.53,.54,.54,.54));
+    @include translate3d(0, 0, 0);*/
     width: 100%;
     float: left;
     margin-left: 0px;
@@ -69,15 +69,15 @@ html.flypanels-open, body.flypanels-open {
       padding-top: 50px;
       -webkit-overflow-scrolling: touch;
       overflow-y: auto;
-      .transition(all 0.2s cubic-bezier(.53,.54,.54,.54));
-      .translate3d(0, 0, 0);
+      @include transition(all 0.2s cubic-bezier(.53,.54,.54,.54));
+      @include translate3d(0, 0, 0);
     }
   }
   &.openleft {
     .flypanels-left {
-      .translate3d(unit(@flypanels_panel_width, px), 0, 0);
+      @include translate3d(#{$flypanels_panel_width}px, 0, 0);
       overflow: hidden;
-      width: unit(@flypanels_panel_width, px);
+      width: #{$flypanels_panel_width}px;
       position: relative;
       .panelcontent {
         position: absolute;
@@ -86,12 +86,12 @@ html.flypanels-open, body.flypanels-open {
     .flypanels-main {
       overflow: hidden;
       .flypanels-topbar {
-        .transition(all 0.2s cubic-bezier(.53,.54,.54,.54));
-        .translate3d(unit(@flypanels_panel_width, px), 0, 0);
+        @include transition(all 0.2s cubic-bezier(.53,.54,.54,.54));
+        @include translate3d(#{$flypanels_panel_width}px, 0, 0);
       }
       .flypanels-content {
-        .transition(all 0.2s cubic-bezier(.53,.54,.54,.54));
-        .translate3d(unit(@flypanels_panel_width, px), 0, 0);
+        @include transition(all 0.2s cubic-bezier(.53,.54,.54,.54));
+        @include translate3d(#{$flypanels_panel_width}px, 0, 0);
         overflow: hidden;
         .overlay {
           background-color: #fff;
@@ -108,9 +108,9 @@ html.flypanels-open, body.flypanels-open {
   }
   &.openright {
     .flypanels-right {
-      .translate3d(unit(-(@flypanels_panel_width), px), 0, 0);
+      @include translate3d(#{0 - $flypanels_panel_width}px, 0, 0);
       overflow: hidden;
-      width: unit(@flypanels_panel_width, px);
+      width: #{$flypanels_panel_width}px;
       position: relative;
       .panelcontent {
         position: absolute;
@@ -119,12 +119,12 @@ html.flypanels-open, body.flypanels-open {
     .flypanels-main {
       overflow: hidden;
       .flypanels-topbar {
-        .transition(all 0.2s cubic-bezier(.53,.54,.54,.54));
-        .translate3d(unit(-(@flypanels_panel_width), px), 0, 0);
+        @include transition(all 0.2s cubic-bezier(.53,.54,.54,.54));
+        @include translate3d(#{0 - $flypanels_panel_width}px, 0, 0);
       }
       .flypanels-content {
-        .transition(all 0.2s cubic-bezier(.53,.54,.54,.54));
-        .translate3d(unit(-(@flypanels_panel_width), px), 0, 0);
+        @include transition(all 0.2s cubic-bezier(.53,.54,.54,.54));
+        @include translate3d(#{0 - $flypanels_panel_width}px, 0, 0);
         overflow: hidden;
         .overlay {
           background-color: #fff;

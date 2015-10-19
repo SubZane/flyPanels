@@ -1,4 +1,4 @@
-flyPanels v0.12.1
+flyPanels v0.13
 =======
 
 flyPanels - responsive off canvas menu panels
@@ -257,6 +257,9 @@ jQuery(document).ready(function($) {
 ```
 
 ##changelog
+####0.13.0
+* Added SASS/SCSS support. flyPanels can now build with SASS or LESS.
+
 ####0.12.1
 * Fixed CSS issue with the tree menu. #3
 

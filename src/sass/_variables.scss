@@ -1,0 +1,48 @@
+$flypanels_primary_color: #c0392b;
+
+$flypanels_main_background_fade_opacity: 0.2;
+$flypanels_loader_size: 120px;
+$flypanels_top_bar_height: 50px;
+$flypanels_panel_width: 260;
+$flypanels_panel_padding: 20;
+$flypanels_top_bar_bgcolor: $flypanels_primary_color;
+
+$flypanels_panel_bg: $flypanels_primary_color;
+$flypanels_text_color: #fff;
+$flypanels_link_color: $flypanels_text_color;
+
+$flypanels_primary_font: Helvetica, sans-serif, arial;
+
+$flypanels_loader_size: 120px;
+$flypanels_loader_color: #fff;
+
+@mixin translate ($x, $y) {
+	-webkit-transform: translate($x, $y);
+	-moz-transform: 	 translate($x, $y);
+	-ms-transform: 		 translate($x, $y);
+	-o-transform: 		 translate($x, $y);
+}
+
+@mixin translate3d($x, $y, $z) {
+  -webkit-transform: translate3d($x, $y, $z);
+     -moz-transform: translate3d($x, $y, $z);
+       -o-transform: translate3d($x, $y, $z);
+          transform: translate3d($x, $y, $z);
+}
+
+// transition
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+// box-shadow
+@mixin box_shadow ($shadow) {
+  -webkit-box-shadow: $shadow;
+  -moz-box-shadow: $shadow;
+  -o-box-shadow: $shadow;
+  box-shadow: $shadow;
+}
