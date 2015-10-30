@@ -10,7 +10,7 @@
 		// References to DOM and jQuery versions of element.
 		var el = element;
 		var $el = $(element);
-		var innerHeight = window.innerHeight;
+		var innerHeight = $(window).height();
 		var panelWidth;
 		var redrawOnResize = true;
 		// Need to get the topbar height in order to later set the correct height of .flypanels-content
@@ -157,7 +157,7 @@
 		}
 
 		function afterWindowResize() {
-			innerHeight = window.innerHeight;
+			innerHeight = $(window).height();
 			setHeight();
 		}
 

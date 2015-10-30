@@ -1,4 +1,4 @@
-/*! flypanels - v0.13.0 - 2015-10-19
+/*! flypanels - v0.14.0 - 2015-10-29
 * https://github.com/SubZane/flyPanels
 * Copyright (c) 2015 Andreas Norman; Licensed MIT */
 (function ($) {
@@ -13,7 +13,7 @@
 		// References to DOM and jQuery versions of element.
 		var el = element;
 		var $el = $(element);
-		var innerHeight = window.innerHeight;
+		var innerHeight = $(window).height();
 		var panelWidth;
 		var redrawOnResize = true;
 		// Need to get the topbar height in order to later set the correct height of .flypanels-content
@@ -160,7 +160,7 @@
 		}
 
 		function afterWindowResize() {
-			innerHeight = window.innerHeight;
+			innerHeight = $(window).height();
 			setHeight();
 		}
 
