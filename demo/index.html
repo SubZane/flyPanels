@@ -241,10 +241,28 @@
 			</div>
 		</div>
 	</div>
+	<!--
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="dependencies/kitUtils/kitUtils.js"></script>
 	<script src="../dist/jquery.flypanels.js"></script>
+-->
+	<script src="../dist/jquery.flypanels.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.3/fastclick.min.js"></script>
+	<script>
+	document.addEventListener("DOMContentLoaded", function(event) {
+		flyPanels.init({
+		    container: '.flypanels-container',
+				treeMenu: {
+					init: true
+				},
+				search: {
+					init: true,
+					saveQueryCookie: true
+				}
+		})
+  });
+	</script>
+	<!--
 	<script>
 		$(document).ready(function(){
 			$('.flypanels-container').flyPanels({
@@ -270,5 +288,6 @@
 	ga('send', 'pageview');
 
 </script>
+-->
 </body>
 </html>

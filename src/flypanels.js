@@ -1,6 +1,3 @@
-/*! flypanels - v0.14.0 - 2015-11-02
-* https://github.com/SubZane/flyPanels
-* Copyright (c) 2015 Andreas Norman; Licensed MIT */
 (function (root, factory) {
 	if (typeof define === 'function' && define.amd) {
 		define([], factory(root));
@@ -378,7 +375,7 @@
 		setHeight();
 		panelWidth = document.querySelectorAll('.flypanels-left').width;
 		attachEvents();
-console.log(settings);
+
     if (settings.search.init) {
       //initSearch();
     }
