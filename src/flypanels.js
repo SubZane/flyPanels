@@ -20,7 +20,7 @@
 
 	var el;
 
-	var innerHeight = window.innerHeight;
+	var innerHeight = document.documentElement.clientHeight;
 	var panelWidth;
 	var redrawOnResize = true;
 	// Need to get the topbar height in order to later set the correct height of .flypanels-content
@@ -171,29 +171,14 @@
 	var attachEvents = function () {
 
 		// Prevent scroll if content doesn't need scroll.
-    var panelcontent = document.querySelectorAll('.panelcontent', 'touchmove');
-    forEach(panelcontent, function (index, value) {
-      index.addEventListener('touchmove', function (e) {
-        if (panel.scrollHeight <= parseInt(innerHeight, 10)) {
-          e.preventDefault();
-        }
-      });
-    });
-
-    // Prevent scrolling of the panel itself. Only the content panel should be allowed to scroll
-    var offcanvas = document.querySelectorAll('.panelcontent', 'touchmove');
-    forEach(offcanvas, function (index, value) {
-      index.addEventListener('touchmove', function (e) {
-        e.preventDefault();
-      });
-    });
-
-    var offcanvaspanelcontent = document.querySelectorAll('.offcanvas .panelcontent', 'touchmove');
-    forEach(offcanvaspanelcontent, function (index, value) {
-      index.addEventListener('touchmove', function (e) {
-        e.preventDefault();
-      });
-    });
+		var panelcontent_panels = document.querySelectorAll('.panelcontent');
+		forEach(panelcontent_panels, function (index, value) {
+			index.addEventListener('touchmove', function (e) {
+				if (index.scrollHeight <= parseInt(innerHeight, 10)) {
+					e.preventDefault();
+				}
+			});
+		});
 
 		document.querySelector('.flypanels-button-left').addEventListener('click', function () {
 			var panel = this.getAttribute('data-panel');
@@ -213,15 +198,6 @@
 			}
 		});
 
-		var hasClass = function (element, classname) {
-			if (element.classList.contains(classname)) {
-				return true;
-			} else {
-				return false;
-			}
-		};
-
-
 		if (redrawOnResize === true) {
       window.onresize = onWindowResize;
 		}
@@ -239,6 +215,13 @@
     resizeTimer = setTimeout(afterWindowResize, 100);
   };
 
+	var hasClass = function (element, classname) {
+		if (element.classList.contains(classname)) {
+			return true;
+		} else {
+			return false;
+		}
+	};
 
 	var isAndroid = function () {
 		if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
