@@ -17,9 +17,7 @@
 	var flyPanels = {}; // Object for public APIs
 	var supports = !!document.querySelector && !!root.addEventListener; // Feature test
 	var settings, eventTimeout;
-
 	var el;
-
 	var innerHeight = document.documentElement.clientHeight;
 	var panelWidth;
 	var redrawOnResize = true;
@@ -31,12 +29,11 @@
 		expandHandler: 'a.expand'
 	};
 
-  var search = {
-    init: false,
-    saveQueryCookie: false,
-    searchPanel: document.querySelector('.offcanvas').querySelector('[data-panel="search"]')
-  };
-
+	var search = {
+		init: false,
+		saveQueryCookie: false,
+		searchPanel: document.querySelector('.offcanvas').querySelector('[data-panel="search"]')
+	};
 
 	// Default settings
 	var defaults = {
@@ -66,14 +63,14 @@
 			document.querySelector('.flypanels-treemenu').classList.add('touch');
 		}
 
-    var expanders = document.querySelectorAll('.flypanels-treemenu li.haschildren ' + settings.treeMenu.expandHandler);
-    forEach(expanders, function (expandLink, value) {
-      expandLink.addEventListener('click', function (e) {
-        this.parentElement.parentElement.classList.toggle('expanded');
-        e.preventDefault();
-      });
-    });
-  };
+		var expanders = document.querySelectorAll('.flypanels-treemenu li.haschildren ' + settings.treeMenu.expandHandler);
+		forEach(expanders, function (expandLink, value) {
+			expandLink.addEventListener('click', function (e) {
+				this.parentElement.parentElement.classList.toggle('expanded');
+				e.preventDefault();
+			});
+		});
+	};
 
 	var close = function () {
 		closeLeft();
@@ -82,25 +79,25 @@
 	};
 
 	var onCloseLeft = function () {
-    document.querySelector('body').classList.remove('flypanels-open');
+		document.querySelector('body').classList.remove('flypanels-open');
 		document.querySelector('html').classList.remove('flypanels-open');
 		hook('onCloseLeft');
 	};
 
 	var onCloseRight = function () {
-    document.querySelector('body').classList.remove('flypanels-open');
+		document.querySelector('body').classList.remove('flypanels-open');
 		document.querySelector('html').classList.remove('flypanels-open');
 		hook('onCloseRight');
 	};
 
 	var onOpenLeft = function () {
-    document.querySelector('body').classList.add('flypanels-open');
+		document.querySelector('body').classList.add('flypanels-open');
 		document.querySelector('html').classList.add('flypanels-open');
 		hook('onOpenLeft');
 	};
 
 	var onOpenRight = function () {
-    document.querySelector('body').classList.add('flypanels-open');
+		document.querySelector('body').classList.add('flypanels-open');
 		document.querySelector('html').classList.add('flypanels-open');
 		hook('onOpenRight');
 	};
@@ -124,7 +121,7 @@
 	var openRight = function (panel) {
 		el.classList.add('openright');
 		setTimeout(function () {
-			document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').style.display = 'block';
+			document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').style.display = '';
 			onOpenRight();
 			onOpen();
 		}, 200);
@@ -133,10 +130,10 @@
 	var closeRight = function () {
 		el.classList.remove('openright');
 		setTimeout(function () {
-      var panels = document.querySelectorAll('.flypanels-right .panelcontent');
-      forEach(panels, function (panel, value) {
-        panel.style.display = 'none';
-      });
+			var panels = document.querySelectorAll('.flypanels-right .panelcontent');
+			forEach(panels, function (panel, value) {
+				panel.style.display = 'none';
+			});
 			onCloseRight();
 			onClose();
 		}, 200);
@@ -145,7 +142,7 @@
 	var openLeft = function (panel) {
 		el.classList.add('openleft');
 		setTimeout(function () {
-			document.querySelector('.flypanels-left').querySelector('[data-panel="' + panel + '"]').style.display = 'block';
+			document.querySelector('.flypanels-left').querySelector('[data-panel="' + panel + '"]').style.display = '';
 			onOpenLeft();
 			onOpen();
 		}, 200);
@@ -154,10 +151,10 @@
 	var closeLeft = function () {
 		el.classList.remove('openleft');
 		setTimeout(function () {
-      var panels = document.querySelectorAll('.flypanels-left .panelcontent');
-      forEach(panels, function (panel, value) {
-        panel.style.display = 'none';
-      });
+			var panels = document.querySelectorAll('.flypanels-left .panelcontent');
+			forEach(panels, function (panel, value) {
+				panel.style.display = 'none';
+			});
 			onCloseLeft();
 			onClose();
 		}, 200);
@@ -199,21 +196,21 @@
 		});
 
 		if (redrawOnResize === true) {
-      window.onresize = onWindowResize;
+			window.onresize = onWindowResize;
 		}
 
 		// Listen for orientation changes
-    window.addEventListener('orientationchange', function() {
-      setHeight();
-    });
+		window.addEventListener('orientationchange', function () {
+			setHeight();
+		});
 		hook('onLoad');
 	};
 
-  var onWindowResize = function () {
-    var resizeTimer;
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(afterWindowResize, 100);
-  };
+	var onWindowResize = function () {
+		var resizeTimer;
+		clearTimeout(resizeTimer);
+		resizeTimer = setTimeout(afterWindowResize, 100);
+	};
 
 	var hasClass = function (element, classname) {
 		if (element.classList.contains(classname)) {
@@ -239,20 +236,157 @@
 		}
 	};
 
-	var addEventListenerList = function (list, event, fn) {
-		for (var i = 0, len = list.length; i < len; i++) {
-			list[i].addEventListener(event, fn, false);
+	// Search funkctions
+
+	var executeSearch = function (query) {
+		searchError('hide');
+		var jsonURL = options.search.searchPanel.querySelector('.searchbox').getAttribute('data-searchurl');
+		jsonURL = jsonURL + '&q=' + query;
+
+		var request = new XMLHttpRequest();
+		request.open('GET', jsonURL, true);
+
+		request.onload = function () {
+			if (request.status >= 200 && request.status < 400) {
+				// Success!
+				var response = JSON.parse(request.response);
+				var foundResults = response.Items.length;
+				var output;
+
+				if (foundResults > 0) {
+					if (options.search.saveQueryCookie === true) {
+						cookies.set('searchQuery', query, null, '/');
+					}
+					output = buildResultsList(response.Items);
+				} else {
+					//$.removeCookie('searchQuery');
+					if (options.search.saveQueryCookie === true) {
+						cookies.remove('searchQuery', '/');
+					}
+					searchError('show');
+				}
+			} else {
+				// We reached our target server, but it returned an error
+				searchError('show');
+			}
+		};
+		request.onerror = function () {
+			// There was a connection error of some sort
+			searchError('show');
+		};
+		request.send();
+
+		// Render html
+		options.search.searchPanel.querySelector('.resultinfo .query').innerHTML = query;
+		options.search.searchPanel.querySelector('.resultinfo .num').innerHTML = foundResults;
+		options.search.searchPanel.querySelector('.flypanels-searchresult').innerHTML = output;
+		searchProgress('hide');
+		options.search.searchPanel.querySelector('.resultinfo').style.display = '';
+		options.search.searchPanel.querySelector('.flypanels-searchresult').style.display = '';
+	};
+
+	var buildResultsList = function (results) {
+		output = '<ul>';
+		for (var i in results) {
+			if (results[i].Type === 'Page') {
+				output += '<li><a href="' + results[i].LinkUrl + '"><span class="link">' + results[i].Header + '</span>  <span class="type"><i class="fa page"></i></span></a>';
+			} else {
+				output += '<li><a href="' + results[i].LinkUrl + '"><span class="link">' + results[i].Header + '</span>  <span class="type"><i class="fa doc"></i></span></a>';
+			}
+		}
+		output += '</ul>';
+		return output;
+	};
+
+	var initSearch = function () {
+		if (isAndroid() || isIOS()) {
+			document.querySelector('.flypanels-searchresult').classList.add('touch');
+		}
+		options.search.searchPanel.querySelector('.searchbutton').addEventListener('click', function (event) {
+			event.preventDefault();
+			searchProgress('show');
+			executeSearch(options.search.searchPanel.querySelector('.searchbox input').value);
+		});
+
+		options.search.searchPanel.querySelector('.searchbox input').addEventListener('keydown', function (event) {
+			if (event.which === 13) {
+				searchProgress('show');
+				executeSearch(this.value);
+				this.blur();
+			}
+		});
+
+		if (cookies.has('searchQuery') === true && options.search.saveQueryCookie === true) {
+			executeSearch(cookies.get('searchQuery'));
 		}
 	};
 
-	var addEventListenerByClass = function (className, event, fn) {
-		var list = document.getElementsByClassName(className);
-		for (var i = 0, len = list.length; i < len; i++) {
-			list[i].addEventListener(event, fn, false);
+	var searchError = function (state) {
+		if (state === 'hide') {
+			searchPanel.querySelector('.errormsg').style.display = 'none';
+		} else {
+			searchPanel.querySelector('.errormsg').style.display = '';
+		}
+	};
+
+	var searchProgress = function (state) {
+		if (state === 'hide') {
+			searchPanel.querySelector('.loading').style.display = 'none';
+		} else {
+			searchPanel.querySelector('.loading').style.display = '';
 		}
 	};
 
 
+	var cookies = {
+		get: function (sKey) {
+			if (!sKey) {
+				return null;
+			}
+			return decodeURIComponent(document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
+		},
+		set: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+			if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) {
+				return false;
+			}
+			var sExpires = '';
+			if (vEnd) {
+				switch (vEnd.constructor) {
+				case Number:
+					sExpires = vEnd === Infinity ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT' : '; max-age=' + vEnd;
+					break;
+				case String:
+					sExpires = '; expires=' + vEnd;
+					break;
+				case Date:
+					sExpires = '; expires=' + vEnd.toUTCString();
+					break;
+				}
+			}
+			document.cookie = encodeURIComponent(sKey) + '=' + encodeURIComponent(sValue) + sExpires + (sDomain ? '; domain=' + sDomain : '') + (sPath ? '; path=' + sPath : '') + (bSecure ? '; secure' : '');
+			return true;
+		},
+		remove: function (sKey, sPath, sDomain) {
+			if (!this.hasItem(sKey)) {
+				return false;
+			}
+			document.cookie = encodeURIComponent(sKey) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT' + (sDomain ? '; domain=' + sDomain : '') + (sPath ? '; path=' + sPath : '');
+			return true;
+		},
+		has: function (sKey) {
+			if (!sKey) {
+				return false;
+			}
+			return (new RegExp('(?:^|;\\s*)' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=')).test(document.cookie);
+		},
+		keys: function () {
+			var aKeys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, '').split(/\s*(?:\=[^;]*)?;\s*/);
+			for (var nLen = aKeys.length, nIdx = 0; nIdx < nLen; nIdx++) {
+				aKeys[nIdx] = decodeURIComponent(aKeys[nIdx]);
+			}
+			return aKeys;
+		}
+	};
 
 	/**
 	 * Callback hooks.
@@ -347,8 +481,8 @@
 		// Destroy any existing initializations
 		flyPanels.destroy();
 
-    options.treeMenu = extend(treeMenu, options.treeMenu || {});
-    options.search = extend(search, options.search || {});
+		options.treeMenu = extend(treeMenu, options.treeMenu || {});
+		options.search = extend(search, options.search || {});
 
 		// Merge user options with defaults
 		settings = extend(defaults, options || {});
@@ -359,13 +493,13 @@
 		panelWidth = document.querySelectorAll('.flypanels-left').width;
 		attachEvents();
 
-    if (settings.search.init) {
-      //initSearch();
-    }
-    if (settings.treeMenu.init) {
+		if (settings.search.init) {
+			//initSearch();
+		}
+		if (settings.treeMenu.init) {
 
-      initTreeMenu();
-    }
+			initTreeMenu();
+		}
 
 		// Remove preload class when page has loaded to allow transitions/animations
 		el.classList.remove('preload');
