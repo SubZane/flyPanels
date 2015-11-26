@@ -32,11 +32,12 @@
 	var search = {
 		init: false,
 		saveQueryCookie: false,
-		searchPanel: document.querySelector('.offcanvas').querySelector('[data-panel="search"]')
+		searchPanel: document.querySelector('.offcanvas [data-panel="search"]')
 	};
 
 	// Default settings
 	var defaults = {
+		transitiontime: 200,
 		container: '.flypanels-container',
 		initClass: 'js-flyPanels',
 		callbackBefore: function () {},
@@ -121,10 +122,10 @@
 	var openRight = function (panel) {
 		el.classList.add('openright');
 		setTimeout(function () {
-			document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').style.display = '';
+			document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').style.display = 'block';
 			onOpenRight();
 			onOpen();
-		}, 200);
+		}, settings.transitiontime);
 	};
 
 	var closeRight = function () {
@@ -136,16 +137,16 @@
 			});
 			onCloseRight();
 			onClose();
-		}, 200);
+		}, settings.transitiontime);
 	};
 
 	var openLeft = function (panel) {
 		el.classList.add('openleft');
 		setTimeout(function () {
-			document.querySelector('.flypanels-left').querySelector('[data-panel="' + panel + '"]').style.display = '';
+			document.querySelector('.flypanels-left').querySelector('[data-panel="' + panel + '"]').style.display = 'block';
 			onOpenLeft();
 			onOpen();
-		}, 200);
+		}, settings.transitiontime);
 	};
 
 	var closeLeft = function () {
@@ -157,7 +158,7 @@
 			});
 			onCloseLeft();
 			onClose();
-		}, 200);
+		}, settings.transitiontime);
 	};
 
 	var afterWindowResize = function () {
@@ -188,7 +189,7 @@
 
 		document.querySelector('.flypanels-button-right').addEventListener('click', function () {
 			var panel = this.getAttribute('data-panel');
-			if (hasClass(document.querySelectorAll('.flypanels-container'), 'openright')) {
+			if (hasClass(document.querySelector('.flypanels-container'), 'openright')) {
 				closeRight();
 			} else {
 				openRight(panel);
@@ -213,7 +214,7 @@
 	};
 
 	var hasClass = function (element, classname) {
-		if (element.classList.contains(classname)) {
+		if (typeof element.classList !== 'undefined' && element.classList.contains(classname)) {
 			return true;
 		} else {
 			return false;
@@ -240,7 +241,7 @@
 
 	var executeSearch = function (query) {
 		searchError('hide');
-		var jsonURL = options.search.searchPanel.querySelector('.searchbox').getAttribute('data-searchurl');
+		var jsonURL = settings.search.searchPanel.querySelector('.searchbox').getAttribute('data-searchurl');
 		jsonURL = jsonURL + '&q=' + query;
 
 		var request = new XMLHttpRequest();
@@ -251,16 +252,23 @@
 				// Success!
 				var response = JSON.parse(request.response);
 				var foundResults = response.Items.length;
-				var output;
-
 				if (foundResults > 0) {
-					if (options.search.saveQueryCookie === true) {
+					if (settings.search.saveQueryCookie === true) {
 						cookies.set('searchQuery', query, null, '/');
 					}
-					output = buildResultsList(response.Items);
+					var output = buildResultsList(response.Items);
+
+					// Render html
+					settings.search.searchPanel.querySelector('.resultinfo .query').innerHTML = query;
+					settings.search.searchPanel.querySelector('.resultinfo .num').innerHTML = foundResults;
+					settings.search.searchPanel.querySelector('.flypanels-searchresult').innerHTML = output;
+					searchProgress('hide');
+					settings.search.searchPanel.querySelector('.resultinfo').style.display = 'block';
+					settings.search.searchPanel.querySelector('.flypanels-searchresult').style.display = 'block';
+
 				} else {
 					//$.removeCookie('searchQuery');
-					if (options.search.saveQueryCookie === true) {
+					if (settings.search.saveQueryCookie === true) {
 						cookies.remove('searchQuery', '/');
 					}
 					searchError('show');
@@ -275,18 +283,10 @@
 			searchError('show');
 		};
 		request.send();
-
-		// Render html
-		options.search.searchPanel.querySelector('.resultinfo .query').innerHTML = query;
-		options.search.searchPanel.querySelector('.resultinfo .num').innerHTML = foundResults;
-		options.search.searchPanel.querySelector('.flypanels-searchresult').innerHTML = output;
-		searchProgress('hide');
-		options.search.searchPanel.querySelector('.resultinfo').style.display = '';
-		options.search.searchPanel.querySelector('.flypanels-searchresult').style.display = '';
 	};
 
 	var buildResultsList = function (results) {
-		output = '<ul>';
+		var output = '<ul>';
 		for (var i in results) {
 			if (results[i].Type === 'Page') {
 				output += '<li><a href="' + results[i].LinkUrl + '"><span class="link">' + results[i].Header + '</span>  <span class="type"><i class="fa page"></i></span></a>';
@@ -302,13 +302,13 @@
 		if (isAndroid() || isIOS()) {
 			document.querySelector('.flypanels-searchresult').classList.add('touch');
 		}
-		options.search.searchPanel.querySelector('.searchbutton').addEventListener('click', function (event) {
+		settings.search.searchPanel.querySelector('.searchbutton').addEventListener('click', function (event) {
 			event.preventDefault();
 			searchProgress('show');
-			executeSearch(options.search.searchPanel.querySelector('.searchbox input').value);
+			executeSearch(settings.search.searchPanel.querySelector('.searchbox input').value);
 		});
 
-		options.search.searchPanel.querySelector('.searchbox input').addEventListener('keydown', function (event) {
+		settings.search.searchPanel.querySelector('.searchbox input').addEventListener('keydown', function (event) {
 			if (event.which === 13) {
 				searchProgress('show');
 				executeSearch(this.value);
@@ -316,24 +316,24 @@
 			}
 		});
 
-		if (cookies.has('searchQuery') === true && options.search.saveQueryCookie === true) {
+		if (cookies.has('searchQuery') === true && settings.search.saveQueryCookie === true) {
 			executeSearch(cookies.get('searchQuery'));
 		}
 	};
 
 	var searchError = function (state) {
 		if (state === 'hide') {
-			searchPanel.querySelector('.errormsg').style.display = 'none';
+			settings.search.searchPanel.querySelector('.errormsg').style.display = 'none';
 		} else {
-			searchPanel.querySelector('.errormsg').style.display = '';
+			settings.search.searchPanel.querySelector('.errormsg').style.display = 'block';
 		}
 	};
 
 	var searchProgress = function (state) {
 		if (state === 'hide') {
-			searchPanel.querySelector('.loading').style.display = 'none';
+			settings.search.searchPanel.querySelector('.loading').style.display = 'none';
 		} else {
-			searchPanel.querySelector('.loading').style.display = '';
+			settings.search.searchPanel.querySelector('.loading').style.display = 'block';
 		}
 	};
 
@@ -494,10 +494,9 @@
 		attachEvents();
 
 		if (settings.search.init) {
-			//initSearch();
+			initSearch();
 		}
 		if (settings.treeMenu.init) {
-
 			initTreeMenu();
 		}
 

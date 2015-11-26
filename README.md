@@ -1,4 +1,4 @@
-flyPanels v0.14
+flyPanels v1.0
 =======
 
 flyPanels - responsive off canvas menu panels
@@ -24,9 +24,7 @@ bower install flyPanels --save
 
 ###Setup
 ```html
-<!-- You'll need jquery -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<!-- and you'll need to include flyPanels of course! -->
+<!-- You'll need to include flyPanels of course! -->
 <script src="jquery.flyPanels.js"></script>
 
 <!-- Some basic CSS is required of course -->
@@ -34,14 +32,15 @@ bower install flyPanels --save
 ```
 ##Usage
 ```javascript
-$(document).ready(function(){
-  $('.flypanels-container').flyPanels();
+document.addEventListener("DOMContentLoaded", function(event) {
+  flyPanels.init();
 });
 ```
 
 ###Settings and Defaults
 ```javascript
 options: {
+  container: '.flypanels-container',
   treeMenu: {
     init: false,
     expandHandler: 'span.expand'
@@ -77,10 +76,8 @@ options: {
 This could be your typical script setup.
 
 ```javascript
-jQuery(document).ready(function($) {
-  $(document).ready(function(){
-    $('.flypanels-container').flyPanels();
-  });
+document.addEventListener("DOMContentLoaded", function(event) {
+  flyPanels.init();
 });
 ```
 
@@ -144,13 +141,11 @@ If you want to use the treemenu component you'll need to set it to true in the o
 
 To customize the appearance of the treemenu you can either modify the LESS files and rebuild or just simply override the default styles.
 ```javascript
-jQuery(document).ready(function($) {
-  $(document).ready(function(){
-    $('.flypanels-container').flyPanels({
-      treeMenu: {
-        init: true
-      }
-    });
+document.addEventListener("DOMContentLoaded", function(event) {
+  flyPanels.init({
+    treeMenu: {
+      init: true
+    }
   });
 });
 ```
@@ -208,14 +203,12 @@ If you want to use the search component you'll need to set it to true in the opt
 
 To customize the appearance of the search panel and its result you can either modify the LESS files and rebuild or just simply override the default styles.
 ```javascript
-jQuery(document).ready(function($) {
-  $(document).ready(function(){
-    $('.flypanels-container').flyPanels({
-      search: {
-        init: true,
-        saveQueryCookie: true
-      }
-    });
+document.addEventListener("DOMContentLoaded", function(event) {
+  flyPanels.init({
+    search: {
+      init: true,
+      saveQueryCookie: true
+    }
   });
 });
 ```
@@ -257,6 +250,11 @@ jQuery(document).ready(function($) {
 ```
 
 ##changelog
+####1.0.0
+* BIG CHANGE: Rewrote the plugin in vanilla JavaScript. jQuery is no longer required.
+* Change: Smoother CSS transitions and changed animation structure for faster Paint and Layout
+* Change: Removed legacy support for LESS. flyPanels now only supports SCSS
+
 ####0.14.0
 * FIX: Fixed sidepanels scrolling issue with iOS9 that can occur depending on your meta viewport settings
 
