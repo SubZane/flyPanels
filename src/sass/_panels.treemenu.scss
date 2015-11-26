@@ -198,25 +198,11 @@
       padding-bottom: 0;
       margin-top: 0;
       margin-bottom: 0;
-      -moz-transition-duration: 0.5s;
-      -webkit-transition-duration: 0.5s;
-      -o-transition-duration: 0.5s;
-      transition-duration: 0.5s;
-      -moz-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-      -webkit-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-      -o-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-      transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
       overflow: hidden;
+      transform: translate3d(0, 0, 0);
+      transition: 0.5s ease-in-out;
   }
   li.haschildren.expanded > ul {
-      -moz-transition-duration: 0.75s;
-      -webkit-transition-duration: 0.75s;
-      -o-transition-duration: 0.75s;
-      transition-duration: 0.75s;
-      -moz-transition-timing-function: ease-in;
-      -webkit-transition-timing-function: ease-in;
-      -o-transition-timing-function: ease-in;
-      transition-timing-function: ease-in;
       max-height: 3000px;
       overflow:hidden;
   }

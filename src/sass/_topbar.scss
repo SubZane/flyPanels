@@ -1,6 +1,6 @@
 .flypanels-topbar {
-  @include transition(all 0.2s cubic-bezier(.53,.54,.54,.54));
-  @include translate3d(0, 0, 0);
+  transition: all 0.2s cubic-bezier(.53,.54,.54,.54);
+  transform: translate3d(0, 0, 0);
   width: 100%;
   height: $flypanels_top_bar_height;
   background-color: $flypanels_top_bar_bgcolor;

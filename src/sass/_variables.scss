@@ -16,33 +16,59 @@ $flypanels_primary_font: Helvetica, sans-serif, arial;
 $flypanels_loader_size: 120px;
 $flypanels_loader_color: #fff;
 
-@mixin translate ($x, $y) {
-	-webkit-transform: translate($x, $y);
-	-moz-transform: 	 translate($x, $y);
-	-ms-transform: 		 translate($x, $y);
-	-o-transform: 		 translate($x, $y);
+$flypanels_transition_time: 0.5s;
+
+
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
 }
 
-@mixin translate3d($x, $y, $z) {
-  -webkit-transform: translate3d($x, $y, $z);
-     -moz-transform: translate3d($x, $y, $z);
-       -o-transform: translate3d($x, $y, $z);
-          transform: translate3d($x, $y, $z);
+@include keyframes(fadein) {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.8;
+  }
 }
 
-// transition
-@mixin transition($args...) {
-  -webkit-transition: $args;
-  -moz-transition: $args;
-  -ms-transition: $args;
-  -o-transition: $args;
-  transition: $args;
+@include keyframes(fadeout) {
+  0% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
-// box-shadow
-@mixin box_shadow ($shadow) {
-  -webkit-box-shadow: $shadow;
-  -moz-box-shadow: $shadow;
-  -o-box-shadow: $shadow;
-  box-shadow: $shadow;
+
+// generic transform
+@mixin transform($transforms) {
+	   -moz-transform: $transforms;
+	     -o-transform: $transforms;
+	    -ms-transform: $transforms;
+	-webkit-transform: $transforms;
+          transform: $transforms;
+}
+
+// rotate
+@mixin rotate ($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+
+// scale
+@mixin scale($scale) {
+	 @include transform(scale($scale));
 }

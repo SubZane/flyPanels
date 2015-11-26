@@ -1,4 +1,4 @@
-/*! flypanels - v0.14.0 - 2015-11-26
+/*! flypanels - v1.0.0 - 2015-11-26
 * https://github.com/SubZane/flyPanels
 * Copyright (c) 2015 Andreas Norman; Licensed MIT */
 (function (root, factory) {
@@ -22,7 +22,8 @@
 	var settings, eventTimeout;
 	var el;
 	var innerHeight = document.documentElement.clientHeight;
-	var panelWidth;
+	var panelWidth = document.querySelector('.flypanels-left').clientWidth;
+	var scrollbarWidth;
 	var redrawOnResize = true;
 	// Need to get the topbar height in order to later set the correct height of .flypanels-content
 	var topBarHeight = document.querySelector('.flypanels-topbar').clientHeight;
@@ -40,6 +41,7 @@
 
 	// Default settings
 	var defaults = {
+		transitiontime: 200,
 		container: '.flypanels-container',
 		initClass: 'js-flyPanels',
 		callbackBefore: function () {},
@@ -50,6 +52,20 @@
 	//
 	// Methods
 	//
+
+	var detectScrollbarWidth = function () {
+		// Create the measurement node
+		var scrollDiv = document.createElement('div');
+		scrollDiv.className = 'scrollbar-measure';
+		document.body.appendChild(scrollDiv);
+
+		// Get the scrollbar width
+		scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+		console.warn(scrollbarWidth); // Mac:  15
+
+		// Delete the DIV
+		document.body.removeChild(scrollDiv);
+	};
 
 	var setHeight = function () {
 		document.querySelector('.flypanels-left').style.height = (innerHeight + 'px');
@@ -62,6 +78,7 @@
 	};
 
 	var initTreeMenu = function () {
+		var maxHeight = innerHeight - topBarHeight;
 		if (isAndroid() || isIOS()) {
 			document.querySelector('.flypanels-treemenu').classList.add('touch');
 		}
@@ -108,59 +125,67 @@
 
 	var onOpen = function () {
 		document.querySelector('.flypanels-content').innerHTML += '<div id="flypanels-overlay" class="overlay"></div>';
-		document.querySelector('.flypanels-content').addEventListener('click touchmove touchend touchleave touchcancel', function (e) {
-			close();
-			e.preventDefault();
+
+		('click touchmove touchend touchleave touchcancel'.split(' ')).forEach(function (event) {
+			document.querySelector('#flypanels-overlay').addEventListener(event, function (e) {
+				close();
+				e.preventDefault();
+			});
 		});
 		hook('onOpen');
 	};
 
 	var onClose = function () {
-		document.querySelector('.flypanels-content #flypanels-overlay').remove();
-		document.querySelector('.flypanels-content').removeEventListener('click touchmove touchend touchleave touchcancel');
+		var overlay = document.querySelector('#flypanels-overlay');
+		overlay.classList.add('closing');
+		setTimeout(function () {
+			if (overlay) {
+				overlay.remove();
+			}
+		}, settings.transitiontime);
 		hook('onClose');
 	};
 
 	var openRight = function (panel) {
 		el.classList.add('openright');
-		setTimeout(function () {
-			document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').style.display = 'block';
-			onOpenRight();
-			onOpen();
-		}, 200);
+		document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').style.display = 'block';
+		onOpenRight();
+		onOpen();
 	};
 
 	var closeRight = function () {
-		el.classList.remove('openright');
+		onClose();
+		el.classList.add('closing');
 		setTimeout(function () {
+			el.classList.remove('openright');
+			el.classList.remove('closing');
 			var panels = document.querySelectorAll('.flypanels-right .panelcontent');
 			forEach(panels, function (panel, value) {
 				panel.style.display = 'none';
 			});
 			onCloseRight();
-			onClose();
-		}, 200);
+		}, settings.transitiontime);
 	};
 
 	var openLeft = function (panel) {
 		el.classList.add('openleft');
-		setTimeout(function () {
-			document.querySelector('.flypanels-left').querySelector('[data-panel="' + panel + '"]').style.display = 'block';
-			onOpenLeft();
-			onOpen();
-		}, 200);
+		document.querySelector('.flypanels-left').querySelector('[data-panel="' + panel + '"]').style.display = 'block';
+		onOpenLeft();
+		onOpen();
 	};
 
 	var closeLeft = function () {
-		el.classList.remove('openleft');
+		onClose();
+		el.classList.add('closing');
 		setTimeout(function () {
+			el.classList.remove('closing');
+			el.classList.remove('openleft');
 			var panels = document.querySelectorAll('.flypanels-left .panelcontent');
 			forEach(panels, function (panel, value) {
 				panel.style.display = 'none';
 			});
 			onCloseLeft();
-			onClose();
-		}, 200);
+		}, settings.transitiontime);
 	};
 
 	var afterWindowResize = function () {
@@ -185,17 +210,24 @@
 			if (hasClass(document.querySelector('.flypanels-container'), 'openleft')) {
 				closeLeft();
 			} else {
-				openLeft(panel);
+				if (hasClass(document.querySelector('.flypanels-container'), 'openright')) {
+					closeRight();
+				} else {
+					openLeft(panel);
+				}
 			}
 		});
 
 		document.querySelector('.flypanels-button-right').addEventListener('click', function () {
 			var panel = this.getAttribute('data-panel');
-			console.log(hasClass(document.querySelector('.flypanels-container'), 'openright'));
 			if (hasClass(document.querySelector('.flypanels-container'), 'openright')) {
 				closeRight();
 			} else {
-				openRight(panel);
+				if (hasClass(document.querySelector('.flypanels-container'), 'openleft')) {
+					closeLeft();
+				} else {
+					openRight(panel);
+				}
 			}
 		});
 
@@ -483,6 +515,7 @@
 
 		// Destroy any existing initializations
 		flyPanels.destroy();
+		detectScrollbarWidth();
 
 		options.treeMenu = extend(treeMenu, options.treeMenu || {});
 		options.search = extend(search, options.search || {});
@@ -493,14 +526,12 @@
 		el = document.querySelector(settings.container);
 
 		setHeight();
-		panelWidth = document.querySelectorAll('.flypanels-left').width;
 		attachEvents();
 
 		if (settings.search.init) {
 			initSearch();
 		}
 		if (settings.treeMenu.init) {
-
 			initTreeMenu();
 		}
 
