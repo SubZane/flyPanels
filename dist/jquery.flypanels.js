@@ -1,4 +1,4 @@
-/*! flypanels - v0.14.0 - 2015-11-02
+/*! flypanels - v0.14.0 - 2015-11-26
 * https://github.com/SubZane/flyPanels
 * Copyright (c) 2015 Andreas Norman; Licensed MIT */
 (function (root, factory) {
@@ -20,10 +20,8 @@
 	var flyPanels = {}; // Object for public APIs
 	var supports = !!document.querySelector && !!root.addEventListener; // Feature test
 	var settings, eventTimeout;
-
 	var el;
-
-	var innerHeight = window.innerHeight;
+	var innerHeight = document.documentElement.clientHeight;
 	var panelWidth;
 	var redrawOnResize = true;
 	// Need to get the topbar height in order to later set the correct height of .flypanels-content
@@ -34,12 +32,11 @@
 		expandHandler: 'a.expand'
 	};
 
-  var search = {
-    init: false,
-    saveQueryCookie: false,
-    searchPanel: document.querySelector('.offcanvas').querySelector('[data-panel="search"]')
-  };
-
+	var search = {
+		init: false,
+		saveQueryCookie: false,
+		searchPanel: document.querySelector('.offcanvas [data-panel="search"]')
+	};
 
 	// Default settings
 	var defaults = {
@@ -69,14 +66,14 @@
 			document.querySelector('.flypanels-treemenu').classList.add('touch');
 		}
 
-    var expanders = document.querySelectorAll('.flypanels-treemenu li.haschildren ' + settings.treeMenu.expandHandler);
-    forEach(expanders, function (expandLink, value) {
-      expandLink.addEventListener('click', function (e) {
-        this.parentElement.parentElement.classList.toggle('expanded');
-        e.preventDefault();
-      });
-    });
-  };
+		var expanders = document.querySelectorAll('.flypanels-treemenu li.haschildren ' + settings.treeMenu.expandHandler);
+		forEach(expanders, function (expandLink, value) {
+			expandLink.addEventListener('click', function (e) {
+				this.parentElement.parentElement.classList.toggle('expanded');
+				e.preventDefault();
+			});
+		});
+	};
 
 	var close = function () {
 		closeLeft();
@@ -85,25 +82,25 @@
 	};
 
 	var onCloseLeft = function () {
-    document.querySelector('body').classList.remove('flypanels-open');
+		document.querySelector('body').classList.remove('flypanels-open');
 		document.querySelector('html').classList.remove('flypanels-open');
 		hook('onCloseLeft');
 	};
 
 	var onCloseRight = function () {
-    document.querySelector('body').classList.remove('flypanels-open');
+		document.querySelector('body').classList.remove('flypanels-open');
 		document.querySelector('html').classList.remove('flypanels-open');
 		hook('onCloseRight');
 	};
 
 	var onOpenLeft = function () {
-    document.querySelector('body').classList.add('flypanels-open');
+		document.querySelector('body').classList.add('flypanels-open');
 		document.querySelector('html').classList.add('flypanels-open');
 		hook('onOpenLeft');
 	};
 
 	var onOpenRight = function () {
-    document.querySelector('body').classList.add('flypanels-open');
+		document.querySelector('body').classList.add('flypanels-open');
 		document.querySelector('html').classList.add('flypanels-open');
 		hook('onOpenRight');
 	};
@@ -136,10 +133,10 @@
 	var closeRight = function () {
 		el.classList.remove('openright');
 		setTimeout(function () {
-      var panels = document.querySelectorAll('.flypanels-right .panelcontent');
-      forEach(panels, function (panel, value) {
-        panel.style.display = 'none';
-      });
+			var panels = document.querySelectorAll('.flypanels-right .panelcontent');
+			forEach(panels, function (panel, value) {
+				panel.style.display = 'none';
+			});
 			onCloseRight();
 			onClose();
 		}, 200);
@@ -157,10 +154,10 @@
 	var closeLeft = function () {
 		el.classList.remove('openleft');
 		setTimeout(function () {
-      var panels = document.querySelectorAll('.flypanels-left .panelcontent');
-      forEach(panels, function (panel, value) {
-        panel.style.display = 'none';
-      });
+			var panels = document.querySelectorAll('.flypanels-left .panelcontent');
+			forEach(panels, function (panel, value) {
+				panel.style.display = 'none';
+			});
 			onCloseLeft();
 			onClose();
 		}, 200);
@@ -174,29 +171,14 @@
 	var attachEvents = function () {
 
 		// Prevent scroll if content doesn't need scroll.
-    var panelcontent = document.querySelectorAll('.panelcontent', 'touchmove');
-    forEach(panelcontent, function (index, value) {
-      index.addEventListener('touchmove', function (e) {
-        if (panel.scrollHeight <= parseInt(innerHeight, 10)) {
-          e.preventDefault();
-        }
-      });
-    });
-
-    // Prevent scrolling of the panel itself. Only the content panel should be allowed to scroll
-    var offcanvas = document.querySelectorAll('.panelcontent', 'touchmove');
-    forEach(offcanvas, function (index, value) {
-      index.addEventListener('touchmove', function (e) {
-        e.preventDefault();
-      });
-    });
-
-    var offcanvaspanelcontent = document.querySelectorAll('.offcanvas .panelcontent', 'touchmove');
-    forEach(offcanvaspanelcontent, function (index, value) {
-      index.addEventListener('touchmove', function (e) {
-        e.preventDefault();
-      });
-    });
+		var panelcontent_panels = document.querySelectorAll('.panelcontent');
+		forEach(panelcontent_panels, function (index, value) {
+			index.addEventListener('touchmove', function (e) {
+				if (index.scrollHeight <= parseInt(innerHeight, 10)) {
+					e.preventDefault();
+				}
+			});
+		});
 
 		document.querySelector('.flypanels-button-left').addEventListener('click', function () {
 			var panel = this.getAttribute('data-panel');
@@ -209,39 +191,38 @@
 
 		document.querySelector('.flypanels-button-right').addEventListener('click', function () {
 			var panel = this.getAttribute('data-panel');
-			if (hasClass(document.querySelectorAll('.flypanels-container'), 'openright')) {
+			console.log(hasClass(document.querySelector('.flypanels-container'), 'openright'));
+			if (hasClass(document.querySelector('.flypanels-container'), 'openright')) {
 				closeRight();
 			} else {
 				openRight(panel);
 			}
 		});
 
-		var hasClass = function (element, classname) {
-			if (element.classList.contains(classname)) {
-				return true;
-			} else {
-				return false;
-			}
-		};
-
-
 		if (redrawOnResize === true) {
-      window.onresize = onWindowResize;
+			window.onresize = onWindowResize;
 		}
 
 		// Listen for orientation changes
-    window.addEventListener('orientationchange', function() {
-      setHeight();
-    });
+		window.addEventListener('orientationchange', function () {
+			setHeight();
+		});
 		hook('onLoad');
 	};
 
-  var onWindowResize = function () {
-    var resizeTimer;
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(afterWindowResize, 100);
-  };
+	var onWindowResize = function () {
+		var resizeTimer;
+		clearTimeout(resizeTimer);
+		resizeTimer = setTimeout(afterWindowResize, 100);
+	};
 
+	var hasClass = function (element, classname) {
+		if (typeof element.classList !== 'undefined' && element.classList.contains(classname)) {
+			return true;
+		} else {
+			return false;
+		}
+	};
 
 	var isAndroid = function () {
 		if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
@@ -259,20 +240,156 @@
 		}
 	};
 
-	var addEventListenerList = function (list, event, fn) {
-		for (var i = 0, len = list.length; i < len; i++) {
-			list[i].addEventListener(event, fn, false);
+	// Search funkctions
+
+	var executeSearch = function (query) {
+		searchError('hide');
+		var jsonURL = settings.search.searchPanel.querySelector('.searchbox').getAttribute('data-searchurl');
+		jsonURL = jsonURL + '&q=' + query;
+
+		var request = new XMLHttpRequest();
+		request.open('GET', jsonURL, true);
+
+		request.onload = function () {
+			if (request.status >= 200 && request.status < 400) {
+				// Success!
+				var response = JSON.parse(request.response);
+				var foundResults = response.Items.length;
+				if (foundResults > 0) {
+					if (settings.search.saveQueryCookie === true) {
+						cookies.set('searchQuery', query, null, '/');
+					}
+					var output = buildResultsList(response.Items);
+
+					// Render html
+					settings.search.searchPanel.querySelector('.resultinfo .query').innerHTML = query;
+					settings.search.searchPanel.querySelector('.resultinfo .num').innerHTML = foundResults;
+					settings.search.searchPanel.querySelector('.flypanels-searchresult').innerHTML = output;
+					searchProgress('hide');
+					settings.search.searchPanel.querySelector('.resultinfo').style.display = 'block';
+					settings.search.searchPanel.querySelector('.flypanels-searchresult').style.display = 'block';
+
+				} else {
+					//$.removeCookie('searchQuery');
+					if (settings.search.saveQueryCookie === true) {
+						cookies.remove('searchQuery', '/');
+					}
+					searchError('show');
+				}
+			} else {
+				// We reached our target server, but it returned an error
+				searchError('show');
+			}
+		};
+		request.onerror = function () {
+			// There was a connection error of some sort
+			searchError('show');
+		};
+		request.send();
+	};
+
+	var buildResultsList = function (results) {
+		var output = '<ul>';
+		for (var i in results) {
+			if (results[i].Type === 'Page') {
+				output += '<li><a href="' + results[i].LinkUrl + '"><span class="link">' + results[i].Header + '</span>  <span class="type"><i class="fa page"></i></span></a>';
+			} else {
+				output += '<li><a href="' + results[i].LinkUrl + '"><span class="link">' + results[i].Header + '</span>  <span class="type"><i class="fa doc"></i></span></a>';
+			}
+		}
+		output += '</ul>';
+		return output;
+	};
+
+	var initSearch = function () {
+		if (isAndroid() || isIOS()) {
+			document.querySelector('.flypanels-searchresult').classList.add('touch');
+		}
+		settings.search.searchPanel.querySelector('.searchbutton').addEventListener('click', function (event) {
+			event.preventDefault();
+			searchProgress('show');
+			executeSearch(settings.search.searchPanel.querySelector('.searchbox input').value);
+		});
+
+		settings.search.searchPanel.querySelector('.searchbox input').addEventListener('keydown', function (event) {
+			if (event.which === 13) {
+				searchProgress('show');
+				executeSearch(this.value);
+				this.blur();
+			}
+		});
+
+		if (cookies.has('searchQuery') === true && settings.search.saveQueryCookie === true) {
+			executeSearch(cookies.get('searchQuery'));
 		}
 	};
 
-	var addEventListenerByClass = function (className, event, fn) {
-		var list = document.getElementsByClassName(className);
-		for (var i = 0, len = list.length; i < len; i++) {
-			list[i].addEventListener(event, fn, false);
+	var searchError = function (state) {
+		if (state === 'hide') {
+			settings.search.searchPanel.querySelector('.errormsg').style.display = 'none';
+		} else {
+			settings.search.searchPanel.querySelector('.errormsg').style.display = 'block';
+		}
+	};
+
+	var searchProgress = function (state) {
+		if (state === 'hide') {
+			settings.search.searchPanel.querySelector('.loading').style.display = 'none';
+		} else {
+			settings.search.searchPanel.querySelector('.loading').style.display = 'block';
 		}
 	};
 
 
+	var cookies = {
+		get: function (sKey) {
+			if (!sKey) {
+				return null;
+			}
+			return decodeURIComponent(document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
+		},
+		set: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+			if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) {
+				return false;
+			}
+			var sExpires = '';
+			if (vEnd) {
+				switch (vEnd.constructor) {
+				case Number:
+					sExpires = vEnd === Infinity ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT' : '; max-age=' + vEnd;
+					break;
+				case String:
+					sExpires = '; expires=' + vEnd;
+					break;
+				case Date:
+					sExpires = '; expires=' + vEnd.toUTCString();
+					break;
+				}
+			}
+			document.cookie = encodeURIComponent(sKey) + '=' + encodeURIComponent(sValue) + sExpires + (sDomain ? '; domain=' + sDomain : '') + (sPath ? '; path=' + sPath : '') + (bSecure ? '; secure' : '');
+			return true;
+		},
+		remove: function (sKey, sPath, sDomain) {
+			if (!this.hasItem(sKey)) {
+				return false;
+			}
+			document.cookie = encodeURIComponent(sKey) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT' + (sDomain ? '; domain=' + sDomain : '') + (sPath ? '; path=' + sPath : '');
+			return true;
+		},
+		has: function (sKey) {
+			if (!sKey) {
+				return false;
+			}
+			return (new RegExp('(?:^|;\\s*)' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=')).test(document.cookie);
+		},
+		keys: function () {
+			var aKeys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, '').split(/\s*(?:\=[^;]*)?;\s*/);
+			for (var nLen = aKeys.length, nIdx = 0; nIdx < nLen; nIdx++) {
+				aKeys[nIdx] = decodeURIComponent(aKeys[nIdx]);
+			}
+			return aKeys;
+		}
+	};
 
 	/**
 	 * Callback hooks.
@@ -367,8 +484,8 @@
 		// Destroy any existing initializations
 		flyPanels.destroy();
 
-    options.treeMenu = extend(treeMenu, options.treeMenu || {});
-    options.search = extend(search, options.search || {});
+		options.treeMenu = extend(treeMenu, options.treeMenu || {});
+		options.search = extend(search, options.search || {});
 
 		// Merge user options with defaults
 		settings = extend(defaults, options || {});
@@ -378,14 +495,14 @@
 		setHeight();
 		panelWidth = document.querySelectorAll('.flypanels-left').width;
 		attachEvents();
-console.log(settings);
-    if (settings.search.init) {
-      //initSearch();
-    }
-    if (settings.treeMenu.init) {
 
-      initTreeMenu();
-    }
+		if (settings.search.init) {
+			initSearch();
+		}
+		if (settings.treeMenu.init) {
+
+			initTreeMenu();
+		}
 
 		// Remove preload class when page has loaded to allow transitions/animations
 		el.classList.remove('preload');
