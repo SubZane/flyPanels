@@ -41,8 +41,21 @@
 		transitiontime: 200,
 		container: '.flypanels-container',
 		initClass: 'js-flyPanels',
-		callbackBefore: function () {},
-		callbackAfter: function () {}
+		onInit: function () {},
+		onInitTreeMenu: function () {},
+		onOpen: function () {},
+		onClose: function () {},
+		onOpenLeft: function () {},
+		onCloseLeft: function () {},
+		onOpenRight: function () {},
+		onCloseRight: function () {},
+		afterWindowResize: function () {},
+		OnAttachEvents: function () {},
+		onWindowResize: function () {},
+		onEmptySearchResult: function () {},
+		onSearchError: function () {},
+		onSearchSuccess: function () {},
+		onInitSearch: function () {},
 	};
 
 
@@ -58,7 +71,7 @@
 
 		// Get the scrollbar width
 		scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-		console.warn(scrollbarWidth); // Mac:  15
+		//console.warn(scrollbarWidth); // Mac:  15
 
 		// Delete the DIV
 		document.body.removeChild(scrollDiv);
@@ -71,7 +84,6 @@
 		if (overlay) {
 			overlay.style.height = innerHeight;
 		}
-
 	};
 
 	var initTreeMenu = function () {
@@ -87,6 +99,7 @@
 				e.preventDefault();
 			});
 		});
+		hook('onInitTreeMenu');
 	};
 
 	var close = function () {
@@ -118,7 +131,6 @@
 		document.querySelector('html').classList.add('flypanels-open');
 		hook('onOpenRight');
 	};
-
 
 	var onOpen = function () {
 		document.querySelector('.flypanels-content').innerHTML += '<div id="flypanels-overlay" class="overlay"></div>';
@@ -188,10 +200,10 @@
 	var afterWindowResize = function () {
 		innerHeight = window.innerHeight;
 		setHeight();
+		hook('afterWindowResize');
 	};
 
 	var attachEvents = function () {
-
 		// Prevent scroll if content doesn't need scroll.
 		var panelcontent_panels = document.querySelectorAll('.panelcontent');
 		forEach(panelcontent_panels, function (index, value) {
@@ -236,13 +248,14 @@
 		window.addEventListener('orientationchange', function () {
 			setHeight();
 		});
-		hook('onLoad');
+		hook('OnAttachEvents');
 	};
 
 	var onWindowResize = function () {
 		var resizeTimer;
 		clearTimeout(resizeTimer);
 		resizeTimer = setTimeout(afterWindowResize, 100);
+		hook('onWindowResize');
 	};
 
 	var hasClass = function (element, classname) {
@@ -297,9 +310,9 @@
 					searchProgress('hide');
 					settings.search.searchPanel.querySelector('.resultinfo').style.display = 'block';
 					settings.search.searchPanel.querySelector('.flypanels-searchresult').style.display = 'block';
-
+					hook('onSearchSuccess');
 				} else {
-					//$.removeCookie('searchQuery');
+					hook('onEmptySearchResult');
 					if (settings.search.saveQueryCookie === true) {
 						cookies.remove('searchQuery', '/');
 					}
@@ -308,6 +321,7 @@
 			} else {
 				// We reached our target server, but it returned an error
 				searchError('show');
+				hook('onSearchError');
 			}
 		};
 		request.onerror = function () {
@@ -351,6 +365,7 @@
 		if (cookies.has('searchQuery') === true && settings.search.saveQueryCookie === true) {
 			executeSearch(cookies.get('searchQuery'));
 		}
+		hook('onInitSearch');
 	};
 
 	var searchError = function (state) {
@@ -368,7 +383,6 @@
 			settings.search.searchPanel.querySelector('.loading').style.display = 'block';
 		}
 	};
-
 
 	var cookies = {
 		get: function (sKey) {

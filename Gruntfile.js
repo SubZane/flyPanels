@@ -57,7 +57,7 @@ module.exports = function (grunt) {
 				options: {
 					jshintrc: 'src/.jshintrc'
 				},
-				src: ['src/**/*.js']
+				src: 'src/flypanels.js'
 			},
 		},
 		watch: {
@@ -68,6 +68,14 @@ module.exports = function (grunt) {
 			src: {
 				files: '<%= jshint.src.src %>',
 				tasks: ['jshint:src']
+			},
+		},
+		copy: {
+			default: {
+				flatten: true,
+				expand: true,
+				src: ['src/dependencies/classlist/classList.min.js', 'dist/<%= pkg.name %>.js', 'dist/<%= pkg.name %>.min.js'],
+				dest: 'demo/js/',
 			},
 		},
 		update_json: {
@@ -112,9 +120,10 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-update-json');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 
 	// Default task.
-	grunt.registerTask('default', ['jshint', 'clean', 'sass', 'concat', 'uglify', 'version']);
+	grunt.registerTask('default', ['jshint', 'clean', 'sass', 'concat', 'uglify', 'copy', 'version']);
 	grunt.registerTask('version', ['update_json:bower', 'update_json:flypanels']);
 
 };
