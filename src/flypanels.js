@@ -56,6 +56,7 @@
 		onSearchError: function () {},
 		onSearchSuccess: function () {},
 		onInitSearch: function () {},
+		onDestroy: function () {}
 	};
 
 
@@ -146,12 +147,14 @@
 
 	var onClose = function () {
 		var overlay = document.querySelector('#flypanels-overlay');
-		overlay.classList.add('closing');
-		setTimeout(function () {
-			if (overlay) {
-				overlay.remove();
-			}
-		}, settings.transitiontime);
+		if (overlay !== null) {
+			overlay.classList.add('closing');
+			setTimeout(function () {
+				if (overlay) {
+					overlay.remove();
+				}
+			}, settings.transitiontime);
+		}
 		hook('onClose');
 	};
 
@@ -510,7 +513,7 @@
 		// Reset variables
 		settings = null;
 		eventTimeout = null;
-
+		hook('onDestroy');
 	};
 
 	/**
@@ -551,11 +554,12 @@
 		hook('onInit');
 	};
 
-
+	flyPanels.closePanels = function () {
+		close();
+	};
 	//
 	// Public APIs
 	//
 
 	return flyPanels;
-
 });

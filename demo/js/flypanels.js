@@ -1,4 +1,4 @@
-/*! flypanels - v1.0.0 - 2015-11-28
+/*! flypanels - v2.0.0 - 2015-11-30
 * https://github.com/SubZane/flyPanels
 * Copyright (c) 2015 Andreas Norman; Licensed MIT */
 (function (root, factory) {
@@ -59,6 +59,7 @@
 		onSearchError: function () {},
 		onSearchSuccess: function () {},
 		onInitSearch: function () {},
+		onDestroy: function () {}
 	};
 
 
@@ -149,12 +150,14 @@
 
 	var onClose = function () {
 		var overlay = document.querySelector('#flypanels-overlay');
-		overlay.classList.add('closing');
-		setTimeout(function () {
-			if (overlay) {
-				overlay.remove();
-			}
-		}, settings.transitiontime);
+		if (overlay !== null) {
+			overlay.classList.add('closing');
+			setTimeout(function () {
+				if (overlay) {
+					overlay.remove();
+				}
+			}, settings.transitiontime);
+		}
 		hook('onClose');
 	};
 
@@ -513,7 +516,7 @@
 		// Reset variables
 		settings = null;
 		eventTimeout = null;
-
+		hook('onDestroy');
 	};
 
 	/**
@@ -554,11 +557,12 @@
 		hook('onInit');
 	};
 
-
+	flyPanels.closePanels = function () {
+		close();
+	};
 	//
 	// Public APIs
 	//
 
 	return flyPanels;
-
 });

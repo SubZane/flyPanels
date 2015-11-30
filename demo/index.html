@@ -136,13 +136,13 @@
 					</div>
 					<div class="row">
 						<div class="col-xs-12 col-md-8 col-md-offset-2">
-							<div class="version">v 1.0.0</div>
+							<div class="version">v 2.0.0</div>
 							<div class="github">
 								<a class="github-button" href="https://github.com/SubZane/flyPanels" data-style="mega" data-count-href="/SubZane/flyPanels/stargazers" data-count-api="/repos/SubZane/flyPanels#stargazers_count">Star</a>
 								<a class="github-button" href="https://github.com/SubZane/flyPanels" data-style="mega" data-count-href="/SubZane/flyPanels/network" data-count-api="/repos/SubZane/flyPanels#forks_count">Fork</a>
 							</div>
 							<h1>flyPanels - an off canvas menu panel system for responsive websites</h1>
-							<p>FlyPanels is a responsive off canvas panel plugin for websites or web apps. It supports all modern browsers and IE from version 10. It can be used for menus, contact forms or anything you like really.</p>
+							<p>FlyPanels is a responsive off canvas panel plugin for websites or web apps. It supports all modern browsers and IE from version 11. It can be used for menus, contact forms or anything you like really. Since version 2.0 this plugin is written in pure vanilla javascript and has no dependencies.</p>
 							<p>Compared to many other off canvas menu plugins out there this one is more solid and behaves more like a native solution. <strong>Try it!</strong></p>
 							<div class="download">
 								<a class="btn btn-primary" href="https://github.com/SubZane/flyPanels">View on Github</a>
@@ -251,13 +251,11 @@
 		</div>
 	</div>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.3/fastclick.min.js"></script>
-	<script src="../dist/flypanels.js"></script>
+	<script src="js/flypanels.js"></script>
 	<script>
 	document.addEventListener("DOMContentLoaded", function(event) {
 		FastClick.attach(document.body);
 		flyPanels.init({
-				transitiontime: 500,
-		    container: '.flypanels-container',
 				treeMenu: {
 					init: true
 				},
@@ -268,9 +266,7 @@
 		})
   });
 	</script>
-	<!--
 	<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
--->
 	<script>
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -281,6 +277,5 @@
 	ga('send', 'pageview');
 
 </script>
--->
 </body>
 </html>

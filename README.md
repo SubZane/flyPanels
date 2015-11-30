@@ -1,4 +1,4 @@
-flyPanels v1.0
+flyPanels v2.0
 =======
 
 flyPanels - responsive off canvas menu panels
@@ -12,10 +12,10 @@ Compared to many other off canvas menu plugins out there this one is more solid 
 
 ##Browser Support
 * Google Chrome (Windows, OSX, iOS and Android 4.x)
-* Internet Explorer 10+
-* Firefox
+* Internet Explorer 11+
+* Firefox 40+
 * Safari 7+
-* Mobile Safari iOS 7+
+* Mobile Safari iOS 8+
 
 ##Installation
 ```
@@ -50,11 +50,20 @@ options: {
     saveQueryCookie: false
   },
   onInit: function () {},
-  onLoad: function () {},
+  onInitTreeMenu: function () {},
+  onOpen: function () {},
+  onClose: function () {},
   onOpenLeft: function () {},
-  onOpenRight: function () {},
   onCloseLeft: function () {},
+  onOpenRight: function () {},
   onCloseRight: function () {},
+  afterWindowResize: function () {},
+  OnAttachEvents: function () {},
+  onWindowResize: function () {},
+  onEmptySearchResult: function () {},
+  onSearchError: function () {},
+  onSearchSuccess: function () {},
+  onInitSearch: function () {},
   onDestroy: function () {}
 };
 ```
@@ -70,6 +79,14 @@ options: {
 * `onOpenRight`: What to do after the right panel has opened.
 * `onCloseLeft`: What to do after the left panel has closed.
 * `onCloseRight`: What to do after the right panel has closed.
+* `afterWindowResize`: What to do just after a window resize.
+* `OnAttachEvents`: What to do just after events has been attached.
+* `onWindowResize`: What to do just on window resize.
+* `onEmptySearchResult`: What to do if search result is empty.
+* `onSearchError`: What to do just if search returns an error.
+* `onSearchSuccess`: What to do if search is successful.
+* `onInitSearch`: What to do just after search is initialized.
+* `onInitTreeMenu`: What to do just after tree menu is initialized.
 * `onDestroy`: What to do just after plugin is destroyed.
 
 ###Typical setup
@@ -250,8 +267,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 ```
 
 ##changelog
-####1.0.0
-* BIG CHANGE: Rewrote the plugin in vanilla JavaScript. jQuery is no longer required.
+####2.0.0
+* BIG CHANGE: Rewrote the plugin in vanilla JavaScript. jQuery is no longer required. Last version to use jQuery is 0.14.0
 * Change: Smoother CSS transitions and changed animation structure for faster Paint and Layout
 * Change: Removed legacy support for LESS. flyPanels now only supports SCSS
 
