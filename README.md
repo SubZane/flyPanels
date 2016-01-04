@@ -4,7 +4,7 @@ flyPanels v2.0
 flyPanels - responsive off canvas menu panels
 
 ##Features
-FlyPanels is a responsive off canvas menu plugin for websites or web apps. It supports all modern browsers and even some of the old ones like IE9. It can be used for menus, contact forms or anything you like really.
+FlyPanels is a responsive off canvas menu plugin for websites or web apps. It supports all modern browsers from IE11
 
 Compared to many other off canvas menu plugins out there this one is more solid and behaves more like a native solution. Try it!
 
