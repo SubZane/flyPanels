@@ -15,6 +15,16 @@ module.exports = function (grunt) {
 		clean: {
 			files: ['dist']
 		},
+		postcss: {
+			options: {
+				processors: [
+					require('autoprefixer')({browsers: 'last 2 versions'}), // add vendor prefixes
+				]
+			},
+			dist: {
+				src: 'demo/css/flypanels.css'
+			}
+		},
 		concat: {
 			options: {
 				banner: '<%= banner %>',
@@ -121,9 +131,10 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-update-json');
 	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-postcss');
 
 	// Default task.
-	grunt.registerTask('default', ['jshint', 'clean', 'sass', 'concat', 'uglify', 'copy', 'version']);
+	grunt.registerTask('default', ['jshint', 'clean', 'sass', 'concat', 'uglify', 'postcss', 'copy', 'version']);
 	grunt.registerTask('version', ['update_json:bower', 'update_json:flypanels']);
 
 };

@@ -267,6 +267,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 ```
 
 ##changelog
+####2.0.1
+* Fix: The CSS contained some too new rules that prevented it from working at all in iOS8. Added CSS prefixes to fix it.
+* Change: Added autoprefixer to the build.
+
 ####2.0.0
 * BIG CHANGE: Rewrote the plugin in vanilla JavaScript. jQuery is no longer required. Last version to use jQuery is 0.14.0
 * Change: Smoother CSS transitions and changed animation structure for faster Paint and Layout
