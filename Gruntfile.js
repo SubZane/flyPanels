@@ -84,7 +84,7 @@ module.exports = function (grunt) {
 			default: {
 				flatten: true,
 				expand: true,
-				src: ['src/dependencies/classlist/classList.min.js', 'dist/<%= pkg.name %>.js', 'dist/<%= pkg.name %>.min.js'],
+				src: ['dist/<%= pkg.name %>.js', 'dist/<%= pkg.name %>.min.js'],
 				dest: 'demo/js/',
 			},
 		},
