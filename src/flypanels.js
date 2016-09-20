@@ -134,7 +134,10 @@
 	};
 
 	var onOpen = function () {
-		document.querySelector('.flypanels-content').innerHTML += '<div id="flypanels-overlay" class="overlay"></div>';
+		var overlayDiv = document.createElement('div');
+		overlayDiv.classList.add('overlay');
+		overlayDiv.setAttribute('id', 'flypanels-overlay');
+		document.querySelector('.flypanels-content').appendChild(overlayDiv);
 
 		('click touchmove touchend touchleave touchcancel'.split(' ')).forEach(function (event) {
 			document.querySelector('#flypanels-overlay').addEventListener(event, function (e) {
