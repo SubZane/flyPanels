@@ -301,32 +301,43 @@
 		request.onload = function () {
 			if (request.status >= 200 && request.status < 400) {
 				// Success!
-				var response = JSON.parse(request.response);
-				var foundResults = response.Items.length;
-				if (foundResults > 0) {
-					if (settings.search.saveQueryCookie === true) {
-						cookies.set('searchQuery', query, null, '/');
-					}
-					var output = buildResultsList(response.Items);
+				var response = parseJSON(request.response);
+				if (response !== false) {
+					var foundResults = response.Items.length;
+					if (foundResults > 0) {
+						if (settings.search.saveQueryCookie === true) {
+							cookies.set('searchQuery', query, null, '/');
+						}
+						var output = buildResultsList(response.Items);
 
-					// Render html
-					settings.search.searchPanel.querySelector('.resultinfo .query').innerHTML = query;
-					settings.search.searchPanel.querySelector('.resultinfo .num').innerHTML = foundResults;
-					settings.search.searchPanel.querySelector('.flypanels-searchresult').innerHTML = output;
-					searchProgress('hide');
-					settings.search.searchPanel.querySelector('.resultinfo').style.display = 'block';
-					settings.search.searchPanel.querySelector('.flypanels-searchresult').style.display = 'block';
-					hook('onSearchSuccess');
+						// Render html
+						settings.search.searchPanel.querySelector('.resultinfo .query').innerHTML = query;
+						settings.search.searchPanel.querySelector('.resultinfo .num').innerHTML = foundResults;
+						settings.search.searchPanel.querySelector('.flypanels-searchresult').innerHTML = output;
+						searchProgress('hide');
+						settings.search.searchPanel.querySelector('.resultinfo').style.display = 'block';
+						settings.search.searchPanel.querySelector('.flypanels-searchresult').style.display = 'block';
+						hook('onSearchSuccess');
+					} else {
+						hook('onEmptySearchResult');
+						if (settings.search.saveQueryCookie === true) {
+							cookies.remove('searchQuery', '/');
+						}
+						searchProgress('hide');
+						searchError('show');
+					}
 				} else {
 					hook('onEmptySearchResult');
 					if (settings.search.saveQueryCookie === true) {
 						cookies.remove('searchQuery', '/');
 					}
+					searchProgress('hide');
 					searchError('show');
 				}
 			} else {
 				// We reached our target server, but it returned an error
 				searchError('show');
+				searchProgress('hide');
 				hook('onSearchError');
 			}
 		};
@@ -348,6 +359,21 @@
 		}
 		output += '</ul>';
 		return output;
+	};
+
+	var parseJSON = function (jsonString) {
+		try {
+			var o = JSON.parse(jsonString);
+			// Handle non-exception-throwing cases:
+			// Neither JSON.parse(false) or JSON.parse(1234) throw errors, hence the type-checking,
+			// but... JSON.parse(null) returns 'null', and typeof null === "object",
+			// so we must check for that, too.
+			if (o && typeof o === 'object' && o !== null) {
+				return o;
+			}
+		} catch (e) {}
+		console.warn('Error parsing JSON file');
+		return false;
 	};
 
 	var initSearch = function () {
@@ -419,7 +445,7 @@
 			return true;
 		},
 		remove: function (sKey, sPath, sDomain) {
-			if (!this.hasItem(sKey)) {
+			if (!this.has(sKey)) {
 				return false;
 			}
 			document.cookie = encodeURIComponent(sKey) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT' + (sDomain ? '; domain=' + sDomain : '') + (sPath ? '; path=' + sPath : '');

@@ -1,4 +1,4 @@
-flyPanels v2.0.2
+flyPanels v2.0.3
 =======
 
 flyPanels - responsive off canvas menu panels
@@ -267,6 +267,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 ```
 
 ##changelog
+####2.0.3
+* Fix: Bug with the search not handling zero results properly and not hiding the spinner after a search.
+
 ####2.0.2
 * Fix: A case where flyPanels made RoyalSlider to not work after a panel has been opened. It seems that using 'innerHTML' to add elements to the DOM made RoyalSlider to stop working. Rewrote my function to not use innerHTML. Now it works just fine. Who would have known, eh?
 
