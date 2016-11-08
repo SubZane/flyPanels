@@ -288,10 +288,11 @@
 		}
 	};
 
-	// Search funkctions
+	// Search functions
 
 	var executeSearch = function (query) {
 		searchError('hide');
+		settings.search.searchPanel.querySelector('.flypanels-searchresult').innerHTML = '';
 		var jsonURL = settings.search.searchPanel.querySelector('.searchbox').getAttribute('data-searchurl');
 		jsonURL = jsonURL + '&q=' + query;
 

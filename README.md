@@ -267,6 +267,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 ```
 
 ##changelog
+
+####2.0.4
+* Fix: Bug with the search not removing previous search results if new query results in zero hits.
+
 ####2.0.3
 * Fix: Bug with the search not handling zero results properly and not hiding the spinner after a search.
 
