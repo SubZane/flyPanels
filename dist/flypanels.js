@@ -1,4 +1,4 @@
-/*! flypanels - v2.0.3 - 2016-11-08
+/*! flypanels - v2.0.5 - 2016-11-08
 * https://github.com/SubZane/flyPanels
 * Copyright (c) 2016 Andreas Norman; Licensed MIT */
 (function (root, factory) {
@@ -296,6 +296,8 @@
 	var executeSearch = function (query) {
 		searchError('hide');
 		settings.search.searchPanel.querySelector('.flypanels-searchresult').innerHTML = '';
+		settings.search.searchPanel.querySelector('.resultinfo .query').innerHTML = query;
+		settings.search.searchPanel.querySelector('.resultinfo .num').innerHTML = 0;
 		var jsonURL = settings.search.searchPanel.querySelector('.searchbox').getAttribute('data-searchurl');
 		jsonURL = jsonURL + '&q=' + query;
 

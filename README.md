@@ -268,6 +268,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 ##changelog
 
+####2.0.5
+* Fix: Bug with the search not removing previous search query and number of hits.
+
 ####2.0.4
 * Fix: Bug with the search not removing previous search results if new query results in zero hits.
 
