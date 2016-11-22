@@ -293,6 +293,8 @@
 	var executeSearch = function (query) {
 		searchError('hide');
 		settings.search.searchPanel.querySelector('.flypanels-searchresult').innerHTML = '';
+		settings.search.searchPanel.querySelector('.resultinfo .query').innerHTML = query;
+		settings.search.searchPanel.querySelector('.resultinfo .num').innerHTML = 0;
 		var jsonURL = settings.search.searchPanel.querySelector('.searchbox').getAttribute('data-searchurl');
 		jsonURL = jsonURL + '&q=' + query;
 
