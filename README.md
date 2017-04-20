@@ -1,4 +1,4 @@
-flyPanels v2.0.3
+flyPanels v2.0.6
 =======
 
 flyPanels - responsive off canvas menu panels
@@ -267,6 +267,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 ```
 
 ##changelog
+
+####2.0.6
+* Fix: Adjustments to animations en environment.
+* Fix: Prevents content to "jump" due to scrollbar in desktop mode.
 
 ####2.0.5
 * Fix: Bug with the search not removing previous search query and number of hits.
