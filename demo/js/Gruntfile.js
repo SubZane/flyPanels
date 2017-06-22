@@ -90,7 +90,7 @@ module.exports = function (grunt) {
 			default: {
 				flatten: true,
 				expand: true,
-				src: ['dist/*.js'],
+				src: ['*.js'],
 				dest: 'demo/js/',
 			},
 		},

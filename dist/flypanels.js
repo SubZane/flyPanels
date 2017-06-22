@@ -1,4 +1,4 @@
-/*! flypanels - v2.0.5 - 2017-04-20
+/*! flypanels - v2.1.0 - 2017-06-22
 * https://github.com/SubZane/flyPanels
 * Copyright (c) 2017 Andreas Norman; Licensed MIT */
 (function (root, factory) {
@@ -28,24 +28,12 @@
 	// Need to get the topbar height in order to later set the correct height of .flypanels-content
 	var topBarHeight = document.querySelector('.flypanels-topbar').clientHeight;
 
-	var treeMenu = {
-		init: false,
-		expandHandler: 'a.expand'
-	};
-
-	var search = {
-		init: false,
-		saveQueryCookie: false,
-		searchPanel: document.querySelector('.offcanvas [data-panel="search"]')
-	};
-
 	// Default settings
 	var defaults = {
 		transitiontime: 200,
 		container: '.flypanels-container',
 		initClass: 'js-flyPanels',
 		onInit: function () {},
-		onInitTreeMenu: function () {},
 		onOpen: function () {},
 		onClose: function () {},
 		onOpenLeft: function () {},
@@ -55,10 +43,6 @@
 		afterWindowResize: function () {},
 		OnAttachEvents: function () {},
 		onWindowResize: function () {},
-		onEmptySearchResult: function () {},
-		onSearchError: function () {},
-		onSearchSuccess: function () {},
-		onInitSearch: function () {},
 		onDestroy: function () {}
 	};
 
@@ -88,22 +72,6 @@
 		if (overlay) {
 			overlay.style.height = innerHeight;
 		}
-	};
-
-	var initTreeMenu = function () {
-		var maxHeight = innerHeight - topBarHeight;
-		if (isAndroid() || isIOS()) {
-			document.querySelector('.flypanels-treemenu').classList.add('touch');
-		}
-
-		var expanders = document.querySelectorAll('.flypanels-treemenu li.haschildren ' + settings.treeMenu.expandHandler);
-		forEach(expanders, function (expandLink, value) {
-			expandLink.addEventListener('click', function (e) {
-				this.parentElement.parentElement.classList.toggle('expanded');
-				e.preventDefault();
-			});
-		});
-		hook('onInitTreeMenu');
 	};
 
 	var hasVerticalScroll = function () {
@@ -298,203 +266,6 @@
 		}
 	};
 
-	var isAndroid = function () {
-		if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
-			return true;
-		} else {
-			return false;
-		}
-	};
-
-	var isIOS = function () {
-		if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPad/i)) || (navigator.userAgent.match(/iPod/i))) {
-			return true;
-		} else {
-			return false;
-		}
-	};
-
-	// Search functions
-
-	var executeSearch = function (query) {
-		searchError('hide');
-		settings.search.searchPanel.querySelector('.flypanels-searchresult').innerHTML = '';
-		settings.search.searchPanel.querySelector('.resultinfo .query').innerHTML = query;
-		settings.search.searchPanel.querySelector('.resultinfo .num').innerHTML = 0;
-		var jsonURL = settings.search.searchPanel.querySelector('.searchbox').getAttribute('data-searchurl');
-		jsonURL = jsonURL + '&q=' + query;
-
-		var request = new XMLHttpRequest();
-		request.open('GET', jsonURL, true);
-
-		request.onload = function () {
-			if (request.status >= 200 && request.status < 400) {
-				// Success!
-				var response = parseJSON(request.response);
-				if (response !== false) {
-					var foundResults = response.Items.length;
-					if (foundResults > 0) {
-						if (settings.search.saveQueryCookie === true) {
-							cookies.set('searchQuery', query, null, '/');
-						}
-						var output = buildResultsList(response.Items);
-
-						// Render html
-						settings.search.searchPanel.querySelector('.resultinfo .query').innerHTML = query;
-						settings.search.searchPanel.querySelector('.resultinfo .num').innerHTML = foundResults;
-						settings.search.searchPanel.querySelector('.flypanels-searchresult').innerHTML = output;
-						searchProgress('hide');
-						settings.search.searchPanel.querySelector('.resultinfo').style.display = 'block';
-						settings.search.searchPanel.querySelector('.flypanels-searchresult').style.display = 'block';
-						hook('onSearchSuccess');
-					} else {
-						hook('onEmptySearchResult');
-						if (settings.search.saveQueryCookie === true) {
-							cookies.remove('searchQuery', '/');
-						}
-						searchProgress('hide');
-						searchError('show');
-					}
-				} else {
-					hook('onEmptySearchResult');
-					if (settings.search.saveQueryCookie === true) {
-						cookies.remove('searchQuery', '/');
-					}
-					searchProgress('hide');
-					searchError('show');
-				}
-			} else {
-				// We reached our target server, but it returned an error
-				searchError('show');
-				searchProgress('hide');
-				hook('onSearchError');
-			}
-		};
-		request.onerror = function () {
-			// There was a connection error of some sort
-			searchError('show');
-		};
-		request.send();
-	};
-
-	var buildResultsList = function (results) {
-		var output = '<ul>';
-		for (var i in results) {
-			if (results[i].Type === 'Page') {
-				output += '<li><a href="' + results[i].LinkUrl + '"><span class="link">' + results[i].Header + '</span>  <span class="type"><i class="fa page"></i></span></a>';
-			} else {
-				output += '<li><a href="' + results[i].LinkUrl + '"><span class="link">' + results[i].Header + '</span>  <span class="type"><i class="fa doc"></i></span></a>';
-			}
-		}
-		output += '</ul>';
-		return output;
-	};
-
-	var parseJSON = function (jsonString) {
-		try {
-			var o = JSON.parse(jsonString);
-			// Handle non-exception-throwing cases:
-			// Neither JSON.parse(false) or JSON.parse(1234) throw errors, hence the type-checking,
-			// but... JSON.parse(null) returns 'null', and typeof null === "object",
-			// so we must check for that, too.
-			if (o && typeof o === 'object' && o !== null) {
-				return o;
-			}
-		} catch (e) {}
-		console.warn('Error parsing JSON file');
-		return false;
-	};
-
-	var initSearch = function () {
-		if (isAndroid() || isIOS()) {
-			document.querySelector('.flypanels-searchresult').classList.add('touch');
-		}
-		settings.search.searchPanel.querySelector('.searchbutton').addEventListener('click', function (event) {
-			event.preventDefault();
-			searchProgress('show');
-			executeSearch(settings.search.searchPanel.querySelector('.searchbox input').value);
-		});
-
-		settings.search.searchPanel.querySelector('.searchbox input').addEventListener('keydown', function (event) {
-			if (event.which === 13) {
-				searchProgress('show');
-				executeSearch(this.value);
-				this.blur();
-			}
-		});
-
-		if (cookies.has('searchQuery') === true && settings.search.saveQueryCookie === true) {
-			executeSearch(cookies.get('searchQuery'));
-		}
-		hook('onInitSearch');
-	};
-
-	var searchError = function (state) {
-		if (state === 'hide') {
-			settings.search.searchPanel.querySelector('.errormsg').style.display = 'none';
-		} else {
-			settings.search.searchPanel.querySelector('.errormsg').style.display = 'block';
-		}
-	};
-
-	var searchProgress = function (state) {
-		if (state === 'hide') {
-			settings.search.searchPanel.querySelector('.loading').style.display = 'none';
-		} else {
-			settings.search.searchPanel.querySelector('.loading').style.display = 'block';
-		}
-	};
-
-	var cookies = {
-		get: function (sKey) {
-			if (!sKey) {
-				return null;
-			}
-			return decodeURIComponent(document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
-		},
-		set: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
-			if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) {
-				return false;
-			}
-			var sExpires = '';
-			if (vEnd) {
-				switch (vEnd.constructor) {
-				case Number:
-					sExpires = vEnd === Infinity ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT' : '; max-age=' + vEnd;
-					break;
-				case String:
-					sExpires = '; expires=' + vEnd;
-					break;
-				case Date:
-					sExpires = '; expires=' + vEnd.toUTCString();
-					break;
-				}
-			}
-			document.cookie = encodeURIComponent(sKey) + '=' + encodeURIComponent(sValue) + sExpires + (sDomain ? '; domain=' + sDomain : '') + (sPath ? '; path=' + sPath : '') + (bSecure ? '; secure' : '');
-			return true;
-		},
-		remove: function (sKey, sPath, sDomain) {
-			if (!this.has(sKey)) {
-				return false;
-			}
-			document.cookie = encodeURIComponent(sKey) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT' + (sDomain ? '; domain=' + sDomain : '') + (sPath ? '; path=' + sPath : '');
-			return true;
-		},
-		has: function (sKey) {
-			if (!sKey) {
-				return false;
-			}
-			return (new RegExp('(?:^|;\\s*)' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=')).test(document.cookie);
-		},
-		keys: function () {
-			var aKeys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, '').split(/\s*(?:\=[^;]*)?;\s*/);
-			for (var nLen = aKeys.length, nIdx = 0; nIdx < nLen; nIdx++) {
-				aKeys[nIdx] = decodeURIComponent(aKeys[nIdx]);
-			}
-			return aKeys;
-		}
-	};
-
 	/**
 	 * Callback hooks.
 	 * Usage: In the defaults object specify a callback function:
@@ -589,9 +360,6 @@
 		flyPanels.destroy();
 		detectScrollbarWidth();
 
-		options.treeMenu = extend(treeMenu, options.treeMenu || {});
-		options.search = extend(search, options.search || {});
-
 		// Merge user options with defaults
 		settings = extend(defaults, options || {});
 
@@ -599,13 +367,6 @@
 
 		setHeight();
 		attachEvents();
-
-		if (settings.search.init) {
-			initSearch();
-		}
-		if (settings.treeMenu.init) {
-			initTreeMenu();
-		}
 
 		// Remove preload class when page has loaded to allow transitions/animations
 		el.classList.remove('preload');

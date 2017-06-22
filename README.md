@@ -1,28 +1,28 @@
-flyPanels v2.0.6
+flyPanels v2.1.0
 =======
 
 flyPanels - responsive off canvas menu panels
 
-##Features
+## Features
 FlyPanels is a responsive off canvas menu plugin for websites or web apps. It supports all modern browsers from IE11. This new version is written in vanilla JavaScript and has no other dependencies. The old jQuery version can still be accessed on a [separate branch called jQuery](https://github.com/SubZane/flyPanels/tree/jQuery). Take note that the old jQuery version will not receive as much attention from me as I'm moving away from jQuery.
 
 Compared to many other off canvas menu plugins out there this one is more solid and behaves more like a native solution. Try it!
 
-###[View demo](http://www.andreasnorman.com/flypanels)
+### [View demo](http://www.andreasnorman.com/flypanels)
 
-##Browser Support
+## Browser Support
 * Google Chrome (Windows, OSX, iOS and Android 4.x)
 * Internet Explorer 11+
 * Firefox 40+
 * Safari 7+
 * Mobile Safari iOS 8+
 
-##Installation
+## Installation
 ```
 bower install flyPanels --save
 ```
 
-###Setup
+### Setup
 ```html
 <!-- You'll need to include flyPanels of course! -->
 <script src="jquery.flyPanels.js"></script>
@@ -30,14 +30,14 @@ bower install flyPanels --save
 <!-- Some basic CSS is required of course -->
 <link rel="stylesheet" href="css/flyPanels.css">
 ```
-##Usage
+## Usage
 ```javascript
 document.addEventListener("DOMContentLoaded", function(event) {
   flyPanels.init();
 });
 ```
 
-###Settings and Defaults
+### Settings and Defaults
 ```javascript
 options: {
   container: '.flypanels-container',
@@ -89,7 +89,7 @@ options: {
 * `onInitTreeMenu`: What to do just after tree menu is initialized.
 * `onDestroy`: What to do just after plugin is destroyed.
 
-###Typical setup
+### Typical setup
 This could be your typical script setup.
 
 ```javascript
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 ```
 
-###Html needed for a basic setup
+### Html needed for a basic setup
 ```html
 <div class="flypanels-container preload">
   <div class="offcanvas flypanels-left">
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 </div>
 ```
 
-###Multiple content panels
+### Multiple content panels
 It is possible to have multiple content panels in one panel and activate a different content panel depending on what button you press. You use the `data-panel` attribute to target a specific content panel
 ```html
 <div class="flypanels-container preload">
@@ -153,7 +153,7 @@ It is possible to have multiple content panels in one panel and activate a diffe
 </div>
 ```
 
-###Using the expanding treemenu component
+### Using the expanding treemenu component
 If you want to use the treemenu component you'll need to set it to true in the options and you'll need to add the necessary HTML markup.
 
 To customize the appearance of the treemenu you can either modify the LESS files and rebuild or just simply override the default styles.
@@ -215,7 +215,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 </div>
 ```
 
-###Using the search component
+### Using the search component
 If you want to use the search component you'll need to set it to true in the options and you'll need to add the necessary HTML markup.
 
 To customize the appearance of the search panel and its result you can either modify the LESS files and rebuild or just simply override the default styles.
@@ -266,79 +266,82 @@ document.addEventListener("DOMContentLoaded", function(event) {
 </div>
 ```
 
-##changelog
+## changelog
 
-####2.0.6
+#### 2.1.0
+* New modular approach. Both the search and treemenu are now separate scripts that need to be incluced if needed.
+
+#### 2.0.6
 * Fix: Adjustments to animations en environment.
 * Fix: Prevents content to "jump" due to scrollbar in desktop mode.
 
-####2.0.5
+#### 2.0.5
 * Fix: Bug with the search not removing previous search query and number of hits.
 
-####2.0.4
+#### 2.0.4
 * Fix: Bug with the search not removing previous search results if new query results in zero hits.
 
-####2.0.3
+#### 2.0.3
 * Fix: Bug with the search not handling zero results properly and not hiding the spinner after a search.
 
-####2.0.2
+#### 2.0.2
 * Fix: A case where flyPanels made RoyalSlider to not work after a panel has been opened. It seems that using 'innerHTML' to add elements to the DOM made RoyalSlider to stop working. Rewrote my function to not use innerHTML. Now it works just fine. Who would have known, eh?
 
-####2.0.1
+#### 2.0.1
 * Fix: The CSS contained some too new rules that prevented it from working at all in iOS8. Added CSS prefixes to fix it.
 * Change: Added autoprefixer to the build.
 
-####2.0.0
+#### 2.0.0
 * BIG CHANGE: Rewrote the plugin in vanilla JavaScript. jQuery is no longer required. Last version to use jQuery is 0.14.0
 * Change: Smoother CSS transitions and changed animation structure for faster Paint and Layout
 * Change: Removed legacy support for LESS. flyPanels now only supports SCSS
 
-####0.14.0
+#### 0.14.0
 * FIX: Fixed sidepanels scrolling issue with iOS9 that can occur depending on your meta viewport settings
 
-####0.13.0
+#### 0.13.0
 * Added SASS/SCSS support. flyPanels can now build with SASS or LESS.
 
-####0.12.1
+#### 0.12.1
 * Fixed CSS issue with the tree menu. #3
 
-####0.12.0
+#### 0.12.0
 * Added CSS class for active menu item.
 
-####0.11.2
+#### 0.11.2
 * Renamed all LESS variables. Added prefix `flypanels_` to all.
 
-####0.11.1
+#### 0.11.1
 * The search result shouldn't be a `nav` element. Changed to a `div`. LESS file updated as well.
 
-####0.11.0
+#### 0.11.0
 * Updated the HTML markup for the treemenu component for a more accessible menu. Switched out `span` elements for `a` link elements
 * Addressed some issues with horizontal scrollbars caused by scrollbars on units with visible scrollbars. Horizontal overflow in the panels is now set to `overflow-x:hidden` and vertical scroll is now set to auto `overflow-y:auto`. This is maybe not the best solution to address scrollbar width.
 
-####0.10.4
+#### 0.10.4
 * Fixed bug with topbar not being fixed because of `translate3d`.
 
-####0.10.3
+#### 0.10.3
 * Bug fix: Errors in the CSS preventing the panels to work in Firefox.
 
-####0.10.2
+#### 0.10.2
 * Small fix: Removing and adding classes when opening and closing panels wasn't working properly resulting in unwanted scroll.
-####0.10.0
+#### 0.10.0
 * Added search panel. This is a panel with an search form that calls a URL with a querystring passing along a keyword expecting a JSON response. Use this to produce a search result in the panel. Look at the dummy JSON file to understand on how the JSON format should be.
 * Added search settings. Default the search features will not init, just like the tree menu component it must be set to true to init.
 
-####0.9.1
+#### 0.9.1
 * Added a `preload` class to the container wich is removed at page load, to prevent objects from animating to their starting positions.
 
-####0.9.0
+#### 0.9.0
 * Removed support for IE9
 * Removed the need for jquery.transit. Making the whole script as such smaller.
 * Added CSS3 translate3d animations for better and smoother animations.
 * Removed the `fadedOpacity` option (The opacity value of the content when a panel is open). This is now a LESS variable you can change in the LESS file
 * Please refer to the LESS files for all visual customizations you need.
 
-####0.8.0
+#### 0.8.0
 * Added a very nice and expanding treemenu component supporting up to 6 levels of depth.
 
-####0.7.0
+#### 0.7.0
 First public release.

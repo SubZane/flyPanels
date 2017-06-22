@@ -11,7 +11,7 @@ insert_final_newline = true
 
 [*.html]
 indent_style = tab
-indent_size = 1
+indent_size = 2
 
 [*.md]
 trim_trailing_whitespace = false
