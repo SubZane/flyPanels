@@ -1,0 +1,27 @@
+div.cart-products {
+	color: #fff;
+  font-size: 11px;
+	ul,li {
+		padding: 0;
+    margin: 0;
+		list-style: none;
+	}
+	li {
+    clear: both;
+    margin-bottom: 15px;
+	}
+	.cart-product-image {
+		width: 30px;
+		float: left;
+	}
+	.cart-product-name {
+    margin-left: 40px;
+    font-weight: bold;
+    line-height: 110%;
+		margin-bottom: 5px;
+	}
+	.cart-product-description {
+    margin-left: 40px;
+    line-height: 110%;
+	}
+}

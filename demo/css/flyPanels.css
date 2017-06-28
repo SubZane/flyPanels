@@ -45,7 +45,7 @@ html.flypanels-open, body.flypanels-open {
   transition: transform 0.5s;
   background-color: #c0392b;
   overflow: hidden;
-  width: 260px; }
+  width: 90vw; }
   .flypanels-container .offcanvas .panelcontent {
     display: none;
     padding: 0 20px 20px 20px;
@@ -61,11 +61,11 @@ html.flypanels-open, body.flypanels-open {
     -webkit-overflow-scrolling: touch; }
 
 .flypanels-container .flypanels-right {
-  margin-right: -260px;
+  margin-right: -90vw;
   float: right; }
 
 .flypanels-container .flypanels-left {
-  margin-left: -260px;
+  margin-left: -90vw;
   float: left; }
 
 .flypanels-container .flypanels-main {
@@ -94,9 +94,9 @@ html.flypanels-open, body.flypanels-open {
         opacity: 0; }
 
 .flypanels-container.openleft .flypanels-left {
-  transform: translate3d(260px, 0, 0);
+  transform: translate3d(90vw, 0, 0);
   overflow: hidden;
-  width: 260px;
+  width: 90vw;
   position: relative; }
   .flypanels-container.openleft .flypanels-left .panelcontent {
     position: absolute; }
@@ -110,9 +110,9 @@ html.flypanels-open, body.flypanels-open {
   transform: translate3d(0px, 0, 0); }
 
 .flypanels-container.openright .flypanels-right {
-  transform: translate3d(-260px, 0, 0);
+  transform: translate3d(-90vw, 0, 0);
   overflow: hidden;
-  width: 260px;
+  width: 90vw;
   position: relative; }
   .flypanels-container.openright .flypanels-right .panelcontent {
     position: absolute; }
@@ -121,7 +121,7 @@ html.flypanels-open, body.flypanels-open {
   overflow: hidden; }
 
 .flypanels-container.openright.closing .flypanels-right {
-  transform: translate3d(260px, 0, 0); }
+  transform: translate3d(90vw, 0, 0); }
 
 .flypanels-topbar a.flypanels-button-left.icon-hamburger {
   padding: 0;
@@ -244,33 +244,29 @@ html.flypanels-open, body.flypanels-open {
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     font-weight: 400;
     font-size: 12px;
-    display: inline-block;
-    width: 260px;
-    position: relative; }
+    width: 90vw; }
     .panelcontent nav.flypanels-treemenu ul li div a.link {
       color: #fff;
       padding-top: 11px;
       padding-bottom: 13px;
-      display: inline-block;
+      display: block;
       padding-left: 15px;
       padding-right: 15px;
-      width: 260px; }
+      float: none;
+      overflow: hidden;
+      width: auto; }
   .panelcontent nav.flypanels-treemenu ul li.haschildren a.link {
-    width: 200px;
     border-right: 1px solid rgba(255, 255, 255, 0.15); }
   .panelcontent nav.flypanels-treemenu ul li.haschildren a.expand {
     color: #fff;
-    width: 60px;
+    width: 50px;
     font-size: 11px;
     float: right;
-    display: inline-block;
+    display: block;
     height: 100%;
     padding-left: 15px;
     padding-top: 11px;
-    padding-bottom: 13px;
-    position: absolute;
-    top: 0;
-    bottom: 0; }
+    padding-bottom: 13px; }
   .panelcontent nav.flypanels-treemenu ul li.haschildren > div > a.expand > i.fa.icon:before {
     content: "\f105"; }
   .panelcontent nav.flypanels-treemenu ul li.expanded > div > a.expand > i.fa.icon:before {
@@ -281,44 +277,41 @@ html.flypanels-open, body.flypanels-open {
       background-color: #ab3326; }
       .panelcontent nav.flypanels-treemenu ul li.haschildren li div a.link {
         border-right: none;
-        width: 260px;
+        width: auto;
         padding-left: 25px; }
   .panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren a.link {
-    border-right: 1px solid #b8564c;
-    width: 200px; }
+    border-right: 1px solid #b8564c; }
   .panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li div {
     border-bottom-color: #a94c43; }
     .panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li div a {
       background-color: #962d22; }
       .panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li div a.link {
         border-right: none;
-        width: 260px;
+        width: auto;
         padding-left: 40px; }
   .panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren a.link {
-    border-right: 1px solid #a94c43;
-    width: 200px; }
+    border-right: 1px solid #a94c43; }
   .panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren li div {
     border-bottom-color: #96443b; }
     .panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren li div a {
       background-color: #81261d; }
       .panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren li div a.link {
         border-right: none;
-        width: 260px;
+        width: auto;
         padding-left: 55px; }
   .panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren li.haschildren a.link {
-    border-right: 1px solid #96443b;
-    width: 200px; }
+    border-right: 1px solid #96443b; }
   .panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren li.haschildren li div {
     border-bottom-color: #843c34; }
     .panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren li.haschildren li div a {
       background-color: #6d2018; }
       .panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren li.haschildren li div a.link {
         border-right: none;
-        width: 260px;
+        width: auto;
         padding-left: 70px; }
   .panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren li.haschildren li.haschildren a.link {
     border-right: 1px solid #843c34;
-    width: 200px; }
+    width: auto; }
   .panelcontent nav.flypanels-treemenu li div a.link:hover, .panelcontent nav.flypanels-treemenu li.active > div * * > * * a.link {
     text-decoration: none;
     background-color: rgba(255, 255, 255, 0.8) !important;
@@ -428,27 +421,24 @@ nav.flypanels-iconmenu li a {
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     font-weight: 400;
     font-size: 13px;
-    display: inline-block;
-    width: 260px;
-    position: relative; }
+    width: auto;
+    overflow: hidden; }
     .panelcontent .flypanels-searchresult ul li a span.link {
       padding-top: 11px;
       padding-bottom: 13px;
-      display: inline-block;
+      display: block;
       padding-left: 15px;
       padding-right: 15px;
-      width: 210px; }
+      width: auto;
+      overflow: hidden; }
     .panelcontent .flypanels-searchresult ul li a span.type {
       width: 50px;
       float: right;
-      display: inline-block;
+      display: block;
       height: 100%;
       padding-left: 15px;
       padding-top: 11px;
-      padding-bottom: 13px;
-      position: absolute;
-      top: 0;
-      bottom: 0; }
+      padding-bottom: 13px; }
       .panelcontent .flypanels-searchresult ul li a span.type i.page {
         font-size: 14px;
         margin-left: 10px; }
@@ -523,11 +513,12 @@ nav.flypanels-iconmenu li a {
     background-color: #fff;
     height: 40px;
     margin-left: 10px;
+    margin-right: 10px;
     margin-top: 10px;
-    width: 240px; }
+    width: auto; }
     .flypanels-container .offcanvas .panelcontent[data-panel="search"] .searchbox input {
       height: 100%;
-      width: 210px;
+      width: calc(100% - 30px);
       border: none;
       padding-left: 10px;
       padding-right: 10px;
@@ -537,9 +528,10 @@ nav.flypanels-iconmenu li a {
         font-size: 16px;
         box-shadow: none; }
     .flypanels-container .offcanvas .panelcontent[data-panel="search"] .searchbox .searchbutton {
-      width: 30px;
+      width: 20px;
       float: right;
-      color: #c0392b; }
+      color: #c0392b;
+      margin-right: 10px; }
       .flypanels-container .offcanvas .panelcontent[data-panel="search"] .searchbox .searchbutton::before {
         font-family: FontAwesome;
         font-weight: normal;
@@ -552,3 +544,25 @@ nav.flypanels-iconmenu li a {
         top: 9px; }
       .flypanels-container .offcanvas .panelcontent[data-panel="search"] .searchbox .searchbutton:hover {
         text-decoration: none; }
+
+div.cart-products {
+  color: #fff;
+  font-size: 11px; }
+  div.cart-products ul, div.cart-products li {
+    padding: 0;
+    margin: 0;
+    list-style: none; }
+  div.cart-products li {
+    clear: both;
+    margin-bottom: 15px; }
+  div.cart-products .cart-product-image {
+    width: 30px;
+    float: left; }
+  div.cart-products .cart-product-name {
+    margin-left: 40px;
+    font-weight: bold;
+    line-height: 110%;
+    margin-bottom: 5px; }
+  div.cart-products .cart-product-description {
+    margin-left: 40px;
+    line-height: 110%; }

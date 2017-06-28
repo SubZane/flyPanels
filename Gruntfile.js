@@ -43,6 +43,10 @@ module.exports = function (grunt) {
 				src: '<%= concat.dist.dest %>',
 				dest: 'dist/<%= pkg.name %>.min.js'
 			},
+			all: {
+				src: ['<%= concat.dist.dest %>', 'src/modules/*.js'],
+				dest: 'dist/<%= pkg.name %>.all.min.js'
+			},
 			modules: {
 				expand: true,
 				cwd: 'src/modules',
@@ -139,7 +143,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-postcss');
 
 	// Default task.
-	grunt.registerTask('default', ['jshint', 'clean', 'sass', 'concat', 'uglify:base', 'uglify:modules','postcss', 'copy', 'version']);
+	grunt.registerTask('default', ['jshint', 'clean', 'sass', 'concat', 'uglify:base', 'uglify:modules', 'uglify:all','postcss', 'copy', 'version']);
 	grunt.registerTask('version', ['update_json:bower', 'update_json:flypanels']);
 
 };

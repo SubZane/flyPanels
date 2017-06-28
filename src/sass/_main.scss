@@ -39,7 +39,7 @@ html.flypanels-open, body.flypanels-open {
     transition: transform $flypanels_transition_time;
     background-color: $flypanels_top_bar_bgcolor;
     overflow: hidden;
-    width: #{$flypanels_panel_width}px;
+    width: #{$flypanels_panel_width}vw;
     .panelcontent {
       display:none;
       padding: 0 #{$flypanels_panel_padding}px #{$flypanels_panel_padding}px #{$flypanels_panel_padding}px;
@@ -57,11 +57,11 @@ html.flypanels-open, body.flypanels-open {
   }
 
   .flypanels-right {
-    margin-right: #{0 - $flypanels_panel_width}px;
+    margin-right: #{0 - $flypanels_panel_width}vw;
     float: right;
   }
   .flypanels-left {
-    margin-left: #{0 - $flypanels_panel_width}px;
+    margin-left: #{0 - $flypanels_panel_width}vw;
     float: left;
   }
 
@@ -95,9 +95,9 @@ html.flypanels-open, body.flypanels-open {
   }
   &.openleft {
     .flypanels-left {
-      transform: translate3d(#{$flypanels_panel_width}px, 0, 0);
+      transform: translate3d(#{$flypanels_panel_width}vw, 0, 0);
       overflow: hidden;
-      width: #{$flypanels_panel_width}px;
+      width: #{$flypanels_panel_width}vw;
       position: relative;
       .panelcontent {
         position: absolute;
@@ -117,9 +117,9 @@ html.flypanels-open, body.flypanels-open {
   }
   &.openright {
     .flypanels-right {
-      transform: translate3d(#{0 - $flypanels_panel_width}px, 0, 0);
+      transform: translate3d(#{0 - $flypanels_panel_width}vw, 0, 0);
       overflow: hidden;
-      width: #{$flypanels_panel_width}px;
+      width: #{$flypanels_panel_width}vw;
       position: relative;
       .panelcontent {
         position: absolute;
@@ -130,7 +130,7 @@ html.flypanels-open, body.flypanels-open {
     }
     &.closing {
       .flypanels-right {
-        transform: translate3d(#{$flypanels_panel_width}px, 0, 0);
+        transform: translate3d(#{$flypanels_panel_width}vw, 0, 0);
       }
     }
   }

@@ -13,38 +13,34 @@
         border-bottom: 1px solid rgba(255, 255, 255, 0.15);
         font-weight: 400;
         font-size: 12px;
-        display: inline-block;
-        width: #{$flypanels_panel_width}px;
-        position: relative;
+        width: #{$flypanels_panel_width}vw;
 
         a.link {
           color: $flypanels_link_color;
           padding-top: 11px;
           padding-bottom: 13px;
-          display: inline-block;
+          display: block;
           padding-left: 15px;
           padding-right: 15px;
-          width: #{$flypanels_panel_width}px;
+					float: none;
+					overflow: hidden;
+					width: auto;
         }
       }
       &.haschildren {
         a.link {
-          width: #{$flypanels_panel_width - 60}px;
           border-right: 1px solid rgba(255, 255, 255, 0.15);
         }
         a.expand {
           color: $flypanels_link_color;
-          width: #{$flypanels_panel_width - 200}px;
+          width: 50px;
           font-size: 11px;
           float: right;
-          display: inline-block;
+          display: block;
           height: 100%;
           padding-left: 15px;
           padding-top: 11px;
           padding-bottom: 13px;
-          position: absolute;
-          top: 0;
-          bottom: 0;
         }
       }
       &.haschildren > div > a.expand > i.fa.icon:before {
@@ -65,7 +61,7 @@
           background-color: darken($flypanels_primary_color, 5%);
           &.link {
             border-right: none;
-            width: #{$flypanels_panel_width}px;
+            width: auto;
             padding-left: 25px;
           }
         }
@@ -73,7 +69,6 @@
       &.haschildren {
         a.link {
           border-right: 1px solid desaturate(lighten(darken($flypanels_primary_color, 5%), 10%), 20%);
-          width: #{$flypanels_panel_width - 60}px;
         }
         li {
           div {
@@ -82,7 +77,7 @@
               background-color: darken($flypanels_primary_color, 10%);
               &.link {
                 border-right: none;
-                width: #{$flypanels_panel_width}px;
+                width: auto;
                 padding-left: 40px;
               }
             }
@@ -90,7 +85,6 @@
           &.haschildren {
             a.link {
               border-right: 1px solid desaturate(lighten(darken($flypanels_primary_color, 10%), 10%), 20%);
-              width: #{$flypanels_panel_width - 60}px;
             }
             li {
               div {
@@ -99,7 +93,7 @@
                   background-color: darken($flypanels_primary_color, 15%);
                   &.link {
                     border-right: none;
-                    width: #{$flypanels_panel_width}px;
+                    width: auto;
                     padding-left: 55px;
                   }
                 }
@@ -107,7 +101,6 @@
               &.haschildren {
                 a.link {
                   border-right: 1px solid desaturate(lighten(darken($flypanels_primary_color, 15%), 10%), 20%);
-                  width: #{$flypanels_panel_width - 60}px;
                 }
                 li {
                   div {
@@ -116,7 +109,7 @@
                       background-color: darken($flypanels_primary_color, 20%);
                       &.link {
                         border-right: none;
-                        width: #{$flypanels_panel_width}px;
+                        width: auto;
                         padding-left: 70px;
                       }
                     }
@@ -124,7 +117,7 @@
                   &.haschildren {
                     a.link {
                       border-right: 1px solid desaturate(lighten(darken($flypanels_primary_color, 20%), 10%), 20%);
-                      width: #{$flypanels_panel_width - 60}px;
+                      width: auto;
                     }
                   }
                 }

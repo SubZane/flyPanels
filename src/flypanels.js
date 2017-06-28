@@ -211,31 +211,38 @@
 			});
 		});
 
-		document.querySelector('.flypanels-button-left').addEventListener('click', function () {
-			var panel = this.getAttribute('data-panel');
-			if (hasClass(document.querySelector('.flypanels-container'), 'openleft')) {
-				closeLeft();
-			} else {
-				if (hasClass(document.querySelector('.flypanels-container'), 'openright')) {
-					closeRight();
-				} else {
-					openLeft(panel);
-				}
-			}
-		});
-
-		document.querySelector('.flypanels-button-right').addEventListener('click', function () {
-			var panel = this.getAttribute('data-panel');
-			if (hasClass(document.querySelector('.flypanels-container'), 'openright')) {
-				closeRight();
-			} else {
+		var buttons_left = document.querySelectorAll('.flypanels-button-left');
+		forEach(buttons_left, function (index, value) {
+			index.addEventListener('click', function (e) {
+				var panel = index.getAttribute('data-panel');
 				if (hasClass(document.querySelector('.flypanels-container'), 'openleft')) {
 					closeLeft();
 				} else {
-					openRight(panel);
+					if (hasClass(document.querySelector('.flypanels-container'), 'openright')) {
+						closeRight();
+					} else {
+						openLeft(panel);
+					}
 				}
-			}
+			});
 		});
+
+		var buttons_right = document.querySelectorAll('.flypanels-button-right');
+		forEach(buttons_right, function (index, value) {
+			index.addEventListener('click', function (e) {
+				var panel = index.getAttribute('data-panel');
+				if (hasClass(document.querySelector('.flypanels-container'), 'openright')) {
+					closeRight();
+				} else {
+					if (hasClass(document.querySelector('.flypanels-container'), 'openleft')) {
+						closeLeft();
+					} else {
+						openRight(panel);
+					}
+				}
+			});
+		});
+
 
 		if (redrawOnResize === true) {
 			window.onresize = onWindowResize;

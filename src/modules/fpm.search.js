@@ -100,9 +100,9 @@
 		var output = '<ul>';
 		for (var i in results) {
 			if (results[i].Type === 'Page') {
-				output += '<li><a href="' + results[i].LinkUrl + '"><span class="link">' + results[i].Header + '</span>  <span class="type"><i class="fa page"></i></span></a>';
+				output += '<li><a href="' + results[i].LinkUrl + '"><span class="type"><i class="fa page"></i></span><span class="link">' + results[i].Header + '</span></a>';
 			} else {
-				output += '<li><a href="' + results[i].LinkUrl + '"><span class="link">' + results[i].Header + '</span>  <span class="type"><i class="fa doc"></i></span></a>';
+				output += '<li><a href="' + results[i].LinkUrl + '"><span class="type"><i class="fa doc"></i></span><span class="link">' + results[i].Header + '</span></a>';
 			}
 		}
 		output += '</ul>';

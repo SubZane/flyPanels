@@ -268,8 +268,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 ## changelog
 
-#### 2.1.0
+#### 3.0.0
 * New modular approach. Both the search and treemenu are now separate scripts that need to be incluced if needed.
+* Sizing adjusted from pixel sizing to viewport sizing for a more responsive approach. Markup and CSS Changed.
 
 #### 2.0.6
 * Fix: Adjustments to animations en environment.
