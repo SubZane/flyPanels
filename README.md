@@ -271,6 +271,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 #### 3.0.0
 * New modular approach. Both the search and treemenu are now separate scripts that need to be incluced if needed.
 * Sizing adjusted from pixel sizing to viewport sizing for a more responsive approach. Markup and CSS Changed.
+* The panel widths are now possible to adjust depending on screen size using media queries. Default it uses the breakpoints defined by Bootstrap.
 
 #### 2.0.6
 * Fix: Adjustments to animations en environment.

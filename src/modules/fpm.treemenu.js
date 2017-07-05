@@ -57,6 +57,14 @@
 		}
 	};
 
+	var toggleAriaExpanded = function (element) {
+		if (element.getAttribute('aria-expanded') === 'false') {
+			element.setAttribute('aria-expanded', 'true');
+		} else {
+			element.setAttribute('aria-expanded', 'false');
+		}
+	};
+
 	/**
 	 * Callback hooks.
 	 * Usage: In the defaults object specify a callback function:
@@ -164,6 +172,7 @@
 		forEach(expanders, function (expandLink, value) {
 			expandLink.addEventListener('click', function (e) {
 				this.parentElement.parentElement.classList.toggle('expanded');
+				toggleAriaExpanded(this.parentElement.parentElement);
 				e.preventDefault();
 			});
 		});

@@ -155,6 +155,7 @@
 	var openRight = function (panel) {
 		el.classList.add('openright');
 		document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').style.display = 'block';
+		document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').setAttribute('aria-hidden', 'false');
 		onOpenRight();
 		onOpen();
 	};
@@ -168,6 +169,7 @@
 			var panels = document.querySelectorAll('.flypanels-right .panelcontent');
 			forEach(panels, function (panel, value) {
 				panel.style.display = 'none';
+				panel.setAttribute('aria-hidden', 'true');
 			});
 			onCloseRight();
 		}, settings.transitiontime);
@@ -176,6 +178,7 @@
 	var openLeft = function (panel) {
 		el.classList.add('openleft');
 		document.querySelector('.flypanels-left').querySelector('[data-panel="' + panel + '"]').style.display = 'block';
+		document.querySelector('.flypanels-left').querySelector('[data-panel="' + panel + '"]').setAttribute('aria-hidden', 'false');
 		onOpenLeft();
 		onOpen();
 	};
@@ -189,6 +192,7 @@
 			var panels = document.querySelectorAll('.flypanels-left .panelcontent');
 			forEach(panels, function (panel, value) {
 				panel.style.display = 'none';
+				panel.setAttribute('aria-hidden', 'true');
 			});
 			onCloseLeft();
 		}, settings.transitiontime);

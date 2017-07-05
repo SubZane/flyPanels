@@ -16,18 +16,18 @@
 <body data-debug="true">
 	<div class="flypanels-container preload">
 		<div class="offcanvas flypanels-left">
-			<div class="panelcontent" data-panel="treemenu">
-				<nav class="flypanels-treemenu" role="navigation">
+			<div class="panelcontent" aria-hidden="true" data-panel="treemenu">
+				<nav class="flypanels-treemenu" role="navigation" aria-label="Main navigation">
 					<ul>
-						<li class="haschildren"><div><a href="#" class="expand">2<i class="fa icon"></i></a><a href="#" class="link">Example menu item Example menu item Example menu item</a></div>
+						<li class="haschildren" aria-expanded="false"><div><a href="#" class="expand">2<i class="fa icon"></i></a><a href="#" class="link">Example menu item Example menu item Example menu item</a></div>
 							<ul>
 								<li><div><a href="#" class="link">Example menu item</a></div></li>
 								<li><div><a href="#" class="link">Example menu item</a></div></li>
 							</ul>
 						</li>
-						<li class="haschildren"><div class="link"><a href="#" class="expand">5<i class="fa icon"></i></a><a href="#" class="link">Example menu item</a> </div>
+						<li class="haschildren" aria-expanded="false"><div class="link"><a href="#" class="expand">5<i class="fa icon"></i></a><a href="#" class="link">Example menu item</a> </div>
 							<ul>
-								<li class="haschildren"><div class="link"><a href="#" class="expand">6<i class="fa icon"></i></a><a href="#" class="link">Example menu item</a> </div>
+								<li class="haschildren" aria-expanded="false"><div class="link"><a href="#" class="expand">6<i class="fa icon"></i></a><a href="#" class="link">Example menu item</a> </div>
 									<ul>
 										<li class="active"><div><a href="#" class="link">Example menu item</a></div></li>
 										<li><div><a href="#" class="link">Example menu item</a></div></li>
@@ -37,10 +37,10 @@
 										<li><div><a href="#" class="link">Example menu item</a></div></li>
 									</ul>
 								</li>
-								<li class="haschildren"><div class="link"><a href="#" class="expand">11<i class="fa icon"></i></a><a href="#" class="link">Example menu item</a> </div>
+								<li class="haschildren" aria-expanded="false"><div class="link"><a href="#" class="expand">11<i class="fa icon"></i></a><a href="#" class="link">Example menu item</a> </div>
 									<ul>
 										<li><div><a href="#" class="link">Example menu item</a></div></li>
-										<li class="haschildren"><div class="link"><a href="#" class="expand">8<i class="fa icon"></i></a><a href="#" class="link">Example menu item</a> </div>
+										<li class="haschildren" aria-expanded="false"><div class="link"><a href="#" class="expand">8<i class="fa icon"></i></a><a href="#" class="link">Example menu item</a> </div>
 											<ul>
 												<li><div><a href="#" class="link">Example menu item</a></div></li>
 												<li><div><a href="#" class="link">Example menu item</a></div></li>
@@ -52,10 +52,10 @@
 												<li><div><a href="#" class="link">Example menu item</a></div></li>
 											</ul>
 										</li>
-										<li class="haschildren"><div class="link"><a href="#" class="expand">11<i class="fa icon"></i></a><a href="#" class="link">Example menu item</a> </div>
+										<li class="haschildren" aria-expanded="false"><div class="link"><a href="#" class="expand">11<i class="fa icon"></i></a><a href="#" class="link">Example menu item</a> </div>
 											<ul>
 												<li><div><a href="#" class="link">Example menu item</a></div></li>
-												<li class="haschildren"><div class="link"><a href="#" class="expand">11<i class="fa icon"></i></a><a href="#" class="link">Example menu item</a> </div>
+												<li class="haschildren" aria-expanded="false"><div class="link"><a href="#" class="expand">11<i class="fa icon"></i></a><a href="#" class="link">Example menu item</a> </div>
 													<ul>
 														<li><div><a href="#" class="link">Example menu item</a></div></li>
 														<li><div><a href="#" class="link">Example menu item</a></div></li>
@@ -70,7 +70,7 @@
 														<li><div><a href="#" class="link">Example menu item</a></div></li>
 													</ul>
 												</li>
-												<li class="haschildren"><div class="link"><a href="#" class="expand">11<i class="fa icon"></i></a><a href="#" class="link">Example menu item</a> </div>
+												<li class="haschildren" aria-expanded="false"><div class="link"><a href="#" class="expand">11<i class="fa icon"></i></a><a href="#" class="link">Example menu item</a> </div>
 													<ul>
 														<li><div><a href="#" class="link">Example menu item</a></div></li>
 														<li><div><a href="#" class="link">Example menu item</a></div></li>
@@ -83,7 +83,7 @@
 									</ul>
 								</li>
 								<li><div><a href="#" class="link">Example menu item</a></div></li>
-								<li class="haschildren"><div class="link"><a href="#" class="expand">5<i class="fa icon"></i></a><a href="#" class="link">Example menu item</a> </div>
+								<li class="haschildren" aria-expanded="false"><div class="link"><a href="#" class="expand">5<i class="fa icon"></i></a><a href="#" class="link">Example menu item</a> </div>
 								<ul>
 										<li><div><a href="#" class="link">Example menu item</a></div></li>
 										<li><div><a href="#" class="link">Example menu item</a></div></li>
@@ -94,14 +94,14 @@
 								</li>
 							</ul>
 						</li>
-						<li class="haschildren"><div class="link"><a href="#" class="expand">1<i class="fa icon"></i></a><a href="#" class="link">Example menu item</a> </div>
+						<li class="haschildren" aria-expanded="false"><div class="link"><a href="#" class="expand">1<i class="fa icon"></i></a><a href="#" class="link">Example menu item</a> </div>
 							<ul>
 								<li><div><a href="#" class="link">Example menu item</a></div></li>
 							</ul>
 						</li>
 						<li><div><a href="#" class="link">Example menu item</a></div></li>
 						<li><div><a href="#" class="link">Example menu item</a></div></li>
-						<li class="haschildren"><div class="link"><a href="#" class="expand">4<i class="fa icon"></i></a><a href="#" class="link">Example menu item</a> </div>
+						<li class="haschildren" aria-expanded="false"><div class="link"><a href="#" class="expand">4<i class="fa icon"></i></a><a href="#" class="link">Example menu item</a> </div>
 							<ul>
 								<li><div><a href="#" class="link">Example menu item</a></div></li>
 								<li><div><a href="#" class="link">Example menu item</a></div></li>
@@ -115,7 +115,7 @@
 		</div>
 		<div class="flypanels-main">
 			<div class="flypanels-topbar">
-				<a class="flypanels-button-left icon-menu icon-hamburger" data-panel="treemenu" href="#">
+				<a class="flypanels-button-left icon-menu icon-hamburger" aria-label="Show navigation" data-panel="treemenu" href="#">
 					<span></span>
 					<span></span>
 					<span></span>
@@ -123,10 +123,10 @@
 					<span></span>
 					<span></span>
 				</a>
-				<a class="flypanels-button-right icon-menu icon-magnify" data-panel="search" href="#">
+				<a class="flypanels-button-right icon-menu icon-magnify" aria-label="Show search" data-panel="search" href="#">
 					<i class="fa fa-search"></i>
 				</a>
-				<a class="flypanels-button-right icon-menu icon-cart" data-panel="cart" href="#">
+				<a class="flypanels-button-right icon-menu icon-cart" aria-label="Show shopping cart" data-panel="cart" href="#">
 					<i class="fa fa-shopping-cart"></i>
 				</a>
 			</div>
@@ -139,7 +139,7 @@
 					</div>
 					<div class="row">
 						<div class="col-xs-12 col-md-8 col-md-offset-2">
-							<div class="version">v 2.0.6</div>
+							<div class="version">v 3.0.0</div>
 							<div class="github">
 								<a class="github-button" href="https://github.com/SubZane/flyPanels" data-style="mega" data-count-href="/SubZane/flyPanels/stargazers" data-count-api="/repos/SubZane/flyPanels#stargazers_count">Star</a>
 								<a class="github-button" href="https://github.com/SubZane/flyPanels" data-style="mega" data-count-href="/SubZane/flyPanels/network" data-count-api="/repos/SubZane/flyPanels#forks_count">Fork</a>
@@ -225,7 +225,7 @@
 			</div>
 		</div>
 		<div class="offcanvas flypanels-right">
-			<div class="panelcontent" data-panel="cart">
+			<div class="panelcontent" aria-hidden="true" data-panel="cart">
 				<div class="cart-products">
 					<ul>
 						<li data-product-id="1">
@@ -246,15 +246,15 @@
 					</ul>
 				</div>
 			</div>
-			<div class="panelcontent" data-panel="search">
+			<div class="panelcontent" aria-hidden="true" data-panel="search">
 				<div class="searchbox" data-searchurl="json/searchresult.json?search=true">
 					<input title="search" type="text" />
 					<a href="#" aria-label="search" class="searchbutton"></a>
 				</div>
-				<div class="resultinfo" style="display:none">
+				<div class="resultinfo" style="display:none" aria-live="polite">
 					You search for "<span class="query">lorem ipsum</span>" resulted in <span class="num">5</span> hits.
 				</div>
-				<div class="errormsg" style="display:none">
+				<div class="errormsg" style="display:none" aria-live="polite">
 					Something went wrong, please refresh the page and try again.
 				</div>
 
@@ -264,7 +264,7 @@
 
 
 			<div class="panelcontent" data-panel="iconmenu">
-				<nav class="flypanels-iconmenu">
+				<nav class="flypanels-iconmenu" role="navigation">
 					<ul>
 						<li><a class="fa fa-github-square" href="https://github.com/SubZane/flyPanels">Github repository</a></li>
 						<li><a class="fa fa-exclamation-circle" href="https://github.com/SubZane/flyPanels/issues">Issues</a></li>

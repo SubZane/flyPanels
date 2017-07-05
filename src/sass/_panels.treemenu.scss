@@ -13,7 +13,7 @@
         border-bottom: 1px solid rgba(255, 255, 255, 0.15);
         font-weight: 400;
         font-size: 12px;
-        width: #{$flypanels_panel_width}vw;
+        width: #{$flypanels_panel_width};
 
         a.link {
           color: $flypanels_link_color;
@@ -209,4 +209,43 @@
 .flypanels-container .offcanvas .panelcontent[data-panel="treemenu"] {
   padding-left: 0;
   padding-right: 0;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+	.panelcontent nav.flypanels-treemenu {
+		ul {
+			li {
+				div {
+					width: #{$flypanels_panel_small_screen_width};
+				}
+			}
+		}
+	}
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+	.panelcontent nav.flypanels-treemenu {
+		ul {
+			li {
+				div {
+					width: #{$flypanels_panel_medium_screen_width};
+				}
+			}
+		}
+	}
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+	.panelcontent nav.flypanels-treemenu {
+		ul {
+			li {
+				div {
+					width: #{$flypanels_panel_large_screen_width};
+				}
+			}
+		}
+	}
 }

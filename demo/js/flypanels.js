@@ -1,4 +1,4 @@
-/*! flypanels - v2.1.0 - 2017-06-28
+/*! flypanels - v2.1.0 - 2017-07-05
 * https://github.com/SubZane/flyPanels
 * Copyright (c) 2017 Andreas Norman; Licensed MIT */
 (function (root, factory) {
@@ -158,6 +158,7 @@
 	var openRight = function (panel) {
 		el.classList.add('openright');
 		document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').style.display = 'block';
+		document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').setAttribute('aria-hidden', 'false');
 		onOpenRight();
 		onOpen();
 	};
@@ -171,6 +172,7 @@
 			var panels = document.querySelectorAll('.flypanels-right .panelcontent');
 			forEach(panels, function (panel, value) {
 				panel.style.display = 'none';
+				panel.setAttribute('aria-hidden', 'true');
 			});
 			onCloseRight();
 		}, settings.transitiontime);
@@ -179,6 +181,7 @@
 	var openLeft = function (panel) {
 		el.classList.add('openleft');
 		document.querySelector('.flypanels-left').querySelector('[data-panel="' + panel + '"]').style.display = 'block';
+		document.querySelector('.flypanels-left').querySelector('[data-panel="' + panel + '"]').setAttribute('aria-hidden', 'false');
 		onOpenLeft();
 		onOpen();
 	};
@@ -192,6 +195,7 @@
 			var panels = document.querySelectorAll('.flypanels-left .panelcontent');
 			forEach(panels, function (panel, value) {
 				panel.style.display = 'none';
+				panel.setAttribute('aria-hidden', 'true');
 			});
 			onCloseLeft();
 		}, settings.transitiontime);
