@@ -18,14 +18,14 @@
 	var supports = !!document.querySelector && !!root.addEventListener; // Feature test
 	var settings, eventTimeout;
 	var el;
-	// Need to get the topbar height in order to later set the correct height of .flypanels-content
-	var topBarHeight = document.querySelector('.flypanels-topbar').clientHeight;
 
 	// Default settings
 	var defaults = {
 		expandHandler: 'a.expand',
 		onInit: function () {},
-		onDestroy: function () {}
+		onDestroy: function () {},
+		OnExpandOpen: function () {},
+		OnExpandClose: function () {}
 	};
 
 
@@ -57,11 +57,42 @@
 		}
 	};
 
+	var initKeyboardNavigation = function () {
+		window.onkeydown = function (e) {
+			var code = e.keyCode ? e.keyCode : e.which;
+			if (code === 38) { //up key
+
+			} else if (code === 39) { //right key
+
+			} else if (code === 40) { //down key
+
+			} else if (code === 37) { //left key
+
+			}
+		};
+	};
+
 	var toggleAriaExpanded = function (element) {
 		if (element.getAttribute('aria-expanded') === 'false') {
 			element.setAttribute('aria-expanded', 'true');
+			element.querySelector('ul').setAttribute('aria-hidden', 'false');
+			element.querySelector('ul').removeAttribute('hidden');
+			setTimeout(function () {
+				element.classList.toggle('expanded');
+			}, settings.transitiontime);
+
+			hook('OnExpandOpen');
 		} else {
 			element.setAttribute('aria-expanded', 'false');
+			element.querySelector('ul').setAttribute('aria-hidden', 'true');
+			element.querySelector('ul').setAttribute('hidden', '');
+
+			//Since we removed a hidden attribute we need to wait, if we want the animation to run visible. Very silly.
+			setTimeout(function () {
+				element.classList.toggle('expanded');
+			}, settings.transitiontime);
+
+			hook('OnExpandClose');
 		}
 	};
 
@@ -163,7 +194,6 @@
 
 		el = document.querySelector(settings.container);
 
-		var maxHeight = innerHeight - topBarHeight;
 		if (isAndroid() || isIOS()) {
 			document.querySelector('.flypanels-treemenu').classList.add('touch');
 		}
@@ -171,7 +201,6 @@
 		var expanders = document.querySelectorAll('.flypanels-treemenu li.haschildren ' + settings.expandHandler);
 		forEach(expanders, function (expandLink, value) {
 			expandLink.addEventListener('click', function (e) {
-				this.parentElement.parentElement.classList.toggle('expanded');
 				toggleAriaExpanded(this.parentElement.parentElement);
 				e.preventDefault();
 			});

@@ -14,6 +14,7 @@
         font-weight: 400;
         font-size: 12px;
         width: #{$flypanels_panel_width};
+				display: flex;
 
         a.link {
           color: $flypanels_link_color;
@@ -24,7 +25,8 @@
           padding-right: 15px;
 					float: none;
 					overflow: hidden;
-					width: auto;
+					width: 100%;
+					order: 1;
         }
       }
       &.haschildren {
@@ -33,14 +35,14 @@
         }
         a.expand {
           color: $flypanels_link_color;
-          width: 50px;
+          width: 60px;
           font-size: 11px;
           float: right;
           display: block;
-          height: 100%;
           padding-left: 15px;
           padding-top: 11px;
           padding-bottom: 13px;
+					order: 2;
         }
       }
       &.haschildren > div > a.expand > i.fa.icon:before {
@@ -61,7 +63,6 @@
           background-color: darken($flypanels_primary_color, 5%);
           &.link {
             border-right: none;
-            width: auto;
             padding-left: 25px;
           }
         }
@@ -77,7 +78,6 @@
               background-color: darken($flypanels_primary_color, 10%);
               &.link {
                 border-right: none;
-                width: auto;
                 padding-left: 40px;
               }
             }
@@ -93,7 +93,6 @@
                   background-color: darken($flypanels_primary_color, 15%);
                   &.link {
                     border-right: none;
-                    width: auto;
                     padding-left: 55px;
                   }
                 }
@@ -109,16 +108,31 @@
                       background-color: darken($flypanels_primary_color, 20%);
                       &.link {
                         border-right: none;
-                        width: auto;
                         padding-left: 70px;
                       }
                     }
                   }
                   &.haschildren {
                     a.link {
-                      border-right: 1px solid desaturate(lighten(darken($flypanels_primary_color, 20%), 10%), 20%);
-                      width: auto;
+                      border-right: 1px solid desaturate(lighten(darken($flypanels_primary_color, 25%), 10%), 20%);
                     }
+										li {
+											div {
+												border-bottom-color: desaturate(lighten(darken($flypanels_primary_color, 25%), 10%), 20%);
+												a {
+													background-color: darken($flypanels_primary_color, 25%);
+													&.link {
+														border-right: none;
+														padding-left: 85px;
+													}
+												}
+											}
+											&.haschildren {
+												a.link {
+													border-right: 1px solid desaturate(lighten(darken($flypanels_primary_color, 25%), 10%), 20%);
+												}
+											}
+										}
                   }
                 }
               }
@@ -173,12 +187,17 @@
   background-color:rgba(0, 0, 0, 0.5) !important;
   color: $flypanels_link_color;
 }
+.panelcontent nav.flypanels-treemenu.touch li li li li li li li a:hover {
+  background-color:rgba(0, 0, 0, 0.6) !important;
+  color: $flypanels_link_color;
+}
 
 .panelcontent nav.flypanels-treemenu.touch li a:active,
 .panelcontent nav.flypanels-treemenu.touch li li a:active,
 .panelcontent nav.flypanels-treemenu.touch li li li a:active,
 .panelcontent nav.flypanels-treemenu.touch li li li li a:active,
-.panelcontent nav.flypanels-treemenu.touch li li li li li a:active {
+.panelcontent nav.flypanels-treemenu.touch li li li li li a:active,
+.panelcontent nav.flypanels-treemenu.touch li li li li li li a:active {
   text-decoration: none;
   background-color:rgba(255, 255, 255, 0.8) !important;
   color: $flypanels_primary_color;
@@ -193,7 +212,7 @@
       margin-bottom: 0;
       overflow: hidden;
       transform: translate3d(0, 0, 0);
-      transition: 0.5s ease-in-out;
+      transition: $flypanels_transition_time ease-in-out;
   }
   li.haschildren.expanded > ul {
       max-height: 3000px;

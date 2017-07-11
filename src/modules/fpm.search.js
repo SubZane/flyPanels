@@ -63,8 +63,10 @@
 						settings.searchPanel.querySelector('.resultinfo .num').innerHTML = foundResults;
 						settings.searchPanel.querySelector('.flypanels-searchresult').innerHTML = output;
 						searchProgress('hide');
-						settings.searchPanel.querySelector('.resultinfo').style.display = 'block';
-						settings.searchPanel.querySelector('.flypanels-searchresult').style.display = 'block';
+						settings.searchPanel.querySelector('.resultinfo').removeAttribute('hidden');
+						settings.searchPanel.querySelector('.resultinfo').setAttribute('aria-hidden', 'false');
+						settings.searchPanel.querySelector('.flypanels-searchresult').removeAttribute('hidden');
+						settings.searchPanel.querySelector('.flypanels-searchresult').setAttribute('aria-hidden', 'false');
 						hook('onSearchSuccess');
 					} else {
 						hook('onEmptySearchResult');
@@ -126,17 +128,19 @@
 
 	var searchError = function (state) {
 		if (state === 'hide') {
-			settings.searchPanel.querySelector('.errormsg').style.display = 'none';
+			settings.searchPanel.querySelector('.errormsg').setAttribute('hidden', '');
+			settings.searchPanel.querySelector('.errormsg').setAttribute('aria-hidden', 'true');
 		} else {
-			settings.searchPanel.querySelector('.errormsg').style.display = 'block';
+			settings.searchPanel.querySelector('.errormsg').removeAttribute('hidden');
+			settings.searchPanel.querySelector('.errormsg').setAttribute('aria-hidden', 'false');
 		}
 	};
 
 	var searchProgress = function (state) {
 		if (state === 'hide') {
-			settings.searchPanel.querySelector('.loading').style.display = 'none';
+			settings.searchPanel.querySelector('.errormsg').setAttribute('hidden', '');
 		} else {
-			settings.searchPanel.querySelector('.loading').style.display = 'block';
+			settings.searchPanel.querySelector('.errormsg').removeAttribute('hidden');
 		}
 	};
 

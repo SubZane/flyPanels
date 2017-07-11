@@ -27,7 +27,7 @@
 
 	// Default settings
 	var defaults = {
-		transitiontime: 200,
+		transitiontime: 500,
 		container: '.flypanels-container',
 		initClass: 'js-flyPanels',
 		onInit: function () {},
@@ -156,6 +156,8 @@
 		el.classList.add('openright');
 		document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').style.display = 'block';
 		document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').setAttribute('aria-hidden', 'false');
+		document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').setAttribute('tabindex', '-1');
+		document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').focus();
 		onOpenRight();
 		onOpen();
 	};
@@ -170,6 +172,7 @@
 			forEach(panels, function (panel, value) {
 				panel.style.display = 'none';
 				panel.setAttribute('aria-hidden', 'true');
+				panel.removeAttribute('tabindex');
 			});
 			onCloseRight();
 		}, settings.transitiontime);
@@ -179,6 +182,8 @@
 		el.classList.add('openleft');
 		document.querySelector('.flypanels-left').querySelector('[data-panel="' + panel + '"]').style.display = 'block';
 		document.querySelector('.flypanels-left').querySelector('[data-panel="' + panel + '"]').setAttribute('aria-hidden', 'false');
+		document.querySelector('.flypanels-left').querySelector('[data-panel="' + panel + '"]').setAttribute('tabindex', '-1');
+		document.querySelector('.flypanels-left').querySelector('[data-panel="' + panel + '"]').focus();
 		onOpenLeft();
 		onOpen();
 	};
@@ -193,6 +198,7 @@
 			forEach(panels, function (panel, value) {
 				panel.style.display = 'none';
 				panel.setAttribute('aria-hidden', 'true');
+				panel.removeAttribute('tabindex');
 			});
 			onCloseLeft();
 		}, settings.transitiontime);

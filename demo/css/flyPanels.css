@@ -307,7 +307,9 @@ html.flypanels-open, body.flypanels-open {
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     font-weight: 400;
     font-size: 12px;
-    width: 90vw; }
+    width: 90vw;
+    display: -ms-flexbox;
+    display: flex; }
     .panelcontent nav.flypanels-treemenu ul li div a.link {
       color: #fff;
       padding-top: 11px;
@@ -317,19 +319,22 @@ html.flypanels-open, body.flypanels-open {
       padding-right: 15px;
       float: none;
       overflow: hidden;
-      width: auto; }
+      width: 100%;
+      -ms-flex-order: 1;
+          order: 1; }
   .panelcontent nav.flypanels-treemenu ul li.haschildren a.link {
     border-right: 1px solid rgba(255, 255, 255, 0.15); }
   .panelcontent nav.flypanels-treemenu ul li.haschildren a.expand {
     color: #fff;
-    width: 50px;
+    width: 60px;
     font-size: 11px;
     float: right;
     display: block;
-    height: 100%;
     padding-left: 15px;
     padding-top: 11px;
-    padding-bottom: 13px; }
+    padding-bottom: 13px;
+    -ms-flex-order: 2;
+        order: 2; }
   .panelcontent nav.flypanels-treemenu ul li.haschildren > div > a.expand > i.fa.icon:before {
     content: "\f105"; }
   .panelcontent nav.flypanels-treemenu ul li.expanded > div > a.expand > i.fa.icon:before {
@@ -340,7 +345,6 @@ html.flypanels-open, body.flypanels-open {
       background-color: #ab3326; }
       .panelcontent nav.flypanels-treemenu ul li.haschildren li div a.link {
         border-right: none;
-        width: auto;
         padding-left: 25px; }
   .panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren a.link {
     border-right: 1px solid #b8564c; }
@@ -350,7 +354,6 @@ html.flypanels-open, body.flypanels-open {
       background-color: #962d22; }
       .panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li div a.link {
         border-right: none;
-        width: auto;
         padding-left: 40px; }
   .panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren a.link {
     border-right: 1px solid #a94c43; }
@@ -360,7 +363,6 @@ html.flypanels-open, body.flypanels-open {
       background-color: #81261d; }
       .panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren li div a.link {
         border-right: none;
-        width: auto;
         padding-left: 55px; }
   .panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren li.haschildren a.link {
     border-right: 1px solid #96443b; }
@@ -370,11 +372,18 @@ html.flypanels-open, body.flypanels-open {
       background-color: #6d2018; }
       .panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren li.haschildren li div a.link {
         border-right: none;
-        width: auto;
         padding-left: 70px; }
   .panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren li.haschildren li.haschildren a.link {
-    border-right: 1px solid #843c34;
-    width: auto; }
+    border-right: 1px solid #72332d; }
+  .panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren li.haschildren li.haschildren li div {
+    border-bottom-color: #72332d; }
+    .panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren li.haschildren li.haschildren li div a {
+      background-color: #581a14; }
+      .panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren li.haschildren li.haschildren li div a.link {
+        border-right: none;
+        padding-left: 85px; }
+  .panelcontent nav.flypanels-treemenu ul li.haschildren li.haschildren li.haschildren li.haschildren li.haschildren li.haschildren a.link {
+    border-right: 1px solid #72332d; }
   .panelcontent nav.flypanels-treemenu li div a.link:hover, .panelcontent nav.flypanels-treemenu li.active > div * * > * * a.link {
     text-decoration: none;
     background-color: rgba(255, 255, 255, 0.8) !important;
@@ -411,11 +420,16 @@ html.flypanels-open, body.flypanels-open {
   background-color: rgba(0, 0, 0, 0.5) !important;
   color: #fff; }
 
+.panelcontent nav.flypanels-treemenu.touch li li li li li li li a:hover {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  color: #fff; }
+
 .panelcontent nav.flypanels-treemenu.touch li a:active,
 .panelcontent nav.flypanels-treemenu.touch li li a:active,
 .panelcontent nav.flypanels-treemenu.touch li li li a:active,
 .panelcontent nav.flypanels-treemenu.touch li li li li a:active,
-.panelcontent nav.flypanels-treemenu.touch li li li li li a:active {
+.panelcontent nav.flypanels-treemenu.touch li li li li li a:active,
+.panelcontent nav.flypanels-treemenu.touch li li li li li li a:active {
   text-decoration: none;
   background-color: rgba(255, 255, 255, 0.8) !important;
   color: #c0392b; }
