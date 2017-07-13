@@ -45,7 +45,7 @@ html.flypanels-open, body.flypanels-open {
       padding: 0 #{$flypanels_panel_padding}px #{$flypanels_panel_padding}px #{$flypanels_panel_padding}px;
       top: 0;
       right: 0;
-      bottom: 0;
+      bottom: $flypanels_top_bar_height;
       left: 0;
       width: auto;
       height: auto;

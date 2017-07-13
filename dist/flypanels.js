@@ -1,4 +1,4 @@
-/*! flypanels - v2.1.0 - 2017-07-11
+/*! flypanels - v2.1.0 - 2017-07-12
 * https://github.com/SubZane/flyPanels
 * Copyright (c) 2017 Andreas Norman; Licensed MIT */
 (function (root, factory) {
@@ -33,6 +33,7 @@
 		transitiontime: 500,
 		container: '.flypanels-container',
 		initClass: 'js-flyPanels',
+		useKeyboardEvents: true,
 		onInit: function () {},
 		onOpen: function () {},
 		onClose: function () {},
@@ -159,8 +160,10 @@
 		el.classList.add('openright');
 		document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').style.display = 'block';
 		document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').setAttribute('aria-hidden', 'false');
-		document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').setAttribute('tabindex', '-1');
-		document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').focus();
+		setTimeout(function () {
+			document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').setAttribute('tabindex', '-1');
+			//document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').focus();
+		}, settings.transitiontime);
 		onOpenRight();
 		onOpen();
 	};
@@ -275,6 +278,16 @@
 		hook('onWindowResize');
 	};
 
+	var bindKeyEventTriggers = function () {
+		window.onkeydown = function( event ) {
+			// ESC
+			if ( event.keyCode === 27 ) {
+				closeLeft();
+				closeRight();
+			}
+		};
+	};
+
 	var hasClass = function (element, classname) {
 		if (typeof element.classList !== 'undefined' && element.classList.contains(classname)) {
 			return true;
@@ -383,6 +396,9 @@
 		el = document.querySelector(settings.container);
 
 		setHeight();
+		if (settings.useKeyboardEvents === true) {
+			bindKeyEventTriggers();
+		}
 		attachEvents();
 
 		// Remove preload class when page has loaded to allow transitions/animations

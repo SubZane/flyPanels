@@ -51,7 +51,7 @@ html.flypanels-open, body.flypanels-open {
     padding: 0 20px 20px 20px;
     top: 0;
     right: 0;
-    bottom: 0;
+    bottom: 50px;
     left: 0;
     width: auto;
     height: auto;
@@ -636,25 +636,3 @@ nav.flypanels-iconmenu li a {
         top: 9px; }
       .flypanels-container .offcanvas .panelcontent[data-panel="search"] .searchbox .searchbutton:hover {
         text-decoration: none; }
-
-div.cart-products {
-  color: #fff;
-  font-size: 11px; }
-  div.cart-products ul, div.cart-products li {
-    padding: 0;
-    margin: 0;
-    list-style: none; }
-  div.cart-products li {
-    clear: both;
-    margin-bottom: 15px; }
-  div.cart-products .cart-product-image {
-    width: 30px;
-    float: left; }
-  div.cart-products .cart-product-name {
-    margin-left: 40px;
-    font-weight: bold;
-    line-height: 110%;
-    margin-bottom: 5px; }
-  div.cart-products .cart-product-description {
-    margin-left: 40px;
-    line-height: 110%; }

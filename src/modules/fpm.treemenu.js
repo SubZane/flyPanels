@@ -57,6 +57,30 @@
 		}
 	};
 
+	var initTabNavigation = function () {
+		var linkElements = document.querySelector('.flypanels-treemenu').querySelectorAll('a');
+		window.onkeydown = function( event ) {
+			if (hasClass(document.querySelector('body'), 'flypanels-open')) {
+				// 9 = Tab
+				if ( event.keyCode === 9 ) {
+					if (event.shiftKey) {
+						console.log(Array.prototype.indexOf.call(linkElements, event.target));
+						console.log(linkElements.length);
+						if (Array.prototype.indexOf.call(linkElements, event.target) === 0) {
+							linkElements[linkElements.length-1].focus();
+							event.preventDefault();
+						}
+					}	else {
+						if (Array.prototype.indexOf.call(linkElements, event.target) === -1) {
+							linkElements[0].focus();
+							event.preventDefault();
+						}
+					}
+				}
+			}
+		};
+	};
+
 	var initKeyboardNavigation = function () {
 		window.onkeydown = function (e) {
 			var code = e.keyCode ? e.keyCode : e.which;
@@ -205,7 +229,7 @@
 				e.preventDefault();
 			});
 		});
-
+		initTabNavigation();
 		hook('onInit');
 	};
 
