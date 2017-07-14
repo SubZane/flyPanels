@@ -18,6 +18,7 @@
 	var supports = !!document.querySelector && !!root.addEventListener; // Feature test
 	var settings, eventTimeout;
 	var el;
+	var tabElements;
 
 	// Default settings
 	var defaults = {
@@ -62,6 +63,7 @@
 						settings.searchPanel.querySelector('.resultinfo .query').innerHTML = query;
 						settings.searchPanel.querySelector('.resultinfo .num').innerHTML = foundResults;
 						settings.searchPanel.querySelector('.flypanels-searchresult').innerHTML = output;
+						tabElements = document.querySelectorAll('.flypanels-right .searchbutton, #flypanels-searchfield, .flypanels-searchresult ul li a');
 						searchProgress('hide');
 						settings.searchPanel.querySelector('.resultinfo').removeAttribute('hidden');
 						settings.searchPanel.querySelector('.resultinfo').setAttribute('aria-hidden', 'false');
@@ -210,6 +212,43 @@
 		}
 	};
 
+	var initTabNavigation = function () {
+		tabElements = tabElements ? tabElements : document.querySelectorAll('#flypanels-searchfield, .flypanels-right .searchbutton');
+		document.onkeydown = function( event ) {
+			if ((hasClass(document.querySelector('body'), 'flypanels-open') && hasClass(document.querySelector('.flypanels-container'), 'openright'))) {
+				// 9 = Tab
+				if ( event.keyCode === 9 ) {
+					if (event.shiftKey) {
+						console.log(Array.prototype.indexOf.call(tabElements, event.target));
+						if (Array.prototype.indexOf.call(tabElements, event.target) === 0) {
+							tabElements[tabElements.length-1].focus();
+							event.preventDefault();
+						}
+					}	else {
+						if (Array.prototype.indexOf.call(tabElements, event.target) === -1) {
+							tabElements[0].focus();
+							event.preventDefault();
+						}
+						else if ((Array.prototype.indexOf.call(tabElements, event.target) + 1)=== tabElements.length) {
+							tabElements[0].focus();
+							event.preventDefault();
+						}
+					}
+
+				}
+			}
+		};
+	};
+
+
+	var hasClass = function (element, classname) {
+		if (typeof element.classList !== 'undefined' && element.classList.contains(classname)) {
+			return true;
+		} else {
+			return false;
+		}
+	};
+
 	/**
 	 * Callback hooks.
 	 * Usage: In the defaults object specify a callback function:
@@ -321,7 +360,6 @@
 			if (event.which === 13) {
 				searchProgress('show');
 				executeSearch(this.value);
-				this.blur();
 			}
 		});
 
@@ -329,6 +367,7 @@
 			executeSearch(cookies.get('searchQuery'));
 		}
 
+		initTabNavigation();
 		hook('onInit');
 	};
 
