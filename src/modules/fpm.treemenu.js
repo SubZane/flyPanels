@@ -61,7 +61,7 @@
 		var linkElements = document.querySelectorAll('.flypanels-treemenu a, .flypanels-button-left');
 
 		window.onkeydown = function( event ) {
-			if (hasClass(document.querySelector('body'), 'flypanels-open')) {
+			if (hasClass(document.querySelector('body'), 'flypanels-open') && hasClass(document.querySelector('.flypanels-container'), 'openleft')){
 				// 9 = Tab
 				if ( event.keyCode === 9 ) {
 					if (event.shiftKey) {
