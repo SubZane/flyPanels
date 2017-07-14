@@ -1,4 +1,4 @@
-/*! flypanels - v2.1.0 - 2017-07-12
+/*! flypanels - v2.1.0 - 2017-07-14
 * https://github.com/SubZane/flyPanels
 * Copyright (c) 2017 Andreas Norman; Licensed MIT */
 (function (root, factory) {
@@ -158,6 +158,7 @@
 
 	var openRight = function (panel) {
 		el.classList.add('openright');
+		toggleAriaLabel(document.querySelector('.flypanels-button-right'), true);
 		document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').style.display = 'block';
 		document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').setAttribute('aria-hidden', 'false');
 		setTimeout(function () {
@@ -171,6 +172,7 @@
 	var closeRight = function () {
 		onClose();
 		el.classList.add('closing');
+		toggleAriaLabel(document.querySelector('.flypanels-button-right'), false);
 		setTimeout(function () {
 			el.classList.remove('openright');
 			el.classList.remove('closing');
@@ -186,6 +188,7 @@
 
 	var openLeft = function (panel) {
 		el.classList.add('openleft');
+		toggleAriaLabel(document.querySelector('.flypanels-button-right'), true);
 		document.querySelector('.flypanels-left').querySelector('[data-panel="' + panel + '"]').style.display = 'block';
 		document.querySelector('.flypanels-left').querySelector('[data-panel="' + panel + '"]').setAttribute('aria-hidden', 'false');
 		document.querySelector('.flypanels-left').querySelector('[data-panel="' + panel + '"]').setAttribute('tabindex', '-1');
@@ -197,6 +200,7 @@
 	var closeLeft = function () {
 		onClose();
 		el.classList.add('closing');
+		toggleAriaLabel(document.querySelector('.flypanels-button-left'), false);
 		setTimeout(function () {
 			el.classList.remove('closing');
 			el.classList.remove('openleft');
@@ -293,6 +297,15 @@
 			return true;
 		} else {
 			return false;
+		}
+	};
+
+	var toggleAriaLabel = function (element, active) {
+		if(active){
+			element.setAttribute('aria-label', element.getAttribute('data-aria-label-active'));
+		}
+		else {
+			element.setAttribute('aria-label', element.getAttribute('data-aria-label'));
 		}
 	};
 
