@@ -219,7 +219,6 @@
 				// 9 = Tab
 				if ( event.keyCode === 9 ) {
 					if (event.shiftKey) {
-						console.log(Array.prototype.indexOf.call(tabElements, event.target));
 						if (Array.prototype.indexOf.call(tabElements, event.target) === 0) {
 							tabElements[tabElements.length-1].focus();
 							event.preventDefault();
