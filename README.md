@@ -272,6 +272,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 * New modular approach. Both the search and treemenu are now separate scripts that need to be incluced if needed.
 * Sizing adjusted from pixel sizing to viewport sizing for a more responsive approach. Markup and CSS Changed.
 * The panel widths are now possible to adjust depending on screen size using media queries. Default it uses the breakpoints defined by Bootstrap.
+* Added keyboard navigation TAB for better WCAG support.
+* ESC key now closes the currently open panel.
 
 #### 2.0.6
 * Fix: Adjustments to animations en environment.
