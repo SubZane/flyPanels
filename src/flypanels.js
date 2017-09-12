@@ -160,7 +160,6 @@
 		document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').setAttribute('aria-hidden', 'false');
 		setTimeout(function () {
 			document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').setAttribute('tabindex', '-1');
-			//document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').focus();
 		}, settings.transitiontime);
 		onOpenRight();
 		onOpen();
@@ -280,13 +279,13 @@
 	};
 
 	var bindKeyEventTriggers = function () {
-		window.onkeydown = function( event ) {
+		document.addEventListener('keydown', function( event ) {
 			// ESC
 			if ( event.keyCode === 27 ) {
 				closeLeft();
 				closeRight();
 			}
-		};
+		});
 	};
 
 	var hasClass = function (element, classname) {
