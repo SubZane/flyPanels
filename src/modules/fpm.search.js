@@ -63,7 +63,7 @@
 						settings.searchPanel.querySelector('.resultinfo .query').innerHTML = query;
 						settings.searchPanel.querySelector('.resultinfo .num').innerHTML = foundResults;
 						settings.searchPanel.querySelector('.flypanels-searchresult').innerHTML = output;
-						tabElements = document.querySelectorAll('.flypanels-right .searchbutton, #flypanels-searchfield, .flypanels-searchresult ul li a');
+						tabElements = document.querySelectorAll('.flypanels-button-right, .flypanels-right .searchbutton, #flypanels-searchfield, .flypanels-searchresult ul li a');
 						searchProgress('hide');
 						settings.searchPanel.querySelector('.resultinfo').removeAttribute('hidden');
 						settings.searchPanel.querySelector('.resultinfo').setAttribute('aria-hidden', 'false');
@@ -213,8 +213,8 @@
 	};
 
 	var initTabNavigation = function () {
-		tabElements = tabElements ? tabElements : document.querySelectorAll('#flypanels-searchfield, .flypanels-right .searchbutton');
-		document.onkeydown = function( event ) {
+		tabElements = tabElements ? tabElements : document.querySelectorAll('#flypanels-searchfield, .flypanels-right .searchbutton, .flypanels-button-right');
+		document.addEventListener('keydown', function( event ) {
 			if ((hasClass(document.querySelector('body'), 'flypanels-open') && hasClass(document.querySelector('.flypanels-container'), 'openright'))) {
 				// 9 = Tab
 				if ( event.keyCode === 9 ) {
@@ -223,20 +223,32 @@
 							tabElements[tabElements.length-1].focus();
 							event.preventDefault();
 						}
+						else if ((Array.prototype.indexOf.call(tabElements, event.target) - 1) < 0 ) {
+							tabElements[0].focus();
+							event.preventDefault();
+						}
+						else {
+							tabElements[(Array.prototype.indexOf.call(tabElements, event.target) - 1)].focus();
+							event.preventDefault();
+						}
 					}	else {
 						if (Array.prototype.indexOf.call(tabElements, event.target) === -1) {
 							tabElements[0].focus();
 							event.preventDefault();
 						}
-						else if ((Array.prototype.indexOf.call(tabElements, event.target) + 1)=== tabElements.length) {
+						else if ((Array.prototype.indexOf.call(tabElements, event.target) + 1) === tabElements.length) {
 							tabElements[0].focus();
+							event.preventDefault();
+						}
+						else {
+							tabElements[(Array.prototype.indexOf.call(tabElements, event.target) + 1)].focus();
 							event.preventDefault();
 						}
 					}
 
 				}
 			}
-		};
+		});
 	};
 
 
