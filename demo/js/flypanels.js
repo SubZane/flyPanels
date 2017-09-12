@@ -1,4 +1,4 @@
-/*! flypanels - v2.1.0 - 2017-09-11
+/*! flypanels - v3.0.0 - 2017-09-12
 * https://github.com/SubZane/flyPanels
 * Copyright (c) 2017 Andreas Norman; Licensed MIT */
 (function (root, factory) {
@@ -163,7 +163,6 @@
 		document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').setAttribute('aria-hidden', 'false');
 		setTimeout(function () {
 			document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').setAttribute('tabindex', '-1');
-			//document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').focus();
 		}, settings.transitiontime);
 		onOpenRight();
 		onOpen();
@@ -283,13 +282,13 @@
 	};
 
 	var bindKeyEventTriggers = function () {
-		window.onkeydown = function( event ) {
+		document.addEventListener('keydown', function( event ) {
 			// ESC
 			if ( event.keyCode === 27 ) {
 				closeLeft();
 				closeRight();
 			}
-		};
+		});
 	};
 
 	var hasClass = function (element, classname) {
