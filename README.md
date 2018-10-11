@@ -1,4 +1,4 @@
-flyPanels v3.0.0
+flyPanels v3.1.0
 =======
 
 flyPanels - responsive off canvas menu panels
@@ -19,7 +19,7 @@ Compared to many other off canvas menu plugins out there this one is more solid 
 
 ## Installation
 ```
-bower install flyPanels --save
+yarn add flyPanels
 ```
 
 ### Setup
@@ -267,6 +267,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 ```
 
 ## changelog
+
+#### 3.1.0
+* Moved from Bower to Yarn
 
 #### 3.0.0
 * New modular approach. Both the search and treemenu are now separate scripts that need to be incluced if needed.

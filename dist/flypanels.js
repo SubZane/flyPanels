@@ -1,6 +1,6 @@
-/*! flypanels - v3.0.0 - 2017-09-12
-* https://github.com/SubZane/flyPanels
-* Copyright (c) 2017 Andreas Norman; Licensed MIT */
+/*! flypanels - v3.0.0 - 2018-10-11
+* https://www.andreasnorman.com/flyPanels/
+* Copyright (c) 2018 ; Licensed  */
 (function (root, factory) {
 	if (typeof define === 'function' && define.amd) {
 		define([], factory(root));
