@@ -2,7 +2,7 @@
   "name": "flypanels",
   "title": "flypanels",
   "description": "Responsive off canvas menu panels",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "engines": {
     "node": ">= 0.8.0"
   },
@@ -32,11 +32,6 @@
 		"off canvas"
   ],
   "files": [
-    "dist/*.js",
-    "/*.js",
-    "demo/*.*",
-    "*.json",
-    "*.md",
-    "LICENSE-MIT"
+    "*.*"
   ]
 }

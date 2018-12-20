@@ -267,6 +267,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 ```
 
 ## changelog
+#### 3.1.1
+* FIX: Repository bug
 
 #### 3.1.0
 * Moved from Bower to Yarn
