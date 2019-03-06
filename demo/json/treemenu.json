@@ -1,0 +1,56 @@
+{
+  "treemenu": [
+    {
+      "Title": "Example menu item level 1",
+      "LinkUrl": "#",
+      "children": [
+        {
+          "Title": "Example menu item level 2",
+          "LinkUrl": "#"
+        },
+        {
+          "Title": "Example menu item level 2",
+          "LinkUrl": "#"
+        },
+        {
+          "Title": "Example menu item level 2",
+          "LinkUrl": "#"
+        },
+        {
+          "Title": "Example menu item level 2",
+          "LinkUrl": "#"
+        }
+      ]
+    },
+    {
+      "Title": "Example menu item level 1",
+      "LinkUrl": "#"
+    },
+    {
+      "Title": "Example menu item level 1",
+      "LinkUrl": "#",
+      "children": [
+        {
+          "Title": "Example menu item level 2",
+          "LinkUrl": "#"
+        },
+        {
+          "Title": "Example menu item level 2",
+          "LinkUrl": "#"
+        },
+        {
+          "Title": "Example menu item level 2",
+          "LinkUrl": "#"
+        },
+        {
+          "Title": "Example menu item level 2",
+          "LinkUrl": "#"
+        }
+      ]
+    },
+    {
+      "Title": "Example menu item level 1",
+      "LinkUrl": "#"
+    }
+  ]
+}
