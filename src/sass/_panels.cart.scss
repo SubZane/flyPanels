@@ -1,0 +1,42 @@
+.panelcontent {
+	background-color: #f4f4f4;
+	.cart-items {
+		ul {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+			li {
+				padding: 0;
+				margin: 0;
+				list-style: none;
+				.product-image {
+					width: 50px;
+					float: left;
+					margin-top: 5px;
+				}
+				.product-name {
+					font-weight: bold;
+					font-size: 14px;
+					margin-bottom: 0px;
+				}
+				.product-description {
+					font-size: 12px;
+					line-height: 18px;
+				}
+				div {
+					clear: both;
+					background-color: #ccc;
+					width: 60px;
+					#{$a-tags} {
+						display: inline-block;
+						width: 20px;
+					}
+					#{$a-tags-hover} {
+					}
+				}
+			}
+		}
+
+	}
+
+}

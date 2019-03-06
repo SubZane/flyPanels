@@ -146,7 +146,10 @@
 				<a class="flypanels-button-right icon-menu icon-magnify" aria-label="Show search" data-aria-label="Show search" data-aria-label-active="Close search" data-panel="search" href="#">
 					<i class="fa fa-search"></i>
 				</a>
-			</div>
+				<a class="flypanels-button-right icon-menu icon-cart" aria-label="Show cart" data-aria-label="Show cart" data-aria-label-active="Close cart" data-panel="cart" href="#">
+						<i class="fa fa-shopping-cart"></i>
+					</a>
+				</div>
 			<div class="flypanels-content">
 				<div class="container">
 					<div class="row">
@@ -242,6 +245,22 @@
 			</div>
 		</div>
 		<div class="offcanvas flypanels-right">
+			<div class="panelcontent" aria-hidden="true" data-panel="cart">
+				<div class="cart-items">
+						<ul>
+							<li>
+								<img class="product-image" src="img/products/book1.jpg" alt="">
+								<p class="product-name">Lorem ipsum product</p>
+								<p class="product-description">Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+								<div>
+									<a class="fa fa-plus" href="#"></a>
+									<input type="text">
+									<a class="fa fa-minus" href="#"></a>
+								</div>
+							</li>
+						</ul>
+				</div>
+			</div>
 			<div class="panelcontent" aria-hidden="true" data-panel="search">
 				<div class="searchbox" data-searchurl="json/searchresult.json?search=true">
 					<input title="search" type="text" id="flypanels-searchfield" />
