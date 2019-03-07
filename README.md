@@ -1,4 +1,4 @@
-flyPanels v3.1.0
+flyPanels v3.2.0
 =======
 
 flyPanels - responsive off canvas menu panels
@@ -43,7 +43,12 @@ options: {
   container: '.flypanels-container',
   treeMenu: {
     init: false,
-    expandHandler: 'span.expand'
+    expandHandler: 'span.expand',
+    UseJSON: false,
+    OnExpandOpen: function () {},
+    OnExpandClose: function () {},
+    OnJSONLoaded: function () {},
+    JSONLoadError: function () {}    
   },
   search = {
     init: false,
@@ -70,6 +75,11 @@ options: {
 * `treeMenu`:
   * `init`: Boolean - If it should look for and init the expanding treemenu.
   * `expandHandler`: String - The element that should have the click event to open/close submenu (expand/contract)
+  * `UseJSON`: Boolean - The treemenu can generate HTML markup from a JSON file if specified.
+  * `OnExpandOpen`: What to do just after a node has expanded/opened.
+  * `OnExpandClose`: What to do just after a node has closed.
+  * `OnJSONLoaded`: What to do just after the JSON has been loaded.
+  * `JSONLoadError`: What to do if an error occurred during the loading of the JSON.
 * `search`:
   * `init`: Boolean - If it should look for and init the search component.
   * `saveQueryCookie`: Boolean - If the search query should be stored in a session cookie to remember the last search.
@@ -160,10 +170,10 @@ To customize the appearance of the treemenu you can either modify the LESS files
 ```javascript
 document.addEventListener("DOMContentLoaded", function(event) {
   flyPanels.init({
-    treeMenu: {
-      init: true
-    }
-  });
+    onInit: function() {
+      fpm_treemenu.init();
+    },
+  })
 });
 ```
 
@@ -171,7 +181,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 <div class="flypanels-container preload">
   <div class="offcanvas flypanels-left">
     <div class="panelcontent" data-panel="treemenu">
-      <nav class="flypanels-treemenu">
+      <nav class="flypanels-treemenu" role="navigation" aria-label="Main navigation" id="flypanels-treemenu">
         <ul>
           <li class="haschildren"><a href="#"><span class="link">Example menu item</span> <span class="expand">2<i class="fa icon"></i></span></a>
             <ul>
@@ -215,6 +225,49 @@ document.addEventListener("DOMContentLoaded", function(event) {
 </div>
 ```
 
+### Using the expanding treemenu component with JSON
+If you want to use the treemenu component with JSON as data srouce you'll need to set it to true in the options and you'll need to add the necessary HTML markup. You will also need to specify the URL to the JSON file in the data attribute `data-json`.
+
+To customize the appearance of the treemenu you can either modify the LESS files and rebuild or just simply override the default styles.
+```javascript
+document.addEventListener("DOMContentLoaded", function(event) {
+  flyPanels.init({
+    onInit: function() {
+      fpm_treemenu.init({
+        UseJSON: true
+      });
+    },
+  })
+});
+```
+
+```html
+<div class="flypanels-container preload">
+  <div class="offcanvas flypanels-left">
+    <div class="panelcontent" data-panel="treemenu">
+      <nav class="flypanels-treemenu" role="navigation" aria-label="Main navigation" data-json="json/treemenu.json" id="flypanels-treemenu">
+        <!-- Tree Menu will render here -->
+      </nav>
+    </div>
+  </div>
+  <div class="flypanels-main">
+    <div class="flypanels-topbar">
+      <a class="flypanels-button-left icon-menu" data-panel="treemenu" href="#"><i class="fa fa-bars"></i></a>
+      <a class="flypanels-button-right icon-menu" data-panel="default" href="#"><i class="fa fa-gears"></i></a>
+    </div>
+    <div class="flypanels-content">
+      Your page content goes here...
+    </div>
+  </div>
+  <div class="offcanvas flypanels-right">
+    <div class="panelcontent" data-panel="default">
+      <p>panel content goes here</p>
+    </div>
+  </div>
+</div>
+```
+
+
 ### Using the search component
 If you want to use the search component you'll need to set it to true in the options and you'll need to add the necessary HTML markup.
 
@@ -222,11 +275,10 @@ To customize the appearance of the search panel and its result you can either mo
 ```javascript
 document.addEventListener("DOMContentLoaded", function(event) {
   flyPanels.init({
-    search: {
-      init: true,
-      saveQueryCookie: true
-    }
-  });
+    onInit: function() {
+      fpm_search.init({saveQueryCookie: true});
+    },
+  })
 });
 ```
 
@@ -267,6 +319,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 ```
 
 ## changelog
+#### 3.2.0
+* New: Added support for generating a treemenu from a JSON file.
+
 #### 3.1.1
 * FIX: Repository bug
 

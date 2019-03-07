@@ -18,6 +18,12 @@
 	var supports = !!document.querySelector && !!root.addEventListener; // Feature test
 	var settings, eventTimeout;
 	var el;
+	var JSONObject;
+	var HTMLMarkup = '';
+	var HTMLMarkupitems = {
+		lihaschildren: '<li class="haschildren" role="treeitem" aria-expanded="false"><div><a href="{url}" class="link">{title}</a><a aria-label="Expand submenu" href="#" data-aria-label="Expand submenu" data-aria-label-active="Collapse submenu" class="expand">{count}<i class="fa icon" aria-hidden="true"></i></a></div>',
+		linochildren: '<li class="nochildren"><div><a href="{url}" class="link">{title}</a></div></li>'
+	};
 
 	// Default settings
 	var defaults = {
@@ -25,7 +31,10 @@
 		onInit: function () {},
 		onDestroy: function () {},
 		OnExpandOpen: function () {},
-		OnExpandClose: function () {}
+		OnExpandClose: function () {},
+		OnJSONLoaded: function () {},
+		JSONLoadError: function () {},
+		UseJSON: false
 	};
 
 
@@ -121,7 +130,6 @@
 		}
 	};
 
-
 	var toggleAriaLabel = function (element, active) {
 		if(active){
 			element.setAttribute('aria-label', element.getAttribute('data-aria-label-active'));
@@ -129,6 +137,101 @@
 		else {
 			element.setAttribute('aria-label', element.getAttribute('data-aria-label'));
 		}
+	};
+
+	var parseJSON = function (jsonString) {
+		try {
+			var o = JSON.parse(jsonString);
+			// Handle non-exception-throwing cases:
+			// Neither JSON.parse(false) or JSON.parse(1234) throw errors, hence the type-checking,
+			// but... JSON.parse(null) returns 'null', and typeof null === "object",
+			// so we must check for that, too.
+			if (o && typeof o === 'object' && o !== null) {
+				return o;
+			}
+		} catch (e) {}
+		console.warn('Error parsing JSON file');
+		return false;
+	};
+
+	var loadTreeMenu = function (done) {
+		var jsonURL = document.querySelector('#flypanels-treemenu').getAttribute('data-json');
+		var request = new XMLHttpRequest();
+		request.open('GET', jsonURL, true);
+		request.onload = function () {
+			if (request.status >= 200 && request.status < 400) {
+				// Success!
+				var response = parseJSON(request.response);
+				if (response !== false) {
+					if (response.treemenu.length > 0) {
+						JSONObject = response.treemenu;
+						hook('OnJSONLoaded');
+						done();
+					} else {
+						hook('JSONLoadError');
+						console.warn('JSON response empty: ' + response);
+					}
+				} else {
+					hook('JSONLoadError');
+					console.warn('JSON response empty: ' + response);
+				}
+			} else {
+				// We reached our target server, but it returned an error
+				hook('JSONLoadError');
+				console.warn('Request error: ' + request.status);
+			}
+		};
+		request.onerror = function () {
+			// There was a connection error of some sort
+			hook('JSONLoadError');
+			console.warn('error: ' + request);
+		};
+		request.send();
+	};
+
+	var recursiveTreeMenu = function (json) {
+		var itemObject;
+    if (json.length > 0) {
+			HTMLMarkup += '<ul role="group" aria-hidden="true" hidden>';
+			json.forEach(function(menuitem) {
+				if (menuitem.hasOwnProperty('Children')) {
+					var mapObj = {
+						"{title}": menuitem.Title,
+						"{url}": menuitem.Url,
+						"{count}": menuitem.Children.length,
+					}
+					HTMLMarkup += HTMLMarkupitems.lihaschildren.replace(/{title}|{url}|{count}/gi, function(matched) {
+						return mapObj[matched];
+					})
+					recursiveTreeMenu(menuitem.Children);
+					HTMLMarkup += '</li>';
+				} else {
+					var mapObj = {
+						"{title}": menuitem.Title,
+						"{url}": menuitem.Url
+					}
+					HTMLMarkup += HTMLMarkupitems.linochildren.replace(/{title}|{url}/gi, function(matched) {
+						return mapObj[matched];
+					})
+
+				}
+			});
+			HTMLMarkup += '</ul>';
+    };
+	};
+
+	var prepareTreeMenu = function () {
+		if (isAndroid() || isIOS()) {
+			document.querySelector('.flypanels-treemenu').classList.add('touch');
+		}
+
+		var expanders = document.querySelectorAll('.flypanels-treemenu li.haschildren ' + settings.expandHandler);
+		forEach(expanders, function (expandLink, value) {
+			expandLink.addEventListener('click', function (e) {
+				toggleAriaExpanded(this.parentElement.parentElement);
+				e.preventDefault();
+			});
+		});
 	};
 
 	/**
@@ -229,18 +332,25 @@
 
 		el = document.querySelector(settings.container);
 
-		if (isAndroid() || isIOS()) {
-			document.querySelector('.flypanels-treemenu').classList.add('touch');
+		if (settings.UseJSON) {
+			loadTreeMenu(function (done) {
+				recursiveTreeMenu(JSONObject);
+				// Add treemenu markup
+				var treemenudiv = document.querySelector('.flypanels-treemenu');
+				var div = document.createElement('div');
+	  		div.innerHTML = HTMLMarkup;
+				treemenudiv.appendChild(div.firstChild);
+				document.querySelector('.flypanels-treemenu ul').removeAttribute('hidden');
+				document.querySelector('.flypanels-treemenu ul').removeAttribute('aria-hidden');
+				document.querySelector('.flypanels-treemenu ul').setAttribute('role', 'tree');
+				prepareTreeMenu();
+				initTabNavigation();
+			});
+		} else {
+			prepareTreeMenu();
+			initTabNavigation();
 		}
 
-		var expanders = document.querySelectorAll('.flypanels-treemenu li.haschildren ' + settings.expandHandler);
-		forEach(expanders, function (expandLink, value) {
-			expandLink.addEventListener('click', function (e) {
-				toggleAriaExpanded(this.parentElement.parentElement);
-				e.preventDefault();
-			});
-		});
-		initTabNavigation();
 		hook('onInit');
 	};
 

@@ -2,7 +2,7 @@
   "name": "flypanels",
   "title": "flypanels",
   "description": "Responsive off canvas menu panels",
-  "version": "3.1.1",
+  "version": "3.2.0",
   "engines": {
     "node": ">= 0.8.0"
   },
@@ -22,7 +22,7 @@
   "repository": "https://subzane@github.com/SubZane/flyPanels.git",
   "homepage": "https://www.andreasnorman.com/flyPanels/",
   "bugs": "https://github.com/SubZane/flyPanels/issues",
-  "author": "Andreas Norman <an@andreasnorman.se>",
+  "author": "Andreas Lee-Norman <an@andreasnorman.se>",
   "license": "MIT",
   "private": false,
   "keywords": [

@@ -1,4 +1,4 @@
-/*! flypanels - v3.1.1 - 2019-03-06
+/*! flypanels - v3.1.1 - 2019-03-07
 * https://www.andreasnorman.com/flyPanels/
 * Copyright (c) 2019 ; Licensed  */
 (function (root, factory) {
