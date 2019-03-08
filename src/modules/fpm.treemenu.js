@@ -21,8 +21,8 @@
 	var JSONObject;
 	var HTMLMarkup = '';
 	var HTMLMarkupitems = {
-		lihaschildren: '<li class="haschildren" role="treeitem" aria-expanded="false"><div><a href="{url}" class="link">{title}</a><a aria-label="Expand submenu" href="#" data-aria-label="Expand submenu" data-aria-label-active="Collapse submenu" class="expand">{count}<i class="fa icon" aria-hidden="true"></i></a></div>',
-		linochildren: '<li class="nochildren"><div><a href="{url}" class="link">{title}</a></div></li>'
+		lihaschildren: null,
+		linochildren: null
 	};
 
 	// Default settings
@@ -234,6 +234,15 @@
 		});
 	};
 
+	var loadTemplate = function () {
+		var lichildren = document.querySelector('#flypanels-treemenu li.haschildren');
+		var linochildren = lichildren.querySelector('li.nochildren').parentNode;
+		lichildren.querySelector('ul').remove();
+		HTMLMarkupitems.lihaschildren = lichildren.parentNode.innerHTML.replace('</li>', '');
+		HTMLMarkupitems.linochildren = linochildren.innerHTML;
+		document.querySelector('#flypanels-treemenu').firstChild.remove();
+	};
+
 	/**
 	 * Callback hooks.
 	 * Usage: In the defaults object specify a callback function:
@@ -333,16 +342,20 @@
 		el = document.querySelector(settings.container);
 
 		if (settings.UseJSON) {
+			loadTemplate();
 			loadTreeMenu(function (done) {
 				recursiveTreeMenu(JSONObject);
 				// Add treemenu markup
-				var treemenudiv = document.querySelector('.flypanels-treemenu');
+				var treemenudiv = document.querySelector('#flypanels-treemenu');
+				while (treemenudiv.firstChild) {
+				    treemenudiv.removeChild(treemenudiv.firstChild);
+				}
 				var div = document.createElement('div');
 	  		div.innerHTML = HTMLMarkup;
 				treemenudiv.appendChild(div.firstChild);
-				document.querySelector('.flypanels-treemenu ul').removeAttribute('hidden');
-				document.querySelector('.flypanels-treemenu ul').removeAttribute('aria-hidden');
-				document.querySelector('.flypanels-treemenu ul').setAttribute('role', 'tree');
+				document.querySelector('#flypanels-treemenu ul').removeAttribute('hidden');
+				document.querySelector('#flypanels-treemenu ul').removeAttribute('aria-hidden');
+				document.querySelector('#flypanels-treemenu ul').setAttribute('role', 'tree');
 				prepareTreeMenu();
 				initTabNavigation();
 			});

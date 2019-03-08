@@ -18,7 +18,15 @@
 		<div class="offcanvas flypanels-left">
 			<div class="panelcontent" aria-hidden="true" data-panel="treemenu">
 				<nav class="flypanels-treemenu" role="navigation" aria-label="Main navigation" data-json="json/treemenu.json" id="flypanels-treemenu">
-					<!-- Tree Menu will render here -->
+					<!-- Tree Menu will render here. Please keep template below -->
+					<ul>
+						<li class="haschildren" role="treeitem" aria-expanded="false"><div><a href="{url}" class="link">{title}</a><a aria-label="Expand submenu" href="#" data-aria-label="Expand submenu" data-aria-label-active="Collapse submenu" class="expand">{count}<i class="fa icon" aria-hidden="true"></i></a></div>
+							<ul>
+								<li class="nochildren"><div><a href="{url}" class="link">{title}</a></div></li>
+							</ul>
+						</li>
+					</ul>
+					<!-- End: Tree Menu will render here.  Please keep template below -->
 				</nav>
 			</div>
 		</div>
