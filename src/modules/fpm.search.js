@@ -232,9 +232,8 @@
 	var initTabNavigation = function () {
 		tabElements = tabElements ? tabElements : document.querySelectorAll('#flypanels-searchfield, #flypanels-search .searchbutton');
 		document.addEventListener('keydown', function (event) {
-			if (hasClass(document.querySelector('body'), 'flypanels-open') && hasClass(document.querySelector('.flypanels-container'), 'openright')) {
-				// 9 = Tab
-				if (event.keyCode === 9) {
+			if (hasClass(document.querySelector('body'), 'flypanels-open') && hasClass(document.querySelector('#flypanels-search'), 'visible')) {
+				if (event.key === 'Tab') {
 					if (event.shiftKey) {
 						if (Array.prototype.indexOf.call(tabElements, event.target) === 0) {
 							tabElements[tabElements.length - 1].focus();

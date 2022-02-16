@@ -7,7 +7,6 @@
 		root.fpm_treemenu = factory(root);
 	}
 })(typeof global !== 'undefined' ? global : this.window || this.global, function (root) {
-
 	'use strict';
 
 	//
@@ -22,7 +21,7 @@
 	var HTMLMarkup = '';
 	var HTMLMarkupitems = {
 		lihaschildren: null,
-		linochildren: null
+		linochildren: null,
 	};
 
 	// Default settings
@@ -34,9 +33,8 @@
 		OnExpandClose: function () {},
 		OnJSONLoaded: function () {},
 		JSONLoadError: function () {},
-		UseJSON: false
+		UseJSON: false,
 	};
-
 
 	//
 	// Methods
@@ -51,7 +49,7 @@
 	};
 
 	var isIOS = function () {
-		if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPad/i)) || (navigator.userAgent.match(/iPod/i))) {
+		if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i)) {
 			return true;
 		} else {
 			return false;
@@ -69,16 +67,15 @@
 	var initTabNavigation = function () {
 		var linkElements = document.querySelectorAll('.flypanels-treemenu a, .flypanels-button-left');
 
-		document.addEventListener('keydown', function( event ) {
-			if (hasClass(document.querySelector('body'), 'flypanels-open') && hasClass(document.querySelector('.flypanels-container'), 'openleft')){
-				// 9 = Tab
-				if ( event.keyCode === 9 ) {
+		document.addEventListener('keydown', function (event) {
+			if (hasClass(document.querySelector('body'), 'flypanels-open') && hasClass(document.querySelector('#flypanels-menu'), 'visible')) {
+				if (event.key === 'Tab') {
 					if (event.shiftKey) {
 						if (Array.prototype.indexOf.call(linkElements, event.target) === 0) {
-							linkElements[linkElements.length-1].focus();
+							linkElements[linkElements.length - 1].focus();
 							event.preventDefault();
 						}
-					}	else {
+					} else {
 						if (Array.prototype.indexOf.call(linkElements, event.target) === -1) {
 							linkElements[0].focus();
 							event.preventDefault();
@@ -92,21 +89,21 @@
 	var initKeyboardNavigation = function () {
 		window.onkeydown = function (e) {
 			var code = e.keyCode ? e.keyCode : e.which;
-			if (code === 38) { //up key
-
-			} else if (code === 39) { //right key
-
-			} else if (code === 40) { //down key
-
-			} else if (code === 37) { //left key
-
+			if (code === 38) {
+				//up key
+			} else if (code === 39) {
+				//right key
+			} else if (code === 40) {
+				//down key
+			} else if (code === 37) {
+				//left key
 			}
 		};
 	};
 
 	var toggleAriaExpanded = function (element) {
 		if (element.getAttribute('aria-expanded') === 'false') {
-			element.setAttribute('aria-expanded', 'true')
+			element.setAttribute('aria-expanded', 'true');
 			toggleAriaLabel(element.querySelector('a.expand'), true);
 			element.querySelector('ul').setAttribute('aria-hidden', 'false');
 			element.querySelector('ul').removeAttribute('hidden');
@@ -131,10 +128,9 @@
 	};
 
 	var toggleAriaLabel = function (element, active) {
-		if(active){
+		if (active) {
 			element.setAttribute('aria-label', element.getAttribute('data-aria-label-active'));
-		}
-		else {
+		} else {
 			element.setAttribute('aria-label', element.getAttribute('data-aria-label'));
 		}
 	};
@@ -191,33 +187,32 @@
 
 	var recursiveTreeMenu = function (json) {
 		var itemObject;
-    if (json.length > 0) {
+		if (json.length > 0) {
 			HTMLMarkup += '<ul role="group" aria-hidden="true" hidden>';
-			json.forEach(function(menuitem) {
+			json.forEach(function (menuitem) {
 				if (menuitem.hasOwnProperty('Children')) {
 					var mapObj = {
-						"{title}": menuitem.Title,
-						"{url}": menuitem.Url,
-						"{count}": menuitem.Children.length,
-					}
-					HTMLMarkup += HTMLMarkupitems.lihaschildren.replace(/{title}|{url}|{count}/gi, function(matched) {
+						'{title}': menuitem.Title,
+						'{url}': menuitem.Url,
+						'{count}': menuitem.Children.length,
+					};
+					HTMLMarkup += HTMLMarkupitems.lihaschildren.replace(/{title}|{url}|{count}/gi, function (matched) {
 						return mapObj[matched];
-					})
+					});
 					recursiveTreeMenu(menuitem.Children);
 					HTMLMarkup += '</li>';
 				} else {
 					var mapObj = {
-						"{title}": menuitem.Title,
-						"{url}": menuitem.Url
-					}
-					HTMLMarkup += HTMLMarkupitems.linochildren.replace(/{title}|{url}/gi, function(matched) {
+						'{title}': menuitem.Title,
+						'{url}': menuitem.Url,
+					};
+					HTMLMarkup += HTMLMarkupitems.linochildren.replace(/{title}|{url}/gi, function (matched) {
 						return mapObj[matched];
-					})
-
+					});
 				}
 			});
 			HTMLMarkup += '</ul>';
-    };
+		}
 	};
 
 	var prepareTreeMenu = function () {
@@ -302,7 +297,6 @@
 	 * @public
 	 */
 	fpm_treemenu.destroy = function () {
-
 		// If plugin isn't already initialized, stop
 		if (!settings) {
 			return;
@@ -348,10 +342,10 @@
 				// Add treemenu markup
 				var treemenudiv = document.querySelector('#flypanels-treemenu');
 				while (treemenudiv.firstChild) {
-				    treemenudiv.removeChild(treemenudiv.firstChild);
+					treemenudiv.removeChild(treemenudiv.firstChild);
 				}
 				var div = document.createElement('div');
-	  		div.innerHTML = HTMLMarkup;
+				div.innerHTML = HTMLMarkup;
 				treemenudiv.appendChild(div.firstChild);
 				document.querySelector('#flypanels-treemenu ul').removeAttribute('hidden');
 				document.querySelector('#flypanels-treemenu ul').removeAttribute('aria-hidden');
