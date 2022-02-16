@@ -1,181 +1,184 @@
-.panelcontent .flypanels-searchresult {
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-  ul,
-  ul li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  ul {
-    li {
-      a {
-        color: $flypanels_link_color;
-        display: block;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-        font-weight: 400;
-        font-size: 13px;
-  			width: auto;
+@use 'sass:math';
+
+.flypanels-panel .searchpanel {
+	border-top: 1px solid rgba(255, 255, 255, 0.15);
+	ul,
+	ul li {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	ul {
+		li {
+			a {
+				color: $flypanels_link_color;
+				display: block;
+				border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+				font-weight: 400;
+				font-size: 13px;
+				width: auto;
 				overflow: hidden;
-        span.link {
-          padding-top: 11px;
-          padding-bottom: 13px;
-          display: block;
-          padding-left: 15px;
-          padding-right: 15px;
-          width: auto;
+				span.link {
+					padding-top: 11px;
+					padding-bottom: 13px;
+					display: block;
+					padding-left: 15px;
+					padding-right: 15px;
+					width: auto;
 					overflow: hidden;
-        }
-        span.type {
-          width: 50px;
-          float: right;
-          display: block;
-          height: 100%;
-          padding-left: 15px;
-          padding-top: 11px;
-          padding-bottom: 13px;
-          i.page {
-            font-size: 14px;
-            margin-left: 10px;
-            &::before {
-              content: "\f105";
-            }
-          }
-          i.doc {
-            font-size: 12px;
-            margin-left: 10px;
-            &::before {
-              content: "\f016";
-            }
-          }
-        }
-      }
-    }
-  }
-  li a:hover {
-    text-decoration: none;
-    background-color: rgba(255, 255, 255, 0.8) !important;
-    color: $flypanels_primary_color;
-  }
-  ul li a:focus,
-  .panelcontent nav ul li a:visited,
-  .panelcontent nav ul li a:link {
-    text-decoration: none;
-  }
+				}
+				span.type {
+					width: 50px;
+					float: right;
+					display: block;
+					height: 100%;
+					padding-left: 15px;
+					padding-top: 11px;
+					padding-bottom: 13px;
+					i.page {
+						font-size: 14px;
+						margin-left: 10px;
+						&::before {
+							content: '\f105';
+						}
+					}
+					i.doc {
+						font-size: 12px;
+						margin-left: 10px;
+						&::before {
+							content: '\f016';
+						}
+					}
+				}
+			}
+		}
+	}
+	li a:hover {
+		text-decoration: none;
+		background-color: rgba(255, 255, 255, 0.8) !important;
+		color: $flypanels_primary_color;
+	}
+	ul li a:focus,
+	.searchpanel nav ul li a:visited,
+	.searchpanel nav ul li a:link {
+		text-decoration: none;
+	}
 }
 /* Touch devices :hover fix */
-.panelcontent .flypanels-searchresult.touch li a:hover {
-  background-color: inherit !important;
-  color: $flypanels_link_color;
+.flypanels-panel .searchpanel .flypanels-searchresult.touch li a:hover {
+	background-color: inherit !important;
+	color: $flypanels_link_color;
 }
-.panelcontent .flypanels-searchresult.touch li a:active {
-  text-decoration: none;
-  background-color: rgba(255, 255, 255, 0.8) !important;
-  color: $flypanels_primary_color;
+.flypanels-panel .searchpanel .flypanels-searchresult.touch li a:active {
+	text-decoration: none;
+	background-color: rgba(255, 255, 255, 0.8) !important;
+	color: $flypanels_primary_color;
 }
-.flypanels-container .offcanvas .panelcontent[data-panel="search"] {
-  padding-left: 0;
-  padding-right: 0;
-  padding-top: 0;
-  .loading {
-    margin-top: 50px;
-    span {
-      text-align: center;
-      color: #fff;
-      display: block;
-      margin-top: 15px;
-    }
-    .loader {
-      position: relative;
-      width: $flypanels_loader_size;
-      height: $flypanels_loader_size;
-      margin-left: 70px;
-    }
-    .loader,
-    .loader:before,
-    .loader:after {
-      border-radius: 50%;
-      border: $flypanels_loader_size/12 solid rgba(0,61,88,.0);
-      border-top-color: $flypanels_loader_color;
-      -webkit-animation: spin 4s infinite;
-    }
-    .loader:before,
-    .loader:after {
-      position: absolute;
-      content: '';
-      left: $flypanels_loader_size/12;
-      right: $flypanels_loader_size/12;
-      bottom: $flypanels_loader_size/12;
-      top: $flypanels_loader_size/12;
-    }
-    .loader:after {
-      left: $flypanels_loader_size/4;
-      right: $flypanels_loader_size/4;
-      bottom: $flypanels_loader_size/4;
-      top: $flypanels_loader_size/4;
-      -webkit-animation: spin2 4s infinite;
-    }
-  }
+.flypanels-panel .searchpanel {
+	padding-left: 0;
+	padding-right: 0;
+	padding-top: 0;
+	.loading {
+		margin-top: 50px;
+		span {
+			text-align: center;
+			color: #fff;
+			display: block;
+			margin-top: 15px;
+		}
+		.loader {
+			position: relative;
+			width: $flypanels_loader_size;
+			height: $flypanels_loader_size;
+			margin-left: 70px;
+		}
+		.loader,
+		.loader:before,
+		.loader:after {
+			border-radius: 50%;
+			border: math.div($flypanels_loader_size, 12) solid rgba(0, 61, 88, 0);
+			border-top-color: $flypanels_loader_color;
+			-webkit-animation: spin 4s infinite;
+			animation: spin 4s infinite;
+		}
+		.loader:before,
+		.loader:after {
+			position: absolute;
+			content: '';
+			left: math.div($flypanels_loader_size, 12);
+			right: math.div($flypanels_loader_size, 12);
+			bottom: math.div($flypanels_loader_size, 12);
+			top: math.div($flypanels_loader_size, 12);
+		}
+		.loader:after {
+			left: math.div($flypanels_loader_size, 4);
+			right: math.div($flypanels_loader_size, 4);
+			bottom: math.div($flypanels_loader_size, 4);
+			top: math.div($flypanels_loader_size, 4);
+			-webkit-animation: spin2 4s infinite;
+			animation: spin2 4s infinite;
+		}
+	}
 
-  @-webkit-keyframes spin {
-    0% {
-
-    }
-    100% {
-      -webkit-transform: rotate(360deg);
-    }
-  }
-  @-webkit-keyframes spin2 {
-    0% {
-
-    }
-    100% {
-      -webkit-transform: rotate(720deg);
-    }
-  }
-  .resultinfo {
-    color: $flypanels_text_color;
-    font-size: 13px;
-    padding: 20px 15px;
-  }
-  .searchbox {
-    background-color: #fff;
-    height: 40px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 10px;
-    width: auto;
-    input {
-      height: 100%;
-      width: calc(100% - 30px);
-      border: none;
-      padding-left: 10px;
-      padding-right: 10px;
-      font-size: 16px;
-      &:focus {
-        outline: none;
-        font-size: 16px;
-        box-shadow: none;
-      }
-    }
-    .searchbutton {
-      width: 20px;
-      float: right;
-      color: $flypanels_primary_color;
+	@-webkit-keyframes spin {
+		0% {
+		}
+		100% {
+			-webkit-transform: rotate(360deg);
+		}
+	}
+	@-webkit-keyframes spin2 {
+		0% {
+		}
+		100% {
+			-webkit-transform: rotate(720deg);
+		}
+	}
+	.resultinfo {
+		color: $flypanels_text_color;
+		font-size: 13px;
+		padding: 20px 15px;
+	}
+	.searchbox {
+		background-color: #fff;
+		height: 40px;
+		margin-left: 10px;
+		margin-right: 10px;
+		margin-top: 10px;
+		width: auto;
+		input {
+			height: 100%;
+			width: calc(100% - 30px);
+			border: none;
+			padding-left: 10px;
+			padding-right: 10px;
+			font-size: 16px;
+			color: #000;
+			&:focus {
+				outline: none;
+				font-size: 16px;
+				box-shadow: none;
+			}
+		}
+		.searchbutton {
+			width: 20px;
+			float: right;
+			color: $flypanels_primary_color;
 			margin-right: 10px;
-      &::before {
-        font-family: FontAwesome;
-        font-weight: normal;
-        font-style: normal;
-        text-decoration: inherit;
-        -webkit-font-smoothing: antialiased;
-        content: "\f002";
-        font-size: 16px;
-        position: relative;
-        top: 9px;
-      }
-      &:hover {
-        text-decoration: none;
-      }
-    }
-  }
+			&::before {
+				font-family: FontAwesome;
+				font-weight: normal;
+				font-style: normal;
+				text-decoration: inherit;
+				-webkit-font-smoothing: antialiased;
+				content: '\f002';
+				font-size: 16px;
+				position: relative;
+				top: 9px;
+			}
+			&:hover {
+				text-decoration: none;
+			}
+		}
+	}
 }

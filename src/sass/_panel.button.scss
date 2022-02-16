@@ -1,0 +1,36 @@
+.flypanels-button {
+	position: fixed;
+	width: 50px;
+	background-color: $flypanels_primary_color;
+	background-repeat: no-repeat;
+	background-size: 20px;
+	background-position: center;
+	color: white;
+	font-weight: bold;
+	border-radius: 50px;
+	height: 50px;
+	border: none;
+	&:focus {
+		outline: 0;
+	}
+	z-index: 50;
+	cursor: pointer;
+	&.menu {
+		background-image: url('../img/hamburger.svg');
+		bottom: 20px;
+		right: 20px;
+		@media (min-width: 768px) {
+			top: 20px;
+			left: 20px;
+		}
+	}
+	&.search {
+		background-image: url('../img/search.svg');
+		bottom: 80px;
+		right: 20px;
+		@media (min-width: 768px) {
+			top: 20px;
+			right: 20px;
+		}
+	}
+}

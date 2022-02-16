@@ -7,7 +7,6 @@
 		root.fpm_search = factory(root);
 	}
 })(typeof global !== 'undefined' ? global : this.window || this.global, function (root) {
-
 	'use strict';
 
 	//
@@ -23,14 +22,13 @@
 	// Default settings
 	var defaults = {
 		saveQueryCookie: false,
-		searchPanel: document.querySelector('.offcanvas [data-panel="search"]'),
+		searchPanel: document.querySelector('#flypanels-search .searchpanel'),
 		onInit: function () {},
 		onDestroy: function () {},
 		onEmptySearchResult: function () {},
 		onSearchError: function () {},
 		onSearchSuccess: function () {},
 	};
-
 
 	//
 	// Methods
@@ -63,7 +61,9 @@
 						settings.searchPanel.querySelector('.resultinfo .query').innerHTML = query;
 						settings.searchPanel.querySelector('.resultinfo .num').innerHTML = foundResults;
 						settings.searchPanel.querySelector('.flypanels-searchresult').innerHTML = output;
-						tabElements = document.querySelectorAll('.flypanels-button-right, .flypanels-right .searchbutton, #flypanels-searchfield, .flypanels-searchresult ul li a');
+						tabElements = document.querySelectorAll(
+							'.flypanels-button-right, .flypanels-right .searchbutton, #flypanels-searchfield, .flypanels-searchresult ul li a'
+						);
 						searchProgress('hide');
 						settings.searchPanel.querySelector('.resultinfo').removeAttribute('hidden');
 						settings.searchPanel.querySelector('.resultinfo').setAttribute('aria-hidden', 'false');
@@ -104,9 +104,11 @@
 		var output = '<ul>';
 		for (var i in results) {
 			if (results[i].Type === 'Page') {
-				output += '<li><a href="' + results[i].LinkUrl + '"><span class="type"><i class="fa page"></i></span><span class="link">' + results[i].Header + '</span></a>';
+				output +=
+					'<li><a href="' + results[i].LinkUrl + '"><span class="type"><i class="fa page"></i></span><span class="link">' + results[i].Header + '</span></a>';
 			} else {
-				output += '<li><a href="' + results[i].LinkUrl + '"><span class="type"><i class="fa doc"></i></span><span class="link">' + results[i].Header + '</span></a>';
+				output +=
+					'<li><a href="' + results[i].LinkUrl + '"><span class="type"><i class="fa doc"></i></span><span class="link">' + results[i].Header + '</span></a>';
 			}
 		}
 		output += '</ul>';
@@ -151,7 +153,14 @@
 			if (!sKey) {
 				return null;
 			}
-			return decodeURIComponent(document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
+			return (
+				decodeURIComponent(
+					document.cookie.replace(
+						new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'),
+						'$1'
+					)
+				) || null
+			);
 		},
 		set: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
 			if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) {
@@ -160,32 +169,40 @@
 			var sExpires = '';
 			if (vEnd) {
 				switch (vEnd.constructor) {
-				case Number:
-					sExpires = vEnd === Infinity ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT' : '; max-age=' + vEnd;
-					break;
-				case String:
-					sExpires = '; expires=' + vEnd;
-					break;
-				case Date:
-					sExpires = '; expires=' + vEnd.toUTCString();
-					break;
+					case Number:
+						sExpires = vEnd === Infinity ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT' : '; max-age=' + vEnd;
+						break;
+					case String:
+						sExpires = '; expires=' + vEnd;
+						break;
+					case Date:
+						sExpires = '; expires=' + vEnd.toUTCString();
+						break;
 				}
 			}
-			document.cookie = encodeURIComponent(sKey) + '=' + encodeURIComponent(sValue) + sExpires + (sDomain ? '; domain=' + sDomain : '') + (sPath ? '; path=' + sPath : '') + (bSecure ? '; secure' : '');
+			document.cookie =
+				encodeURIComponent(sKey) +
+				'=' +
+				encodeURIComponent(sValue) +
+				sExpires +
+				(sDomain ? '; domain=' + sDomain : '') +
+				(sPath ? '; path=' + sPath : '') +
+				(bSecure ? '; secure' : '');
 			return true;
 		},
 		remove: function (sKey, sPath, sDomain) {
 			if (!this.has(sKey)) {
 				return false;
 			}
-			document.cookie = encodeURIComponent(sKey) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT' + (sDomain ? '; domain=' + sDomain : '') + (sPath ? '; path=' + sPath : '');
+			document.cookie =
+				encodeURIComponent(sKey) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT' + (sDomain ? '; domain=' + sDomain : '') + (sPath ? '; path=' + sPath : '');
 			return true;
 		},
 		has: function (sKey) {
 			if (!sKey) {
 				return false;
 			}
-			return (new RegExp('(?:^|;\\s*)' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=')).test(document.cookie);
+			return new RegExp('(?:^|;\\s*)' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=').test(document.cookie);
 		},
 		keys: function () {
 			var aKeys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, '').split(/\s*(?:\=[^;]*)?;\s*/);
@@ -193,7 +210,7 @@
 				aKeys[nIdx] = decodeURIComponent(aKeys[nIdx]);
 			}
 			return aKeys;
-		}
+		},
 	};
 
 	var isAndroid = function () {
@@ -205,7 +222,7 @@
 	};
 
 	var isIOS = function () {
-		if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPad/i)) || (navigator.userAgent.match(/iPod/i))) {
+		if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i)) {
 			return true;
 		} else {
 			return false;
@@ -213,44 +230,37 @@
 	};
 
 	var initTabNavigation = function () {
-		tabElements = tabElements ? tabElements : document.querySelectorAll('#flypanels-searchfield, .flypanels-right .searchbutton, .flypanels-button-right');
-		document.addEventListener('keydown', function( event ) {
-			if ((hasClass(document.querySelector('body'), 'flypanels-open') && hasClass(document.querySelector('.flypanels-container'), 'openright'))) {
-				// 9 = Tab
-				if ( event.keyCode === 9 ) {
+		tabElements = tabElements ? tabElements : document.querySelectorAll('#flypanels-searchfield, #flypanels-search .searchbutton');
+		document.addEventListener('keydown', function (event) {
+			if (hasClass(document.querySelector('body'), 'flypanels-open') && hasClass(document.querySelector('#flypanels-search'), 'visible')) {
+				if (event.key === 'Tab') {
 					if (event.shiftKey) {
 						if (Array.prototype.indexOf.call(tabElements, event.target) === 0) {
-							tabElements[tabElements.length-1].focus();
+							tabElements[tabElements.length - 1].focus();
 							event.preventDefault();
-						}
-						else if ((Array.prototype.indexOf.call(tabElements, event.target) - 1) < 0 ) {
+						} else if (Array.prototype.indexOf.call(tabElements, event.target) - 1 < 0) {
 							tabElements[0].focus();
 							event.preventDefault();
-						}
-						else {
-							tabElements[(Array.prototype.indexOf.call(tabElements, event.target) - 1)].focus();
+						} else {
+							tabElements[Array.prototype.indexOf.call(tabElements, event.target) - 1].focus();
 							event.preventDefault();
 						}
-					}	else {
+					} else {
 						if (Array.prototype.indexOf.call(tabElements, event.target) === -1) {
 							tabElements[0].focus();
 							event.preventDefault();
-						}
-						else if ((Array.prototype.indexOf.call(tabElements, event.target) + 1) === tabElements.length) {
+						} else if (Array.prototype.indexOf.call(tabElements, event.target) + 1 === tabElements.length) {
 							tabElements[0].focus();
 							event.preventDefault();
-						}
-						else {
-							tabElements[(Array.prototype.indexOf.call(tabElements, event.target) + 1)].focus();
+						} else {
+							tabElements[Array.prototype.indexOf.call(tabElements, event.target) + 1].focus();
 							event.preventDefault();
 						}
 					}
-
 				}
 			}
 		});
 	};
-
 
 	var hasClass = function (element, classname) {
 		if (typeof element.classList !== 'undefined' && element.classList.contains(classname)) {
@@ -319,7 +329,6 @@
 	 * @public
 	 */
 	fpm_search.destroy = function () {
-
 		// If plugin isn't already initialized, stop
 		if (!settings) {
 			return;

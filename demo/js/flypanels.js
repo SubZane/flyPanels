@@ -7,7 +7,6 @@
 		root.flyPanels = factory(root);
 	}
 })(typeof global !== 'undefined' ? global : this.window || this.global, function (root) {
-
 	'use strict';
 
 	//
@@ -17,33 +16,26 @@
 	var flyPanels = {}; // Object for public APIs
 	var supports = !!document.querySelector && !!root.addEventListener; // Feature test
 	var settings, eventTimeout;
+	var overlay = document.querySelector('.flypanels-overlay');
 	var el;
 	var innerHeight = document.documentElement.clientHeight;
-	var panelWidth = document.querySelector('.flypanels-left').clientWidth;
 	var scrollbarWidth;
 	var redrawOnResize = true;
-	// Need to get the topbar height in order to later set the correct height of .flypanels-content
-	var topBarHeight = document.querySelector('.flypanels-topbar').clientHeight;
 
 	// Default settings
 	var defaults = {
 		transitiontime: 500,
-		container: '.flypanels-container',
 		initClass: 'js-flyPanels',
 		useKeyboardEvents: true,
 		onInit: function () {},
 		onOpen: function () {},
 		onClose: function () {},
-		onOpenLeft: function () {},
-		onCloseLeft: function () {},
-		onOpenRight: function () {},
-		onCloseRight: function () {},
+		onPanelTransitionEnd: function () {},
 		afterWindowResize: function () {},
 		OnAttachEvents: function () {},
 		onWindowResize: function () {},
-		onDestroy: function () {}
+		onDestroy: function () {},
 	};
-
 
 	//
 	// Methods
@@ -63,211 +55,88 @@
 		document.body.removeChild(scrollDiv);
 	};
 
-	var setHeight = function () {
-		document.querySelector('.flypanels-left').style.height = (innerHeight + 'px');
-		document.querySelector('.flypanels-right').style.height = (innerHeight + 'px');
-		var overlay = document.querySelector('.flypanels-overlay');
-		if (overlay) {
-			overlay.style.height = innerHeight;
-		}
-	};
-
-	var hasVerticalScroll = function () {
-		var scrollHeight = document.body.scrollHeight;
-		var clientHeight = document.documentElement.clientHeight;
-		var hasVerticalScrollbar = scrollHeight > clientHeight;
-		return hasVerticalScrollbar;
-	};
-
-	var isMobileBrowser = function () {
-		if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-			return true;
-		} else {
-			return false;
-		}
-	};
-
-	var close = function () {
-		closeLeft();
-		closeRight();
-		onClose();
-	};
-
-	var onCloseLeft = function () {
-		document.querySelector('body').classList.remove('flypanels-open');
-		document.querySelector('html').classList.remove('flypanels-open');
-		document.querySelector('.flypanels-content').style.marginRight = '';
-		hook('onCloseLeft');
-	};
-
-	var onCloseRight = function () {
-		document.querySelector('body').classList.remove('flypanels-open');
-		document.querySelector('html').classList.remove('flypanels-open');
-		document.querySelector('.flypanels-content').style.marginRight = '';
-		hook('onCloseRight');
-	};
-
-	var onOpenLeft = function () {
-		if (hasVerticalScroll() === true && isMobileBrowser() === false) {
-			document.querySelector('.flypanels-content').style.marginRight = scrollbarWidth + 'px';
-		}
-		document.querySelector('body').classList.add('flypanels-open');
-		document.querySelector('html').classList.add('flypanels-open');
-		hook('onOpenLeft');
-	};
-
-	var onOpenRight = function () {
-		if (hasVerticalScroll() === true && isMobileBrowser() === false) {
-			document.querySelector('.flypanels-content').style.marginRight = scrollbarWidth + 'px';
-		}
-		document.querySelector('body').classList.add('flypanels-open');
-		document.querySelector('html').classList.add('flypanels-open');
-		hook('onOpenRight');
+	var onPanelTransitionEnd = function (el) {
+		//console.log(el);
 	};
 
 	var onOpen = function () {
-		var overlayDiv = document.createElement('div');
-		overlayDiv.classList.add('overlay');
-		overlayDiv.setAttribute('id', 'flypanels-overlay');
-		document.querySelector('.flypanels-content').appendChild(overlayDiv);
-
-		('click touchmove touchend touchleave touchcancel'.split(' ')).forEach(function (event) {
-			document.querySelector('#flypanels-overlay').addEventListener(event, function (e) {
-				close();
-				e.preventDefault();
-			});
-		});
+		overlay.classList.add('fadein');
+		document.querySelector('body').classList.add('flypanels-open');
+		document.querySelector('html').classList.add('flypanels-open');
 		hook('onOpen');
 	};
 
 	var onClose = function () {
-		var overlay = document.querySelector('#flypanels-overlay');
-		if (overlay !== null) {
-			overlay.classList.add('closing');
-			setTimeout(function () {
-				if (overlay) {
-					overlay.remove();
-				}
-			}, settings.transitiontime);
-		}
+		overlay.classList.remove('fadein');
+		overlay.classList.add('fadeout');
+		document.querySelector('body').classList.remove('flypanels-open');
+		document.querySelector('html').classList.remove('flypanels-open');
 		hook('onClose');
 	};
 
-	var openRight = function (panel) {
-		el.classList.add('openright');
-		toggleAriaLabel(document.querySelector('.flypanels-button-right'), true);
-		document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').style.display = 'block';
-		document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').setAttribute('aria-hidden', 'false');
-		setTimeout(function () {
-			document.querySelector('.flypanels-right').querySelector('[data-panel="' + panel + '"]').setAttribute('tabindex', '-1');
-		}, settings.transitiontime);
-		onOpenRight();
+	var closeAll = function () {
+		var panels = document.querySelectorAll('.flypanels-panel');
+		forEach(panels, function (index) {
+			index.classList.remove('visible');
+		});
+
+		var contents = document.querySelectorAll('.flypanels-panel .flypanels-content');
+		forEach(contents, function (index) {
+			index.classList.remove('visible');
+		});
+		onClose();
+	};
+
+	var open = function (panel_id) {
+		document.querySelector(panel_id).classList.add('visible');
+		document.querySelector(panel_id + ' .flypanels-content').classList.add('visible');
 		onOpen();
 	};
 
-	var closeRight = function () {
+	var close = function (panel_id) {
+		document.querySelector(panel_id).classList.remove('visible');
+		document.querySelector(panel_id + ' .flypanels-content').classList.remove('visible');
 		onClose();
-		el.classList.add('closing');
-		toggleAriaLabel(document.querySelector('.flypanels-button-right'), false);
-		setTimeout(function () {
-			el.classList.remove('openright');
-			el.classList.remove('closing');
-			var panels = document.querySelectorAll('.flypanels-right .panelcontent');
-			forEach(panels, function (panel, value) {
-				panel.style.display = 'none';
-				panel.setAttribute('aria-hidden', 'true');
-				panel.removeAttribute('tabindex');
-			});
-			onCloseRight();
-		}, settings.transitiontime);
-	};
-
-	var openLeft = function (panel) {
-		el.classList.add('openleft');
-		toggleAriaLabel(document.querySelector('.flypanels-button-right'), true);
-		document.querySelector('.flypanels-left').querySelector('[data-panel="' + panel + '"]').style.display = 'block';
-		document.querySelector('.flypanels-left').querySelector('[data-panel="' + panel + '"]').setAttribute('aria-hidden', 'false');
-		document.querySelector('.flypanels-left').querySelector('[data-panel="' + panel + '"]').setAttribute('tabindex', '-1');
-		document.querySelector('.flypanels-left').querySelector('[data-panel="' + panel + '"]').focus();
-		onOpenLeft();
-		onOpen();
-	};
-
-	var closeLeft = function () {
-		onClose();
-		el.classList.add('closing');
-		toggleAriaLabel(document.querySelector('.flypanels-button-left'), false);
-		setTimeout(function () {
-			el.classList.remove('closing');
-			el.classList.remove('openleft');
-			var panels = document.querySelectorAll('.flypanels-left .panelcontent');
-			forEach(panels, function (panel, value) {
-				panel.style.display = 'none';
-				panel.setAttribute('aria-hidden', 'true');
-				panel.removeAttribute('tabindex');
-			});
-			onCloseLeft();
-		}, settings.transitiontime);
 	};
 
 	var afterWindowResize = function () {
 		innerHeight = window.innerHeight;
-		setHeight();
 		hook('afterWindowResize');
 	};
 
 	var attachEvents = function () {
-		// Prevent scroll if content doesn't need scroll.
-		var panelcontent_panels = document.querySelectorAll('.panelcontent');
-		forEach(panelcontent_panels, function (index, value) {
-			index.addEventListener('touchmove', function (e) {
-				if (index.scrollHeight <= parseInt(innerHeight, 10)) {
-					e.preventDefault();
-				}
-			});
+		overlay.addEventListener('click', function () {
+			closeAll();
 		});
 
-		var buttons_left = document.querySelectorAll('.flypanels-button-left');
-		forEach(buttons_left, function (index, value) {
-			index.addEventListener('click', function (e) {
-				var panel = index.getAttribute('data-panel');
-				if (hasClass(document.querySelector('.flypanels-container'), 'openleft')) {
-					closeLeft();
+		overlay.addEventListener('animationend', () => {
+			overlay.classList.remove('fadeout');
+		});
+
+		document.querySelector('.flypanels-panel').addEventListener('transitionend', (e) => {
+			if (e.propertyName === 'visibility') {
+				onPanelTransitionEnd(e);
+			}
+		});
+
+		var buttons = document.querySelectorAll('.flypanels-button');
+		forEach(buttons, function (index) {
+			index.addEventListener('click', function () {
+				var panel = index.getAttribute('data-target');
+				var panel_id = '#' + panel;
+
+				if (hasClass(document.querySelector(panel_id), 'visible')) {
+					close(panel_id);
 				} else {
-					if (hasClass(document.querySelector('.flypanels-container'), 'openright')) {
-						closeRight();
-					} else {
-						openLeft(panel);
-					}
+					open(panel_id);
 				}
 			});
 		});
-
-		var buttons_right = document.querySelectorAll('.flypanels-button-right');
-		forEach(buttons_right, function (index, value) {
-			index.addEventListener('click', function (e) {
-				var panel = index.getAttribute('data-panel');
-				if (hasClass(document.querySelector('.flypanels-container'), 'openright')) {
-					closeRight();
-				} else {
-					if (hasClass(document.querySelector('.flypanels-container'), 'openleft')) {
-						closeLeft();
-					} else {
-						openRight(panel);
-					}
-				}
-			});
-		});
-
 
 		if (redrawOnResize === true) {
 			window.onresize = onWindowResize;
 		}
 
-		// Listen for orientation changes
-		window.addEventListener('orientationchange', function () {
-			setHeight();
-		});
 		hook('OnAttachEvents');
 	};
 
@@ -279,11 +148,10 @@
 	};
 
 	var bindKeyEventTriggers = function () {
-		document.addEventListener('keydown', function( event ) {
+		document.addEventListener('keydown', function (event) {
 			// ESC
-			if ( event.keyCode === 27 ) {
-				closeLeft();
-				closeRight();
+			if (event.key === 'Escape') {
+				closeAll();
 			}
 		});
 	};
@@ -293,15 +161,6 @@
 			return true;
 		} else {
 			return false;
-		}
-	};
-
-	var toggleAriaLabel = function (element, active) {
-		if(active){
-			element.setAttribute('aria-label', element.getAttribute('data-aria-label-active'));
-		}
-		else {
-			element.setAttribute('aria-label', element.getAttribute('data-aria-label'));
 		}
 	};
 
@@ -364,7 +223,6 @@
 	 * @public
 	 */
 	flyPanels.destroy = function () {
-
 		// If plugin isn't already initialized, stop
 		if (!settings) {
 			return;
@@ -404,14 +262,13 @@
 
 		el = document.querySelector(settings.container);
 
-		setHeight();
 		if (settings.useKeyboardEvents === true) {
 			bindKeyEventTriggers();
 		}
 		attachEvents();
 
 		// Remove preload class when page has loaded to allow transitions/animations
-		el.classList.remove('preload');
+		//el.classList.remove("preload");
 		hook('onInit');
 	};
 
