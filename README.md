@@ -27,7 +27,7 @@ yarn add flyPanels
 
 ```html
 <!-- You'll need to include flyPanels of course! -->
-<script src="jquery.flyPanels.js"></script>
+<script src="flyPanels.js"></script>
 
 <!-- Some basic CSS is required of course -->
 <link rel="stylesheet" href="css/flyPanels.css" />
@@ -45,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
 ```javascript
 options: {
-  container: '.flypanels-container',
   treeMenu: {
     init: false,
     expandHandler: 'span.expand',
@@ -63,10 +62,7 @@ options: {
   onInitTreeMenu: function () {},
   onOpen: function () {},
   onClose: function () {},
-  onOpenLeft: function () {},
-  onCloseLeft: function () {},
-  onOpenRight: function () {},
-  onCloseRight: function () {},
+  onCloseAll: function () {},
   afterWindowResize: function () {},
   OnAttachEvents: function () {},
   onWindowResize: function () {},
@@ -91,10 +87,9 @@ options: {
   - `saveQueryCookie`: Boolean - If the search query should be stored in a session cookie to remember the last search.
 - `onInit`: What to do after the plugin is initialized.
 - `onLoad`: What to do after the plugin has loaded.
-- `onOpenLeft`: What to do after the left panel has opened.
-- `onOpenRight`: What to do after the right panel has opened.
-- `onCloseLeft`: What to do after the left panel has closed.
-- `onCloseRight`: What to do after the right panel has closed.
+- `onOpen`: What to do after a panel has opened.
+- `onClose`: What to do after a panel has closed.
+- `onCloseAll`: What to do after all panels has closed.
 - `afterWindowResize`: What to do just after a window resize.
 - `OnAttachEvents`: What to do just after events has been attached.
 - `onWindowResize`: What to do just on window resize.
@@ -118,51 +113,11 @@ document.addEventListener('DOMContentLoaded', function (event) {
 ### Html needed for a basic setup
 
 ```html
-<div class="flypanels-container preload">
-	<div class="offcanvas flypanels-left">
-		<div class="panelcontent" data-panel="default">
-			<p>panel content goes here</p>
-		</div>
-	</div>
-	<div class="flypanels-main">
-		<div class="flypanels-topbar">
-			<a class="flypanels-button-left icon-menu" data-panel="default" href="#"></a>
-			<a class="flypanels-button-right icon-menu" data-panel="default" href="#"></a>
-		</div>
-		<div class="flypanels-content">Your page content goes here...</div>
-	</div>
-	<div class="offcanvas flypanels-right">
-		<div class="panelcontent" data-panel="default">
-			<p>panel content goes here</p>
-		</div>
-	</div>
-</div>
-```
-
-### Multiple content panels
-
-It is possible to have multiple content panels in one panel and activate a different content panel depending on what button you press. You use the `data-panel` attribute to target a specific content panel
-
-```html
-<div class="flypanels-container preload">
-	<div class="offcanvas flypanels-left">
-		<div class="panelcontent" data-panel="default">
-			<p>panel content goes here</p>
-		</div>
-		<div class="panelcontent" data-panel="more">
-			<p>some other panel content goes here</p>
-		</div>
-	</div>
-	<div class="flypanels-main">
-		<div class="flypanels-topbar">
-			<a class="flypanels-button-left icon-menu" data-panel="default" href="#"><i class="fa fa-bars"></i></a>
-			<a class="flypanels-button-left icon-menu" data-panel="more" href="#"><i class="fa fa-gears"></i></a>
-			<a class="flypanels-button-right icon-menu" data-panel="default" href="#"><i class="fa fa-bars"></i></a>
-		</div>
-		<div class="flypanels-content">Your page content goes here...</div>
-	</div>
-	<div class="offcanvas flypanels-right">
-		<div class="panelcontent" data-panel="default">
+<div class="flypanels-overlay"></div>
+<div id="flypanels-menubutton" class="flypanels-button menu" data-target="flypanels-menu"></div>
+<div id="flypanels-menu" class="flypanels-panel door-left">
+	<div class="flypanels-content door-left">
+		<div class="flypanels-inner">
 			<p>panel content goes here</p>
 		</div>
 	</div>
@@ -186,9 +141,11 @@ document.addEventListener('DOMContentLoaded', function (event) {
 ```
 
 ```html
-<div class="flypanels-container preload">
-	<div class="offcanvas flypanels-left">
-		<div class="panelcontent" data-panel="treemenu">
+<div class="flypanels-overlay"></div>
+<div id="flypanels-menubutton" class="flypanels-button menu" data-target="flypanels-menu"></div>
+<div id="flypanels-menu" class="flypanels-panel door-left">
+	<div class="flypanels-content door-left">
+		<div class="flypanels-inner">
 			<nav class="flypanels-treemenu" role="navigation" aria-label="Main navigation" id="flypanels-treemenu">
 				<ul>
 					<li class="haschildren">
@@ -238,18 +195,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
 			</nav>
 		</div>
 	</div>
-	<div class="flypanels-main">
-		<div class="flypanels-topbar">
-			<a class="flypanels-button-left icon-menu" data-panel="treemenu" href="#"><i class="fa fa-bars"></i></a>
-			<a class="flypanels-button-right icon-menu" data-panel="default" href="#"><i class="fa fa-gears"></i></a>
-		</div>
-		<div class="flypanels-content">Your page content goes here...</div>
-	</div>
-	<div class="offcanvas flypanels-right">
-		<div class="panelcontent" data-panel="default">
-			<p>panel content goes here</p>
-		</div>
-	</div>
 </div>
 ```
 
@@ -272,24 +217,30 @@ document.addEventListener('DOMContentLoaded', function (event) {
 ```
 
 ```html
-<div class="flypanels-container preload">
-	<div class="offcanvas flypanels-left">
-		<div class="panelcontent" data-panel="treemenu">
+<div class="flypanels-overlay"></div>
+<div id="flypanels-menubutton" class="flypanels-button menu" data-target="flypanels-menu"></div>
+<div id="flypanels-menu" class="flypanels-panel door-left">
+	<div class="flypanels-content door-left">
+		<div class="flypanels-inner">
 			<nav class="flypanels-treemenu" role="navigation" aria-label="Main navigation" data-json="json/treemenu.json" id="flypanels-treemenu">
-				<!-- Tree Menu will render here -->
+				<!-- Tree Menu will render here. Please keep template below -->
+				<ul>
+					<li class="haschildren" role="treeitem" aria-expanded="false">
+						<div>
+							<a href="{url}" class="link">{title}</a
+							><a aria-label="Expand submenu" href="#" data-aria-label="Expand submenu" data-aria-label-active="Collapse submenu" class="expand"
+								>{count}<i class="fa icon" aria-hidden="true"></i
+							></a>
+						</div>
+						<ul>
+							<li class="nochildren">
+								<div><a href="{url}" class="link">{title}</a></div>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<!-- End: Tree Menu will render here.  Please keep template below -->
 			</nav>
-		</div>
-	</div>
-	<div class="flypanels-main">
-		<div class="flypanels-topbar">
-			<a class="flypanels-button-left icon-menu" data-panel="treemenu" href="#"><i class="fa fa-bars"></i></a>
-			<a class="flypanels-button-right icon-menu" data-panel="default" href="#"><i class="fa fa-gears"></i></a>
-		</div>
-		<div class="flypanels-content">Your page content goes here...</div>
-	</div>
-	<div class="offcanvas flypanels-right">
-		<div class="panelcontent" data-panel="default">
-			<p>panel content goes here</p>
 		</div>
 	</div>
 </div>
@@ -312,39 +263,40 @@ document.addEventListener('DOMContentLoaded', function (event) {
 ```
 
 ```html
-<div class="flypanels-container preload">
-	<div class="offcanvas flypanels-left">
-		<div class="panelcontent" data-panel="default">
-			<p>panel content goes here</p>
-		</div>
-	</div>
-	<div class="flypanels-main">
-		<div class="flypanels-topbar">
-			<a class="flypanels-button-left icon-menu" data-panel="default" href="#"><i class="fa fa-bars"></i></a>
-			<a class="flypanels-button-right icon-menu" data-panel="search" href="#"><i class="fa fa-search"></i></a>
-		</div>
-		<div class="flypanels-content">Your page content goes here...</div>
-	</div>
-	<div class="offcanvas flypanels-right">
-		<div class="panelcontent" data-panel="search">
-			<div class="searchbox" data-searchurl="json/searchresult.json?search=true">
-				<input type="text" />
-				<a href="#" class="searchbutton"></a>
-			</div>
-			<div class="resultinfo" style="display:none">You search for "<span class="query">lorem ipsum</span>" resulted in <span class="num">5</span> hits.</div>
-			<div class="errormsg" style="display:none">Something went wrong, please refresh the page and try again.</div>
+<div class="flypanels-overlay"></div>
+<div id="flypanels-searchbutton" class="flypanels-button search" data-target="flypanels-search"></div>
+<div id="flypanels-search" class="flypanels-panel door-right">
+	<div class="flypanels-content door-right">
+		<div class="flypanels-inner">
+			<div class="searchpanel">
+				<div class="searchbox" data-searchurl="json/searchresult.json?search=true">
+					<input title="search" type="text" id="flypanels-searchfield" />
+					<a href="#" aria-label="search" class="searchbutton"></a>
+				</div>
+				<div class="resultinfo" aria-live="polite" aria-hidden="true" hidden>
+					You search for "<span class="query">lorem ipsum</span>" resulted in <span class="num">5</span> hits.
+				</div>
+				<div class="errormsg" aria-live="polite" aria-hidden="true" hidden>Something went wrong, please refresh the page and try again.</div>
 
-			<div class="loading" style="display:none">
-				<div class="loader"></div>
-				<span>Searching...</span>
+				<div class="loading" aria-hidden="true" hidden>
+					<div class="loader"></div>
+					<span>Searching...</span>
+				</div>
+				<div class="flypanels-searchresult" aria-hidden="true" aria-live="polite" hidden></div>
 			</div>
-			<nav class="flypanels-searchresult" style="display:none"></nav>
 		</div>
 	</div>
 </div>
 ```
 
 ## changelog
+
+#### 4.0.0
+
+- New: Re-written HTML markup. The component no longer wraps around your content, making it easier to implement and less cumbersome.
+- New: Added some neat animations to the panels. Currently there's only two animations but I will add some more soon enough.
+- New: The buttons to open the panels are now separated and can be placed anywhere you like.
+- Note: The treemenu and search components still works exactly the same.
 
 #### 3.2.0
 
