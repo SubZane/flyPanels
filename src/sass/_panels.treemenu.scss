@@ -1,121 +1,121 @@
+.flypanels-inner nav.flypanels-treemenu {
+	border-top: 1px solid rgba(255, 255, 255, 0.15);
+	ul,
+	ul li {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	ul {
+		li {
+			div {
+				display: block;
+				border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+				font-weight: 400;
+				font-size: 12px;
 
-.panelcontent nav.flypanels-treemenu {
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-  ul, ul li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  ul {
-    li {
-      div {
-        display: block;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-        font-weight: 400;
-        font-size: 12px;
-        width: #{$flypanels_panel_width};
 				display: flex;
 
-        a.link {
-          color: $flypanels_link_color;
-          padding-top: 11px;
-          padding-bottom: 13px;
-          display: block;
-          padding-left: 15px;
-          padding-right: 15px;
+				a.link {
+					color: $flypanels_link_color;
+					padding-top: 11px;
+					padding-bottom: 13px;
+					display: block;
+					padding-left: 15px;
+					padding-right: 15px;
 					float: none;
 					overflow: hidden;
 					width: 100%;
 					order: 1;
-        }
-      }
-      &.haschildren {
-        a.link {
-          border-right: 1px solid rgba(255, 255, 255, 0.15);
-        }
-        a.expand {
-          color: $flypanels_link_color;
-          width: 60px;
-          font-size: 11px;
-          float: right;
-          display: block;
-          padding-left: 15px;
-          padding-top: 11px;
-          padding-bottom: 13px;
+				}
+			}
+			&.haschildren {
+				a.link {
+					border-right: 1px solid rgba(255, 255, 255, 0.15);
+				}
+				a.expand {
+					color: $flypanels_link_color;
+					width: 60px;
+					font-size: 11px;
+					float: right;
+					display: block;
+					padding-left: 15px;
+					padding-top: 11px;
+					padding-bottom: 13px;
 					order: 2;
-        }
-      }
-      &.haschildren > div > a.expand > i.fa.icon:before {
-        content: "\f105";
-      }
-      &.expanded > div > a.expand > i.fa.icon:before {
-        content: "\f107";
-      }
-    }
-  }
+				}
+			}
+			&.haschildren > div > a.expand > i.fa.icon:before {
+				content: '\f105';
+			}
+			&.expanded > div > a.expand > i.fa.icon:before {
+				content: '\f107';
+			}
+		}
+	}
 
-  /* Tree Menu Level 2-6 */
-  ul li.haschildren {
-    li {
-      div {
-        border-bottom-color: desaturate(lighten(darken($flypanels_primary_color, 5%), 10%), 20%);
-        a {
-          background-color: darken($flypanels_primary_color, 5%);
-          &.link {
-            border-right: none;
-            padding-left: 25px;
-          }
-        }
-      }
-      &.haschildren {
-        a.link {
-          border-right: 1px solid desaturate(lighten(darken($flypanels_primary_color, 5%), 10%), 20%);
-        }
-        li {
-          div {
-            border-bottom-color: desaturate(lighten(darken($flypanels_primary_color, 10%), 10%), 20%);
-            a {
-              background-color: darken($flypanels_primary_color, 10%);
-              &.link {
-                border-right: none;
-                padding-left: 40px;
-              }
-            }
-          }
-          &.haschildren {
-            a.link {
-              border-right: 1px solid desaturate(lighten(darken($flypanels_primary_color, 10%), 10%), 20%);
-            }
-            li {
-              div {
-                border-bottom-color: desaturate(lighten(darken($flypanels_primary_color, 15%), 10%), 20%);
-                a {
-                  background-color: darken($flypanels_primary_color, 15%);
-                  &.link {
-                    border-right: none;
-                    padding-left: 55px;
-                  }
-                }
-              }
-              &.haschildren {
-                a.link {
-                  border-right: 1px solid desaturate(lighten(darken($flypanels_primary_color, 15%), 10%), 20%);
-                }
-                li {
-                  div {
-                    border-bottom-color: desaturate(lighten(darken($flypanels_primary_color, 20%), 10%), 20%);
-                    a {
-                      background-color: darken($flypanels_primary_color, 20%);
-                      &.link {
-                        border-right: none;
-                        padding-left: 70px;
-                      }
-                    }
-                  }
-                  &.haschildren {
-                    a.link {
-                      border-right: 1px solid desaturate(lighten(darken($flypanels_primary_color, 25%), 10%), 20%);
-                    }
+	/* Tree Menu Level 2-6 */
+	ul li.haschildren {
+		li {
+			div {
+				border-bottom-color: desaturate(lighten(darken($flypanels_primary_color, 5%), 10%), 20%);
+				a {
+					background-color: darken($flypanels_primary_color, 5%);
+					&.link {
+						border-right: none;
+						padding-left: 25px;
+					}
+				}
+			}
+			&.haschildren {
+				a.link {
+					border-right: 1px solid desaturate(lighten(darken($flypanels_primary_color, 5%), 10%), 20%);
+				}
+				li {
+					div {
+						border-bottom-color: desaturate(lighten(darken($flypanels_primary_color, 10%), 10%), 20%);
+						a {
+							background-color: darken($flypanels_primary_color, 10%);
+							&.link {
+								border-right: none;
+								padding-left: 40px;
+							}
+						}
+					}
+					&.haschildren {
+						a.link {
+							border-right: 1px solid desaturate(lighten(darken($flypanels_primary_color, 10%), 10%), 20%);
+						}
+						li {
+							div {
+								border-bottom-color: desaturate(lighten(darken($flypanels_primary_color, 15%), 10%), 20%);
+								a {
+									background-color: darken($flypanels_primary_color, 15%);
+									&.link {
+										border-right: none;
+										padding-left: 55px;
+									}
+								}
+							}
+							&.haschildren {
+								a.link {
+									border-right: 1px solid desaturate(lighten(darken($flypanels_primary_color, 15%), 10%), 20%);
+								}
+								li {
+									div {
+										border-bottom-color: desaturate(lighten(darken($flypanels_primary_color, 20%), 10%), 20%);
+										a {
+											background-color: darken($flypanels_primary_color, 20%);
+											&.link {
+												border-right: none;
+												padding-left: 70px;
+											}
+										}
+									}
+									&.haschildren {
+										a.link {
+											border-right: 1px solid desaturate(lighten(darken($flypanels_primary_color, 25%), 10%), 20%);
+										}
 										li {
 											div {
 												border-bottom-color: desaturate(lighten(darken($flypanels_primary_color, 25%), 10%), 20%);
@@ -133,138 +133,99 @@
 												}
 											}
 										}
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 
+	li div a.link:hover,
+	li.active > div * * > * * a.link {
+		text-decoration: none;
+		background-color: rgba(255, 255, 255, 0.8) !important;
+		color: $flypanels_primary_color;
+	}
 
-  }
+	li div a.expand:hover {
+		text-decoration: none;
+		background-color: rgba(255, 255, 255, 0.8) !important;
+		color: $flypanels_primary_color;
+	}
 
-  li div a.link:hover, li.active > div * * > * * a.link {
-    text-decoration: none;
-    background-color:rgba(255, 255, 255, 0.8) !important;
-    color: $flypanels_primary_color;
-  }
-
-  li div  a.expand:hover {
-    text-decoration: none;
-    background-color:rgba(255, 255, 255, 0.8) !important;
-    color: $flypanels_primary_color;
-  }
-
-  ul li a:focus, .panelcontent nav ul li a:visited, .panelcontent nav ul li a:link {
-    text-decoration: none;
-  }
+	ul li a:focus,
+	.flypanels-inner nav ul li a:visited,
+	.flypanels-inner nav ul li a:link {
+		text-decoration: none;
+	}
 }
 
 /* Touch devices :hover fix */
-.panelcontent nav.flypanels-treemenu.touch li a:hover {
-  background-color:inherit !important;
-  color: $flypanels_link_color;
+.flypanels-inner nav.flypanels-treemenu.touch li a:hover {
+	background-color: inherit !important;
+	color: $flypanels_link_color;
 }
-.panelcontent nav.flypanels-treemenu.touch li li a:hover {
-  background-color:rgba(0, 0, 0, 0.1) !important;
-  color: $flypanels_link_color;
+.flypanels-inner nav.flypanels-treemenu.touch li li a:hover {
+	background-color: rgba(0, 0, 0, 0.1) !important;
+	color: $flypanels_link_color;
 }
-.panelcontent nav.flypanels-treemenu.touch li li li a:hover {
-  background-color:rgba(0, 0, 0, 0.2) !important;
-  color: $flypanels_link_color;
+.flypanels-inner nav.flypanels-treemenu.touch li li li a:hover {
+	background-color: rgba(0, 0, 0, 0.2) !important;
+	color: $flypanels_link_color;
 }
-.panelcontent nav.flypanels-treemenu.touch li li li li a:hover {
-  background-color:rgba(0, 0, 0, 0.3) !important;
-  color: $flypanels_link_color;
+.flypanels-inner nav.flypanels-treemenu.touch li li li li a:hover {
+	background-color: rgba(0, 0, 0, 0.3) !important;
+	color: $flypanels_link_color;
 }
-.panelcontent nav.flypanels-treemenu.touch li li li li li a:hover {
-  background-color:rgba(0, 0, 0, 0.4) !important;
-  color: $flypanels_link_color;
+.flypanels-inner nav.flypanels-treemenu.touch li li li li li a:hover {
+	background-color: rgba(0, 0, 0, 0.4) !important;
+	color: $flypanels_link_color;
 }
-.panelcontent nav.flypanels-treemenu.touch li li li li li li a:hover {
-  background-color:rgba(0, 0, 0, 0.5) !important;
-  color: $flypanels_link_color;
+.flypanels-inner nav.flypanels-treemenu.touch li li li li li li a:hover {
+	background-color: rgba(0, 0, 0, 0.5) !important;
+	color: $flypanels_link_color;
 }
-.panelcontent nav.flypanels-treemenu.touch li li li li li li li a:hover {
-  background-color:rgba(0, 0, 0, 0.6) !important;
-  color: $flypanels_link_color;
-}
-
-.panelcontent nav.flypanels-treemenu.touch li a:active,
-.panelcontent nav.flypanels-treemenu.touch li li a:active,
-.panelcontent nav.flypanels-treemenu.touch li li li a:active,
-.panelcontent nav.flypanels-treemenu.touch li li li li a:active,
-.panelcontent nav.flypanels-treemenu.touch li li li li li a:active,
-.panelcontent nav.flypanels-treemenu.touch li li li li li li a:active {
-  text-decoration: none;
-  background-color:rgba(255, 255, 255, 0.8) !important;
-  color: $flypanels_primary_color;
+.flypanels-inner nav.flypanels-treemenu.touch li li li li li li li a:hover {
+	background-color: rgba(0, 0, 0, 0.6) !important;
+	color: $flypanels_link_color;
 }
 
-.panelcontent nav.flypanels-treemenu {
-  li.haschildren > ul {
-      max-height: 0;
-      padding-top: 0;
-      padding-bottom: 0;
-      margin-top: 0;
-      margin-bottom: 0;
-      overflow: hidden;
-      transform: translate3d(0, 0, 0);
-      transition: $flypanels_transition_time ease-in-out;
-  }
-  li.haschildren.expanded > ul {
-      max-height: 3000px;
-      overflow:hidden;
-  }
-  ul li a i {
-    font-size: 12px;
-    margin-left: 10px;
-  }
-
+.flypanels-inner nav.flypanels-treemenu.touch li a:active,
+.flypanels-inner nav.flypanels-treemenu.touch li li a:active,
+.flypanels-inner nav.flypanels-treemenu.touch li li li a:active,
+.flypanels-inner nav.flypanels-treemenu.touch li li li li a:active,
+.flypanels-inner nav.flypanels-treemenu.touch li li li li li a:active,
+.flypanels-inner nav.flypanels-treemenu.touch li li li li li li a:active {
+	text-decoration: none;
+	background-color: rgba(255, 255, 255, 0.8) !important;
+	color: $flypanels_primary_color;
 }
 
-.flypanels-container .offcanvas .panelcontent[data-panel="treemenu"] {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-/* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-	.panelcontent nav.flypanels-treemenu {
-		ul {
-			li {
-				div {
-					width: #{$flypanels_panel_small_screen_width};
-				}
-			}
-		}
+.flypanels-inner nav.flypanels-treemenu {
+	li.haschildren > ul {
+		max-height: 0;
+		padding-top: 0;
+		padding-bottom: 0;
+		margin-top: 0;
+		margin-bottom: 0;
+		overflow: hidden;
+		transform: translate3d(0, 0, 0);
+		transition: $flypanels_transition_time ease-in-out;
+	}
+	li.haschildren.expanded > ul {
+		max-height: 3000px;
+		overflow: hidden;
+	}
+	ul li a i {
+		font-size: 12px;
+		margin-left: 10px;
 	}
 }
 
-/* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-	.panelcontent nav.flypanels-treemenu {
-		ul {
-			li {
-				div {
-					width: #{$flypanels_panel_medium_screen_width};
-				}
-			}
-		}
-	}
-}
-
-/* Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-	.panelcontent nav.flypanels-treemenu {
-		ul {
-			li {
-				div {
-					width: #{$flypanels_panel_large_screen_width};
-				}
-			}
-		}
-	}
+.flypanels-container .offcanvas .flypanels-inner[data-panel='treemenu'] {
+	padding-left: 0;
+	padding-right: 0;
 }

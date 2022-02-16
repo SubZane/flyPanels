@@ -1,15 +1,17 @@
-html,body {
-  margin: 0;
-  padding: 0;
-  font-family: $flypanels_primary_font;
-  line-height: 140%;
-  overflow-x: hidden;
+html,
+body {
+	margin: 0;
+	padding: 0;
+	font-family: $flypanels_primary_font;
+	line-height: 140%;
+	overflow-x: hidden;
 }
 
-html.flypanels-open, body.flypanels-open {
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
+html.flypanels-open,
+body.flypanels-open {
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
 }
 
 .scrollbar-measure {
@@ -20,232 +22,9 @@ html.flypanels-open, body.flypanels-open {
 	top: -9999px;
 }
 
-.preload * {
-  transition: none !important;
-}
-
 .img-responsive {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  vertical-align: middle;
-  border: 0px none;
-}
-
-.flypanels-container {
-  .offcanvas {
-    margin-top: $flypanels_top_bar_height;
-    z-index: 100;
-    transition: transform $flypanels_transition_time;
-    background-color: $flypanels_top_bar_bgcolor;
-    overflow: hidden;
-    width: #{$flypanels_panel_width};
-    .panelcontent {
-      display:none;
-      padding: 0 #{$flypanels_panel_padding}px #{$flypanels_panel_padding}px #{$flypanels_panel_padding}px;
-      top: 0;
-      right: 0;
-      bottom: $flypanels_top_bar_height;
-      left: 0;
-      width: auto;
-      height: auto;
-      z-index: 3;
-      overflow-y: auto;
-      overflow-x: hidden;
-      -webkit-overflow-scrolling: touch;
-    }
-  }
-
-  .flypanels-right {
-    margin-right: #{0 - $flypanels_panel_width};
-    float: right;
-  }
-  .flypanels-left {
-    margin-left: #{0 - $flypanels_panel_width};
-    float: left;
-  }
-
-  .flypanels-main {
-    width: 100%;
-    float: left;
-    margin-left: 0px;
-    .flypanels-content {
-      padding: 10px;
-      padding-top: 50px;
-      -webkit-overflow-scrolling: touch;
-      overflow-y: auto;
-      transition: transform $flypanels_transition_time;
-      transform: translate3d(0, 0, 0);
-      .overlay {
-        animation: fadein $flypanels_transition_time;
-        background-color: #fff;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 100;
-        opacity: 0.8;
-        &.closing {
-          animation: fadeout $flypanels_transition_time;
-          opacity: 0;
-        }
-      }
-    }
-  }
-  &.openleft {
-    .flypanels-left {
-      transform: translate3d(#{$flypanels_panel_width}, 0, 0);
-      overflow: hidden;
-      width: #{$flypanels_panel_width};
-      position: relative;
-      .panelcontent {
-        position: absolute;
-      }
-    }
-    .flypanels-main {
-      overflow: hidden;
-      .flypanels-content {
-        overflow: hidden;
-      }
-    }
-    &.closing {
-      .flypanels-left {
-        transform: translate3d(0px, 0, 0);
-      }
-    }
-  }
-  &.openright {
-    .flypanels-right {
-      transform: translate3d(#{0 - $flypanels_panel_width}, 0, 0);
-      overflow: hidden;
-      width: #{$flypanels_panel_width};
-      position: relative;
-      .panelcontent {
-        position: absolute;
-      }
-    }
-    .flypanels-main {
-      overflow: hidden;
-    }
-    &.closing {
-      .flypanels-right {
-        transform: translate3d(#{$flypanels_panel_width}, 0, 0);
-      }
-    }
-  }
-}
-
-/* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-	.flypanels-container {
-		.offcanvas {
-			width: #{$flypanels_panel_small_screen_width};
-		}
-		.flypanels-right {
-			margin-right: #{0 - $flypanels_panel_small_screen_width};
-		}
-		.flypanels-left {
-			margin-left: #{0 - $flypanels_panel_small_screen_width};
-		}
-		.flypanels-main {
-			width: 100%;
-		}
-		&.openleft {
-			.flypanels-left {
-				transform: translate3d(#{$flypanels_panel_small_screen_width}, 0, 0);
-				width: #{$flypanels_panel_small_screen_width};
-			}
-		}
-		&.openright {
-			.flypanels-right {
-				transform: translate3d(#{0 - $flypanels_panel_small_screen_width}, 0, 0);
-				width: #{$flypanels_panel_small_screen_width};
-			}
-			.flypanels-main {
-				overflow: hidden;
-			}
-			&.closing {
-				.flypanels-right {
-					transform: translate3d(#{$flypanels_panel_small_screen_width}, 0, 0);
-				}
-			}
-		}
-	}
-}
-
-/* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-	.flypanels-container {
-		.offcanvas {
-			width: #{$flypanels_panel_medium_screen_width};
-		}
-		.flypanels-right {
-			margin-right: #{0 - $flypanels_panel_medium_screen_width};
-		}
-		.flypanels-left {
-			margin-left: #{0 - $flypanels_panel_medium_screen_width};
-		}
-		.flypanels-main {
-			width: 100%;
-		}
-		&.openleft {
-			.flypanels-left {
-				transform: translate3d(#{$flypanels_panel_medium_screen_width}, 0, 0);
-				width: #{$flypanels_panel_medium_screen_width};
-			}
-		}
-		&.openright {
-			.flypanels-right {
-				transform: translate3d(#{0 - $flypanels_panel_medium_screen_width}, 0, 0);
-				width: #{$flypanels_panel_medium_screen_width};
-			}
-			.flypanels-main {
-				overflow: hidden;
-			}
-			&.closing {
-				.flypanels-right {
-					transform: translate3d(#{$flypanels_panel_medium_screen_width}, 0, 0);
-				}
-			}
-		}
-	}
-}
-
-/* Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-	.flypanels-container {
-		.offcanvas {
-			width: #{$flypanels_panel_large_screen_width};
-		}
-		.flypanels-right {
-			margin-right: #{0 - $flypanels_panel_large_screen_width};
-		}
-		.flypanels-left {
-			margin-left: #{0 - $flypanels_panel_large_screen_width};
-		}
-		.flypanels-main {
-			width: 100%;
-		}
-		&.openleft {
-			.flypanels-left {
-				transform: translate3d(#{$flypanels_panel_large_screen_width}, 0, 0);
-				width: #{$flypanels_panel_large_screen_width};
-			}
-		}
-		&.openright {
-			.flypanels-right {
-				transform: translate3d(#{0 - $flypanels_panel_large_screen_width}, 0, 0);
-				width: #{$flypanels_panel_large_screen_width};
-			}
-			.flypanels-main {
-				overflow: hidden;
-			}
-			&.closing {
-				.flypanels-right {
-					transform: translate3d(#{$flypanels_panel_large_screen_width}, 0, 0);
-				}
-			}
-		}
-	}
+	display: block;
+	max-width: 100%;
+	height: auto;
+	border: 0px none;
 }

@@ -23,55 +23,35 @@ $flypanels_loader_color: #fff;
 
 $flypanels_transition_time: 0.5s;
 
-@mixin keyframes($name) {
-  @-webkit-keyframes #{$name} {
-    @content;
-  }
-  @-moz-keyframes #{$name} {
-    @content;
-  }
-  @-ms-keyframes #{$name} {
-    @content;
-  }
-  @keyframes #{$name} {
-    @content;
-  }
+@keyframes fadein {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
 
-@include keyframes(fadein) {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.8;
-  }
+@keyframes fadeout {
+	100% {
+		opacity: 0;
+	}
+	0% {
+		opacity: 1;
+	}
 }
-
-@include keyframes(fadeout) {
-  0% {
-    opacity: 0.8;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
 
 // generic transform
 @mixin transform($transforms) {
-	   -moz-transform: $transforms;
-	     -o-transform: $transforms;
-	    -ms-transform: $transforms;
-	-webkit-transform: $transforms;
-          transform: $transforms;
+	transform: $transforms;
 }
 
 // rotate
-@mixin rotate ($deg) {
-  @include transform(rotate(#{$deg}deg));
+@mixin rotate($deg) {
+	@include transform(rotate(#{$deg}deg));
 }
 
 // scale
 @mixin scale($scale) {
-	 @include transform(scale($scale));
+	@include transform(scale($scale));
 }

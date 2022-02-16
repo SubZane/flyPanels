@@ -1,0 +1,25 @@
+.flypanels-overlay {
+	backface-visibility: hidden;
+	position: fixed;
+	z-index: 1000;
+	inset: -5000px;
+	background: rgba(43, 46, 56, 0.9);
+	display: none;
+	&.fadein {
+		animation: fadein;
+		animation-duration: 0.5s;
+		animation-fill-mode: forwards;
+		animation-timing-function: ease-in;
+		animation-iteration-count: 1;
+		display: block;
+	}
+	&.fadeout {
+		animation: fadeout;
+		animation-duration: 0.5s;
+		animation-timing-function: ease-out;
+		animation-fill-mode: forwards;
+		animation-iteration-count: 1;
+		opacity: 1;
+		display: block;
+	}
+}
