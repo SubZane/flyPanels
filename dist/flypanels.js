@@ -1,6 +1,3 @@
-/*! flypanels - v3.2.0 - 2019-03-08
-* https://www.andreasnorman.com/flyPanels/
-* Copyright (c) 2019 ; Licensed  */
 (function (root, factory) {
 	if (typeof define === 'function' && define.amd) {
 		define([], factory(root));
