@@ -1,4 +1,4 @@
-# flyPanels v3.2.0
+# flyPanels v4.0.0
 
 flyPanels - responsive off canvas menu panels
 
