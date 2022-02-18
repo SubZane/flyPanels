@@ -15,11 +15,9 @@
 
 	var flyPanels = {}; // Object for public APIs
 	var supports = !!document.querySelector && !!root.addEventListener; // Feature test
-	var settings, eventTimeout;
+	var settings;
 	var overlay = document.querySelector('.flypanels-overlay');
 	var el;
-	var innerHeight = document.documentElement.clientHeight;
-	var scrollbarWidth;
 	var redrawOnResize = true;
 
 	// Default settings
@@ -31,29 +29,13 @@
 		onOpen: function () {},
 		onClose: function () {},
 		onPanelTransitionEnd: function () {},
-		afterWindowResize: function () {},
 		OnAttachEvents: function () {},
-		onWindowResize: function () {},
 		onDestroy: function () {},
 	};
 
 	//
 	// Methods
 	//
-
-	var detectScrollbarWidth = function () {
-		// Create the measurement node
-		var scrollDiv = document.createElement('div');
-		scrollDiv.className = 'scrollbar-measure';
-		document.body.appendChild(scrollDiv);
-
-		// Get the scrollbar width
-		scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-		//console.warn(scrollbarWidth); // Mac:  15
-
-		// Delete the DIV
-		document.body.removeChild(scrollDiv);
-	};
 
 	var onPanelTransitionEnd = function (el) {
 		//console.log(el);
@@ -99,11 +81,6 @@
 		onClose();
 	};
 
-	var afterWindowResize = function () {
-		innerHeight = window.innerHeight;
-		hook('afterWindowResize');
-	};
-
 	var attachEvents = function () {
 		overlay.addEventListener('click', function () {
 			closeAll();
@@ -138,13 +115,6 @@
 		}
 
 		hook('OnAttachEvents');
-	};
-
-	var onWindowResize = function () {
-		var resizeTimer;
-		clearTimeout(resizeTimer);
-		resizeTimer = setTimeout(afterWindowResize, 100);
-		hook('onWindowResize');
 	};
 
 	var bindKeyEventTriggers = function () {
@@ -238,7 +208,6 @@
 
 		// Reset variables
 		settings = null;
-		eventTimeout = null;
 		hook('onDestroy');
 	};
 
@@ -255,7 +224,6 @@
 
 		// Destroy any existing initializations
 		flyPanels.destroy();
-		detectScrollbarWidth();
 
 		// Merge user options with defaults
 		settings = extend(defaults, options || {});

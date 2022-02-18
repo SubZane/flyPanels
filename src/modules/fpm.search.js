@@ -15,7 +15,7 @@
 
 	var fpm_search = {}; // Object for public APIs
 	var supports = !!document.querySelector && !!root.addEventListener; // Feature test
-	var settings, eventTimeout;
+	var settings;
 	var el;
 	var tabElements;
 
@@ -344,7 +344,6 @@
 
 		// Reset variables
 		settings = null;
-		eventTimeout = null;
 		hook('onDestroy');
 	};
 
