@@ -15,7 +15,7 @@
 
 	var fpm_treemenu = {}; // Object for public APIs
 	var supports = !!document.querySelector && !!root.addEventListener; // Feature test
-	var settings, eventTimeout;
+	var settings;
 	var el;
 	var JSONObject;
 	var HTMLMarkup = '';
@@ -312,7 +312,6 @@
 
 		// Reset variables
 		settings = null;
-		eventTimeout = null;
 		hook('onDestroy');
 	};
 

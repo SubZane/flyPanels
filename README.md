@@ -1,4 +1,4 @@
-# flyPanels v3.2.0
+# flyPanels v4.0.1
 
 flyPanels - responsive off canvas menu panels
 
@@ -290,6 +290,10 @@ document.addEventListener('DOMContentLoaded', function (event) {
 ```
 
 ## changelog
+
+#### 4.0.1
+
+- Minor fixes and cleanup of code
 
 #### 4.0.0
 

@@ -437,39 +437,6 @@ body.flypanels-open {
   padding-right: 0;
 }
 
-nav.flypanels-iconmenu ul, nav.flypanels-iconmenu li {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-nav.flypanels-iconmenu li a {
-  color: #fff;
-  display: block;
-  font-weight: 400;
-  font-size: 14px;
-  display: inline-block;
-  width: 260px;
-  padding-left: 20px;
-  padding-top: 10px;
-  padding-bottom: 15px;
-}
-nav.flypanels-iconmenu li a:hover {
-  text-decoration: none;
-  background-color: #db695d;
-}
-nav.flypanels-iconmenu li a:before {
-  color: #fff;
-  font-size: 25px;
-  margin-right: 20px;
-  position: relative;
-  top: 4px;
-}
-
-.flypanels-container .offcanvas .panelcontent[data-panel=iconmenu] {
-  padding-left: 0;
-  padding-right: 0;
-}
-
 .flypanels-panel .searchpanel {
   border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
