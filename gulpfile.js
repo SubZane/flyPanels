@@ -51,3 +51,4 @@ function watchTask() {
 }
 
 exports.default = parallel(scssTask, uglifyTask, copyJS, watchTask);
+exports.build = parallel(scssTask, uglifyTask, copyJS);
