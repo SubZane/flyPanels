@@ -1,24 +1,8 @@
-@-webkit-keyframes fadein {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
 @keyframes fadein {
   0% {
     opacity: 0;
   }
   100% {
-    opacity: 1;
-  }
-}
-@-webkit-keyframes fadeout {
-  100% {
-    opacity: 0;
-  }
-  0% {
     opacity: 1;
   }
 }
@@ -71,29 +55,19 @@ body.flypanels-open {
   display: none;
 }
 .flypanels-overlay.fadein {
-  -webkit-animation: fadein;
-          animation: fadein;
-  -webkit-animation-duration: 0.5s;
-          animation-duration: 0.5s;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-  -webkit-animation-timing-function: ease-in;
-          animation-timing-function: ease-in;
-  -webkit-animation-iteration-count: 1;
-          animation-iteration-count: 1;
+  animation: fadein;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in;
+  animation-iteration-count: 1;
   display: block;
 }
 .flypanels-overlay.fadeout {
-  -webkit-animation: fadeout;
-          animation: fadeout;
-  -webkit-animation-duration: 0.5s;
-          animation-duration: 0.5s;
-  -webkit-animation-timing-function: ease-out;
-          animation-timing-function: ease-out;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-  -webkit-animation-iteration-count: 1;
-          animation-iteration-count: 1;
+  animation: fadeout;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
   opacity: 1;
   display: block;
 }
@@ -536,7 +510,6 @@ body.flypanels-open {
   border-radius: 50%;
   border: 10px solid rgba(0, 61, 88, 0);
   border-top-color: #fff;
-  -webkit-animation: spin 4s infinite;
   animation: spin 4s infinite;
 }
 .flypanels-panel .searchpanel .loading .loader:before,
@@ -553,18 +526,7 @@ body.flypanels-open {
   right: 30px;
   bottom: 30px;
   top: 30px;
-  -webkit-animation: spin2 4s infinite;
   animation: spin2 4s infinite;
-}
-@-webkit-keyframes spin {
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
-}
-@-webkit-keyframes spin2 {
-  100% {
-    -webkit-transform: rotate(720deg);
-  }
 }
 .flypanels-panel .searchpanel .resultinfo {
   color: #fff;
