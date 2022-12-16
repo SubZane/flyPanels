@@ -1,4 +1,4 @@
-# flyPanels v4.0.1
+# flyPanels v4.0.2
 
 flyPanels - responsive off canvas menu panels
 
@@ -290,6 +290,10 @@ document.addEventListener('DOMContentLoaded', function (event) {
 ```
 
 ## changelog
+
+### 4.0.2
+
+- Fixed issue with onWindowResize
 
 #### 4.0.1
 

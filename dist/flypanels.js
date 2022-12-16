@@ -110,10 +110,6 @@
 			});
 		});
 
-		if (redrawOnResize === true) {
-			window.onresize = onWindowResize;
-		}
-
 		hook('OnAttachEvents');
 	};
 
